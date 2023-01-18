@@ -1,0 +1,65 @@
+<ui:composition template="/WEB-INF/templates/fmdbTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="content">
+
+        <h:form id='form1'>
+            <p:messages />
+            <h1 class="first-item">Submission Type</h1>
+            <p:outputPanel id="submissionTypePanel" class="ui-g no-gutter">
+
+                <div class="ui-g-4">
+                    <h:outputLabel value="Submission Type" />
+                    <h:selectOneMenu value="#{SubmissionType.selectedType}" valueChangeListener="#{SubmissionType.selectType}">
+                        <f:selectItem itemLabel="" itemValue="" />
+                        <f:selectItems value="#{SubmissionType.submissionTypes}" />
+                        <p:ajax event="change"  process="@this" update="submissionTypePanel" />
+                    </h:selectOneMenu>
+                </div><div class="ui-g-8"/>
+
+                <div class="ui-g-4">
+                    <h:outputLabel value="Submission Type Code"/>
+                    <p:inputText value="#{SubmissionType.type.submissionTypeCd}" 
+                                 required="true" requiredMessage="Submission Type Code is required" maxlength="15" />
+                </div><div class="ui-g-8"/>
+
+                <div class="ui-g-4">
+                    <h:outputLabel value="Submission Type Description"/>
+                    <p:inputText value="#{SubmissionType.type.submissionTypeDsc}" 
+                                 required="true" requiredMessage="Submission Type Description is required" maxlength="250" size="50"/>
+                </div><div class="ui-g-8"/>
+
+                <div class="ui-g-12">
+                    <h:outputLabel value="Active"/><br/>
+                    <p:selectBooleanCheckbox value="#{SubmissionType.type.activeYnBool}" />
+                </div>
+
+                <p:outputPanel class="ui-g-2" rendered="#{SubmissionType.selectedType!=null}" style="margin-bottom: 20px">
+                    <h:outputLabel value="Last Modified:" /><br/>
+                    <h:outputText value="#{SubmissionType.type.lastModifiedDtm}">
+                        <f:convertDateTime pattern="yyyy-MMM-dd" />
+                    </h:outputText>
+                </p:outputPanel>
+
+                <p:outputPanel class="ui-g-2" rendered="#{SubmissionType.selectedType!=null}" style="margin-bottom: 20px">                        
+                    <h:outputLabel value="Modified By:" /><br/>
+                    <h:outputText value="#{SubmissionType.type.lastModifiedByNm}" />
+                </p:outputPanel>
+
+                <div class="ui-g-12">
+                    <p:commandButton value="Add" action="#{SubmissionType.add}" styleClass="submit-button"
+                                     rendered="#{SubmissionType.selectedType==null}" update="@form"/> 
+                    <p:commandButton value="Update" action="#{SubmissionType.update}" styleClass="submit-button"
+                                     rendered="#{SubmissionType.selectedType!=null}" update="@form" />  
+                    <p:commandLink value="Clear" action="#{SubmissionType.clear}" process="@this" update="@form" />  
+                </div>
+
+            </p:outputPanel>
+
+        </h:form>
+
+    </ui:define>
+</ui:composition>

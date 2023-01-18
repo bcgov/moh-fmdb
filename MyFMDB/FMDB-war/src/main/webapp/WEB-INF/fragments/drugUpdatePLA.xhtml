@@ -1,0 +1,86 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"       
+               xmlns:ui="http://java.sun.com/jsf/facelets"
+               xmlns:h="http://java.sun.com/jsf/html"
+               xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+                   
+    <h1 class="panel-header">#{msg['details.plaSection.plaInfoHeading']}</h1>
+    
+    <p:panelGrid columns="2" styleClass="borderless ui-grid-blank" layout="grid"
+        columnClasses="ui-grid-col-2 label-col, ui-grid-col-6" >
+        
+        <h:outputText value="#{msg['details.plaSection.plaStatus']}" />    
+        <h:selectOneMenu id="PlaStatus" value="#{Details.submission.fmdbProductListingAgreement.plaStatusCd.plaStatusCd}">
+            <f:selectItem itemLabel="" itemValue="" />
+            <f:selectItems value="#{DropDownListBean.plaStatusTypes}" />
+        </h:selectOneMenu>
+
+        <h:outputText value="#{msg['details.plaSection.plaEffectiveDate']}" />
+        <p:calendar size="10" pattern="yyyy-MM-dd" showOn="button" navigator="true"
+                       value="#{Details.submission.fmdbProductListingAgreement.effectiveDt}" />
+                                                
+        <h:outputText value="#{msg['details.plaSection.plaExpiryDate']}" />
+        <p:calendar size="10" pattern="yyyy-MM-dd" showOn="button" navigator="true"
+                       value="#{Details.submission.fmdbProductListingAgreement.expiryDt}" />
+                                                                                  
+        <h:outputText value="#{msg['details.plaSection.plaComments']}" />
+        <p:inputTextarea id="plaComments"
+                        maxlength="4000"
+                        cols="45" value="#{Details.submission.fmdbProductListingAgreement.commentsTxt}" />
+    </p:panelGrid>
+    
+    <h1 class="panel-header">#{msg['details.plaSection.activityLog']}</h1>    
+    <p:panelGrid columns="2" styleClass="borderless ui-grid-blank" layout="grid" columnClasses="ui-grid-col-6, ui-grid-col-6" id="plalog">
+        
+        <p:panelGrid columns="2" styleClass="borderless ui-grid-blank" layout="grid" 
+            columnClasses="ui-grid-col-3 label-col, ui-grid-col-9" >
+            
+            <h:outputText value="#{msg['details.plaSection.date']}" />
+            <p:calendar size="10" id="activityDate" pattern="yyyy-MM-dd" showOn="button" navigator="true"
+                        value="#{Details.plaLog.activityDt}" />
+            
+            <h:outputText value="#{msg['details.plaSection.activity']}" />
+            <p:inputTextarea cols="45" id="activityDetails"
+                                 maxlength="4000"
+                                 value="#{Details.plaLog.activityDetailsTxt}" />
+            
+            <h:panelGroup/>
+            <h:panelGroup >
+                <div class="form-submit-buttons" style="width: 175%;">
+                    <p:commandButton value="Add" action="#{Details.addPlaLog}" update="form1:tabView:plalog @form:messages"  
+                                     rendered="#{Details.selectedPlaLog==null}"
+                                    process="form1:tabView:plalog" styleClass="submit-button"/>
+                    <p:commandButton value="Update" action="#{Details.updatePlaLog}" update="form1:tabView:plalog @form:messages" 
+                                     styleClass="submit-button"
+                                     rendered="#{Details.selectedPlaLog!=null}" process="form1:tabView:plalog" />
+                    <p:commandButton value="Delete" action="#{Details.deletePlaLog}" update="form1:tabView:plalog @form:messages" 
+                                     styleClass="submit-button"
+                                     rendered="#{Details.selectedPlaLog!=null}" process="@this"/>
+                    <p:commandLink value="Clear" action="#{Details.clearPlaLog}" update="form1:tabView:plalog" process="@this"/>
+                </div>
+            </h:panelGroup>
+        </p:panelGrid>
+        
+        <p:dataTable value="#{Details.submission.fmdbProductListingAgreement.fmdbPlaLogsCollection}"
+                    var="row" rowIndexVar="index" rows="5" id="plalogTable">
+           <f:facet name="header">
+               <h:outputText value="List of PLA Logs" />
+           </f:facet>
+            <p:column headerText="#{msg['details.plaSection.datetablehead']}">
+               <h:outputText value="#{row.activityDt}">
+                   <f:convertDateTime dateStyle="medium" />
+               </h:outputText>
+           </p:column>
+            <p:column headerText="#{msg['details.plaSection.activitytablehead']}">
+               <h:outputText value="#{row.activityDetailsTxt}" />
+           </p:column>
+           <p:column>
+               <p:commandButton id="plalogButton" action="#{Details.selectPlaLog}" update="form1:tabView:plalog" value="Edit" process="@this" >
+                   <f:setPropertyActionListener  value="#{index}" target="#{Details.selectedPlaLog}" />
+               </p:commandButton>
+           </p:column>
+       </p:dataTable>
+    </p:panelGrid>
+                                                                                
+</ui:composition>
+     

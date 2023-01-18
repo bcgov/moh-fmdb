@@ -1,0 +1,61 @@
+<ui:composition template="/WEB-INF/templates/fmdbTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="content">
+
+        <h:form id='form1'>
+            <p:messages />
+            <h1 class="first-item">PharmaCare Status</h1>
+            <p:outputPanel id="pharmaStatus" class="ui-g no-gutter">
+
+                <div class="ui-g-10">
+                    <h:outputLabel value="PharmaCare Status Code" />
+                    <h:selectOneMenu value="#{PharmaCareStatusCodes.selectedType}" valueChangeListener="#{PharmaCareStatusCodes.selectType}"
+                                     style="max-width: 220%">
+                        <f:selectItem itemLabel="" itemValue="" />
+                        <f:selectItems value="#{DropDownListBean.reviewStatuses}" />
+                        <p:ajax event="change" process="@this" update="pharmaStatus" />
+                    </h:selectOneMenu>
+                </div>
+
+                <div class="ui-g-10">
+                    <h:outputLabel value="PharmaCare Description"/>
+                    <p:inputText value="#{PharmaCareStatusCodes.type.reviewStatusDsc}" 
+                                 required="true" requiredMessage="PharmaCare Description is required"
+                                 maxlength="250" size="107"/>
+                </div>
+
+                <div class="ui-g-12">
+                    <h:outputLabel value="Active"/><br/>
+                    <p:selectBooleanCheckbox value="#{PharmaCareStatusCodes.type.activeYnBool}" />
+                </div>
+
+                <p:outputPanel class="ui-g-2" rendered="#{PharmaCareStatusCodes.selectedType!=null}" style="margin-bottom: 20px">
+                    <h:outputLabel value="Last Modified:" /><br/>
+                    <h:outputText value="#{PharmaCareStatusCodes.type.lastModifiedDtm}">
+                        <f:convertDateTime pattern="yyyy-MMM-dd" />
+                    </h:outputText>
+                </p:outputPanel>
+
+                <p:outputPanel class="ui-g-2" rendered="#{PharmaCareStatusCodes.selectedType!=null}" style="margin-bottom: 20px">                        
+                    <h:outputLabel value="Modified By:" /><br/>
+                    <h:outputText value="#{PharmaCareStatusCodes.type.lastModifiedByNm}" />
+                </p:outputPanel>
+
+                <div class="ui-g-12">
+                    <p:commandButton value="Add" action="#{PharmaCareStatusCodes.add}" styleClass="submit-button"
+                                     rendered="#{PharmaCareStatusCodes.selectedType==null}" update="@form"/> 
+                    <p:commandButton value="Update" action="#{PharmaCareStatusCodes.update}" styleClass="submit-button"
+                                     rendered="#{PharmaCareStatusCodes.selectedType!=null}" update="@form"/>  
+                    <p:commandLink value="Clear" action="#{PharmaCareStatusCodes.clear}"
+                                   process="@this" update="@form" />  
+                </div>
+
+            </p:outputPanel>                                               
+        </h:form>
+
+    </ui:define>
+</ui:composition>

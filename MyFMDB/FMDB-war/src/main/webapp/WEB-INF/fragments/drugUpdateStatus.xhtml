@@ -1,0 +1,213 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"       
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+     
+
+    <h1 class="panel-header">#{msg['details.statusSection.drugProgressHeading']}</h1>
+    <p:panelGrid columns="2" styleClass="borderless ui-grid-blank" layout="grid"
+        columnClasses="ui-grid-col-2 label-col, ui-grid-col-2" >
+        
+        <h:outputText value="#{msg['details.statusSection.receivedDate']}" styleClass="public-site-data-label" />                                             
+        <h:outputText value="#{Details.submission.receivedDt}" >
+            <f:convertDateTime pattern="yyyy-MMM-dd" />
+        </h:outputText>
+
+        <h:outputText value="#{msg['details.statusSection.cdrDrugReview']}" styleClass="public-site-data-label"/>                                               
+        <h:selectOneMenu value="#{Details.submission.fmdbSubmissionReviewDetails.cdrReviewYn}">
+            <f:selectItem itemLabel="" itemValue="" />
+            <f:selectItems value="#{DropDownListBean.cdrDrugReviewYN}" />
+        </h:selectOneMenu>
+
+        <h:outputText value="#{msg['details.statusSection.status']}" styleClass="public-site-data-label"/>                                            
+        <h:selectOneMenu style="width: auto; max-width: 515%" value="#{Details.submission.fmdbSubmissionReviewDetails.reviewStatusCd.reviewStatusCd}">
+            <f:selectItem itemLabel="" itemValue=""  />
+            <f:selectItems value="#{DropDownListBean.reviewStatuses}"  />
+        </h:selectOneMenu>
+        
+        <h:panelGroup />
+        <h:panelGroup />
+
+        <h:panelGroup>
+            <h:outputText styleClass="preformatted public-site-data-label"
+                          value="Tentative Completion Date:" /><br/>(Standard)
+        </h:panelGroup>
+        <p:calendar size="10" pattern="yyyy-MM-dd" value="#{Details.submission.fmdbSubmissionReviewDetails.tentativeDtStandard}" 
+                    showOn="button" navigator="true"/>
+
+        <h:panelGroup>
+            <h:outputText styleClass="preformatted public-site-data-label"
+                                    value="Tentative Completion Date:" /><br/>(Complex)
+        </h:panelGroup>
+        <p:calendar size="10" pattern="yyyy-MM-dd" value="#{Details.submission.fmdbSubmissionReviewDetails.tentativeDtComplex}" 
+                    showOn="button" navigator="true"/>
+                     
+    </p:panelGrid>
+    
+    
+    <h1 class="panel-header">Budget Impact Analysis</h1>
+    <p:panelGrid columns="4" styleClass="borderless ui-grid-blank" layout="grid"
+        columnClasses="ui-grid-col-2 label-col, ui-grid-col-2, ui-grid-col-2 label-col, ui-grid-col-2" >
+                     
+        <h:outputText value="#{msg['details.statusSection.budgetImpactRequested']}" />                                           
+        <h:selectOneMenu value="#{Details.submission.fmdbSubmissionReviewDetails.biaRequstedCd.biaRequstedCd}">
+            <f:selectItem itemLabel="" itemValue="" />
+            <f:selectItems value="#{DropDownListBean.biaRequestTypes}" />
+        </h:selectOneMenu>
+
+        <h:outputText value="#{msg['details.statusSection.budgetImpactRequestDate']}" />
+        <p:calendar size="10" pattern="yyyy-MM-dd" value="#{Details.submission.fmdbSubmissionReviewDetails.biaRequestedDt}"
+                    navigator="true" showOn="button"/>
+
+        <h:outputText value="#{msg['details.statusSection.budgetRequestedBy']}" />
+        <p:inputText value="#{Details.submission.fmdbSubmissionReviewDetails.biaRequestedByNm}" />
+
+
+        <h:outputText value="#{msg['details.statusSection.budgetAssignedTo']}" />
+        <p:inputText value="#{Details.submission.fmdbSubmissionReviewDetails.biaAssignedToNm}" />
+
+        <h:outputText value="#{msg['details.statusSection.budgetTargetDate']}" />
+        <p:calendar size="10" pattern="yyyy-MM-dd" value="#{Details.submission.fmdbSubmissionReviewDetails.biaTargetDt}" 
+           navigator="true" showOn="button"/>
+        
+        <h:panelGroup>
+            <h:outputText styleClass="info-green" value="#{Details.biaDateDifference} " rendered="#{Details.biaDateDifference>=0}" />
+            <h:outputText styleClass="error-red" value="#{-1*Details.biaDateDifference} " rendered="#{0>Details.biaDateDifference}" />
+            <h:outputText value="#{msg['details.statusSection.budgetActualDate']}" />
+        </h:panelGroup>                                                   
+        <p:calendar size="10" pattern="yyyy-MM-dd" navigator="true" showOn="button"
+                    value="#{Details.submission.fmdbSubmissionReviewDetails.biaActualDt}"/>
+
+        <h:outputText value="#{msg['details.statusSection.budgetNotes']}" />
+        <p:inputTextarea  id="budgetNotes" maxlength="4000"
+                        cols="65" value="#{Details.submission.fmdbSubmissionReviewDetails.biaNotesTxt}" />
+    </p:panelGrid>
+    
+    
+    <h1 class="panel-header">#{msg['details.statusSection.drugBenefitHeader']}</h1>
+    <p:panelGrid columns="4" styleClass="borderless ui-grid-blank" layout="grid" id="drugBenefitCouncilPanel" style="padding-bottom: 0px"
+        columnClasses="ui-grid-col-2 label-col, ui-grid-col-2, ui-grid-col-2 label-col, ui-grid-col-4" >
+
+        <h:outputText value="#{msg['details.statusSection.committeeTargetDate']}" />
+        <p:calendar size="10" pattern="yyyy-MM-dd" navigator="true" showOn="button"
+                    value="#{Details.submission.fmdbSubmissionReviewDetails.dbcTargetDt}"/>
+
+        <h:panelGroup>
+            <h:outputText styleClass="info-green" value="#{Details.dbcDateDifference} " rendered="#{Details.dbcDateDifference>=0}"/>
+            <h:outputText styleClass="error-class" value="#{-1*Details.dbcDateDifference} " rendered="#{0>Details.dbcDateDifference}" />
+            <h:outputText value="#{msg['details.statusSection.committeeActualDate']}" />
+        </h:panelGroup>
+        <h:panelGroup>
+            <p:calendar size="10" pattern="yyyy-MM-dd"  navigator="true" showOn="button"
+            value="#{Details.submission.fmdbSubmissionReviewDetails.dbcActualDt}"/>
+        
+            <h:outputText value=" #{msg['details.statusSection.budgetShowActualDate']} " />
+            <h:selectBooleanCheckbox value="#{Details.submission.fmdbSubmissionReviewDetails.viewDBCActualDateBool}" />
+        </h:panelGroup>
+
+        <h:outputText value="#{msg['details.statusSection.committeeFinalizedDate']}" />
+        <p:calendar size="10" pattern="yyyy-MM-dd"  navigator="true" showOn="button"
+                    value="#{Details.submission.fmdbSubmissionReviewDetails.dbcRecommendationFinalizedD}" />
+        <h:outputText value="#{msg['details.statusSection.dbcNotesLabel']}" />
+        <p:inputTextarea id="dbcNotesLabel" maxlength="4000"
+                         cols="35" value="#{Details.submission.fmdbSubmissionReviewDetails.dbcNotesTxt}"/>
+
+
+        <h:outputText value="#{msg['details.statusSection.committeeRecommendation']}" />
+        <p:inputTextarea id="committeeRecommendation" maxlength="4000"
+                             cols="65" value="#{Details.submission.fmdbSubmissionReviewDetails.dbcRecommendationNotesTxt}"/>
+        
+    </p:panelGrid>
+    <h:panelGroup id="dbcAttachmentPanel">
+            <p:panelGrid columns="2" styleClass="borderless ui-grid-blank" layout="grid"
+                columnClasses="ui-grid-col-2 label-col, ui-grid-col-6"  style="padding-top: 0px" rendered="#{Details.fileName ne null}">
+        
+            <h:outputText value="Current Attachment:" />
+            <h:outputText value="#{Details.fileName}" />
+
+            <h:outputText value="#{msg['details.statusSection.attachLabel']}" />
+            <h:selectBooleanCheckbox value="#{Details.submission.fmdbSubmissionReviewDetails.letterImagePublicBool}" />
+
+            <h:outputText />
+            <p:commandButton action="#{Details.deleteAttachment}" value="Delete Current Attachment"
+                             update="@form:tabView:dbcAttachmentPanel" process="@this"/>
+
+            <h:outputText />
+            <h:outputText value="*Please note that there can only be one attachment at a time."/>
+
+        </p:panelGrid>
+        <p:panelGrid columns="2" styleClass="borderless ui-grid-blank" layout="grid"
+                     columnClasses="ui-grid-col-2 label-col, ui-grid-col-6"  style="padding-top: 0px" rendered="#{Details.fileName eq null}">
+            <h:outputText value="Add Attachment: " />
+            <p:fileUpload id="fileUpload" fileLimit="1" fileUploadListener="#{Details.processUpload}" mode="advanced"
+                          update="@form:tabView:dbcAttachmentPanel" sizeLimit="5242880"/> 
+        </p:panelGrid>
+    </h:panelGroup>
+
+    
+    
+    
+    <h1 class="panel-header">#{msg['details.statusSection.specialAuthorityHeading']}</h1>
+    <p:panelGrid columns="4" styleClass="borderless ui-grid-blank" layout="grid" 
+        columnClasses="ui-grid-col-2 label-col, ui-grid-col-2, ui-grid-col-2 label-col, ui-grid-col-2" >
+        
+        <h:outputText value="#{msg['details.statusSection.specialAuthorityRequired']}" />                                          
+        <h:selectOneMenu value="#{Details.submission.fmdbSubmissionReviewDetails.saRequiredYn}">
+            <f:selectItem itemLabel="" itemValue="" />
+            <f:selectItems value="#{DropDownListBean.safRequiredYN}" />
+        </h:selectOneMenu>
+
+        <h:outputText value="#{msg['details.statusSection.saInitiatedDate']}" />
+        <p:calendar pattern="yyyy-MM-dd"  navigator="true" showOn="button" size="10"
+                    value="#{Details.submission.fmdbSubmissionReviewDetails.saInitiatedDt}" />
+
+        <h:outputText value="#{msg['details.statusSection.saTargetDate']}" />
+        <p:calendar size="10" pattern="yyyy-MM-dd"  navigator="true" showOn="button"
+                    value="#{Details.submission.fmdbSubmissionReviewDetails.saTargetDt}" />
+
+        <h:panelGroup>
+            <h:outputText styleClass="info-green" value="#{Details.safDateDifference} " rendered="#{Details.safDateDifference>=0}"/>
+            <h:outputText styleClass="errorClass" value="#{-1*Details.safDateDifference} " rendered="#{0>Details.safDateDifference}" />
+            <h:outputText value="#{msg['details.statusSection.saCompletedDate']}" />
+        </h:panelGroup>                                             
+        <p:calendar size="10" pattern="yyyy-MM-dd"  navigator="true" showOn="button"
+                    value="#{Details.submission.fmdbSubmissionReviewDetails.saCompletedDt}" />
+
+        <h:outputText value="#{msg['details.statusSection.saNotesLabel']}" />
+        <p:inputTextarea id="saNotesLabel" cols="65" maxlength="4000"
+                        value="#{Details.submission.fmdbSubmissionReviewDetails.saNotesTxt}" />                     
+    </p:panelGrid>
+    
+    
+    <h1 class="panel-header">#{msg['details.statusSection.finalHeading']}</h1>
+    <p:panelGrid columns="4" styleClass="borderless ui-grid-blank" layout="grid"
+        columnClasses="ui-grid-col-2 label-col, ui-grid-col-2, ui-grid-col-2 label-col, ui-grid-col-2" >
+               <h:outputText value="#{msg['details.statusSection.bnSignedDate']}" />
+        <p:calendar size="10" pattern="yyyy-MM-dd"  navigator="true" showOn="button"
+                    value="#{Details.submission.fmdbSubmissionReviewDetails.briefingNoteSignedDt}" />
+
+        <h:outputText value="#{msg['details.statusSection.dbrInitiatedDate']}" />
+        <p:calendar size="10" pattern="yyyy-MM-dd"  navigator="true" showOn="button"
+                    value="#{Details.submission.fmdbSubmissionReviewDetails.dbrInitiatedDt}" />
+
+        <h:outputText value="#{msg['details.statusSection.companyNoticeDate']}" />
+        <p:calendar size="10" pattern="yyyy-MM-dd"  navigator="true" showOn="button"
+                    value="#{Details.submission.fmdbSubmissionReviewDetails.companyNoticeSentDt}" />
+        
+        <h:outputText styleClass="public-site-data-label" value="#{msg['details.statusSection.pnetEffectiveDate']}" />
+        <p:calendar size="10" pattern="yyyy-MM-dd"  navigator="true" showOn="button"
+                    value="#{Details.submission.fmdbSubmissionReviewDetails.dbrPharmanetDt}" />
+
+        <h:outputText value="#{msg['details.statusSection.decisionDays']}" />
+        <p:inputText size="10" disabled="true" value="#{Details.decisionBusinessDays}" />
+
+        <h:outputText value="#{msg['details.statusSection.decisionDaysCalendar']}" />
+        <p:inputText size="10" disabled="true" value="#{Details.decisionDays}" />
+
+        <h:outputText value="#{msg['details.statusSection.additionalInfo']}" />
+        <p:inputTextarea id="additionalInfo" maxlength="500"
+                        cols="65" value="#{Details.submission.fmdbSubmissionReviewDetails.commentsTxt}" />               
+    </p:panelGrid>    
+</ui:composition>
+                                                                   

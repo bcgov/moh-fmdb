@@ -1,0 +1,43 @@
+<h:form xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+    <div class="navbar-collapse collapse" style="max-height:502px;">
+        <nav role ="navigation">
+            <ul class="menu nav navbar-nav">
+                <li class="first leaf top-level-item">
+                    <h:link id="searchLink" outcome="/pages/Search" value="Search"/>
+                </li>
+                <li class="collapsed top-level-item">
+                    <h:link id="detailsLink" outcome="/pages/Details" value="New Drug Submission"/>
+                </li>
+                <li class="expanded dropdown top-level-item">
+                    <h:link id="reportsLink" outcome="/pages/Reports" value="Reports"/>
+                    <ul class="dropdown-menu">
+                        <li><h:link outcome="/pages/reports/SubmissionReport">Submission Report</h:link></li>
+                        <li><h:link outcome="/pages/reports/SpecialAuthorityFormsReport">Special Authority Forms Report</h:link></li>
+                        <li><h:link outcome="/pages/reports/DrugBenefitCommitteeReport">Drug Benefit Committee Report</h:link></li>
+                        <li><h:link outcome="/pages/reports/SubmByApplicantReport">Submission by Applicant Name</h:link></li>
+                        <li><h:link outcome="/pages/reports/TechnicalReviewReport">Techncial Review Report</h:link></li>
+                        <li><h:link outcome="/pages/reports/BudgetImpactAnalysisReport">Budget Impact Analysis Report</h:link></li>
+                        <li><h:link outcome="/pages/reports/SingleDrugSubStatusReport">Single Drug Submission Status Report</h:link></li>
+                    </ul>
+                </li>
+                <li class="expanded dropdown top-level-item">
+                    <h:link id="adminLink" outcome="/pages/Admin" value="Admin"
+                            rendered="#{request.isUserInRole('PSDADMIN')}"/>
+                    <ul class="dropdown-menu">
+                        <li><h:link outcome="/pages/admin/BiaRequestedStatusCodes">BIA Requested Status Codes</h:link></li>
+                        <li><h:link outcome="/pages/admin/CompanyContacts">Company Contacts</h:link></li>
+                        <li><h:link outcome="/pages/admin/CompanyType">Company Type</h:link></li>
+                        <li><h:link outcome="/pages/admin/PharmaCareStatusCodes">Pharmacare Status Codes</h:link></li>
+                        <li><h:link outcome="/pages/admin/PLAStatusCodes">PLA Status Codes</h:link></li>
+                        <li><h:link outcome="/pages/admin/SubmissionType">Submission Type</h:link></li>
+                        <li><h:link outcome="/pages/admin/Reviewer">Reviewer</h:link></li>
+                    </ul>
+                </li>                           
+            </ul>
+        </nav>
+    </div>
+</h:form>

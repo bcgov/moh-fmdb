@@ -1,0 +1,47 @@
+<ui:composition template="/WEB-INF/templates/fmdbTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="content">
+
+        <h:form id="submissionReport">
+            <h1 class="first-item">Submissions Report</h1>
+            <p:messages />
+            <div class="ui-g no-gutter">
+                <div class="ui-g-4">
+                    <label>Report View</label>
+                    <h:selectOneMenu id="reportView" value="#{SubmissionReport.reportView}" valueChangeListener="#{SubmissionReport.updateView}">
+                        <p:ajax event="change" update="submissionReport"/>
+                        <f:selectItems value="#{SubmissionReport.reportViewOptions}"/>
+                    </h:selectOneMenu>
+                </div>
+                <div class="ui-g-8"/>
+                <div class="ui-g-4">
+                    <label>Sort By</label>
+                    <h:selectOneMenu id="sortBy" value="#{SubmissionReport.sortBy}" >
+                        <f:selectItems value="#{SubmissionReport.sortByOptions}"/>
+                    </h:selectOneMenu>
+                </div>
+                <div class="ui-g-8"/>
+                <div class="ui-g-4">
+                    <label>From date</label> <span class="date-pattern">(yyyy-mm-dd)</span>
+                    <p:calendar value="#{SubmissionReport.fromDate}" pattern="yyyy-MM-dd"
+                                navigator="true"/>
+                </div>
+                <div class="ui-g-8"/>
+                <div class="ui-g-4">
+                    <label>To date</label> <span class="date-pattern">(yyyy-mm-dd)</span>
+                    <p:calendar value="#{SubmissionReport.toDate}" pattern="yyyy-MM-dd"
+                                navigator="true" />
+                </div>
+                <div class="ui-g-8"/>
+                <div class="ui-g-12">
+                    <p:commandButton action="#{SubmissionReport.runReportAction}" value="Run Report"/>
+                </div>
+            </div>       
+        </h:form>
+
+    </ui:define>
+</ui:composition>
