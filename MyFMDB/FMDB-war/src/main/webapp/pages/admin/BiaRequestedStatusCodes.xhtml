@@ -1,0 +1,57 @@
+<ui:composition template="/WEB-INF/templates/fmdbTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="content">
+
+        <h:form id='form1'>
+            <p:messages />
+            <h1 class="first-item">Budget Impact Analysis Requested Code</h1>
+            <p:outputPanel id="biaPanel" class="ui-g no-gutter">
+                
+                <div class="ui-g-4">
+                    <h:outputLabel value="BIA Requested Codes" />                                         
+                    <h:selectOneMenu value="#{BiaRequestedStatusCodes.selectedBia}" valueChangeListener="#{BiaRequestedStatusCodes.selectBiaRequestedCode}" >
+                        <f:selectItem itemLabel="" itemValue="" />
+                        <f:selectItems value="#{DropDownListBean.biaRequestTypes}" />
+                        <p:ajax event="change" process="@this" update="biaPanel" />
+                    </h:selectOneMenu>
+                </div><div class="ui-g-8"/>
+                
+                <div class="ui-g-4">
+                    <h:outputLabel value="BIA Requested Code Description"/>
+                    <p:inputText value="#{BiaRequestedStatusCodes.biaRequestedCode.biaRequestedDsc}" 
+                                 required="true" requiredMessage="BIA Requested Code Description is required" maxlength="250" size="50"/>
+                </div><div class="ui-g-8"/>
+                
+                <div class="ui-g-12">
+                    <h:outputLabel value="Active"/><br/>
+                    <p:selectBooleanCheckbox value="#{BiaRequestedStatusCodes.biaRequestedCode.activeYnBool}" />
+                </div>
+                
+                <p:outputPanel class="ui-g-2" rendered="#{BiaRequestedStatusCodes.selectedBia!=null}" style="margin-bottom: 20px">
+                    <h:outputLabel value="Last Modified:" /><br/>
+                    <h:outputText value="#{BiaRequestedStatusCodes.biaRequestedCode.lastModifiedDtm}">
+                        <f:convertDateTime pattern="yyyy-MMM-dd" />
+                    </h:outputText>
+                </p:outputPanel>
+                
+                <p:outputPanel class="ui-g-2" rendered="#{BiaRequestedStatusCodes.selectedBia!=null}" style="margin-bottom: 20px">                        
+                    <h:outputLabel value="Modified By:" /><br/>
+                    <h:outputText value="#{BiaRequestedStatusCodes.biaRequestedCode.lastModifiedByNm}" />
+                </p:outputPanel>
+                
+                <div class="ui-g-12">
+                    <p:commandButton value="Add" action="#{BiaRequestedStatusCodes.add}" styleClass="submit-button"
+                                     rendered="#{BiaRequestedStatusCodes.selectedBia==null}" update="@form" /> 
+                    <p:commandButton value="Update" action="#{BiaRequestedStatusCodes.update}" styleClass="submit-button"
+                                     rendered="#{BiaRequestedStatusCodes.selectedBia!=null}" update="@form"/>  
+                    <p:commandLink value="Clear" action="#{BiaRequestedStatusCodes.clear}" process="@this" update="@form" /> 
+                </div>
+
+            </p:outputPanel>
+        </h:form>
+    </ui:define>
+</ui:composition>

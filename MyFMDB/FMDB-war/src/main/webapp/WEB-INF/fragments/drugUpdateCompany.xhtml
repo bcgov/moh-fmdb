@@ -1,0 +1,122 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"       
+               xmlns:ui="http://java.sun.com/jsf/facelets"
+               xmlns:h="http://java.sun.com/jsf/html"
+               xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+    
+    <h:panelGroup id="companyContactPanel">
+        <h1 class="panel-header">#{msg['details.companyDetailsSection.companyInfoHeading']}</h1>
+        <p:panelGrid columns="4" styleClass="borderless ui-grid-blank" layout="grid"
+            columnClasses="ui-grid-col-2 label-col, ui-grid-col-2, ui-grid-col-2 label-col, ui-grid-col-4" >
+
+            <h:outputText/>
+            <h:outputLink style="font-size: 16px" value="#" onclick="PF('searchDialog').show();">Search For Company</h:outputLink>
+            <h:outputText/>
+            <h:outputText/>
+
+            <h:outputText value="#{msg['details.companyDetailsSection.companyType']}" />
+            <p:inputText disabled="true"  value="#{Details.company.companyTypeCd.companyTypeDsc}" />
+
+            <h:outputText value="#{msg['details.companyDetailsSection.companyAlias']}" />
+            <p:inputText disabled="true" value="#{Details.company.aliasNm}" />
+
+            <h:outputText value="#{msg['details.companyDetailsSection.companyName']}" styleClass="public-site-data-label" />
+            <p:inputText disabled="true" id="companyName" value="#{Details.company.legalNm}" size="50" />
+
+            <h:outputText/>
+            <h:outputText/>
+
+            <h:outputText value="#{msg['details.companyDetailsSection.companyAddress']}" />
+            <p:inputText disabled="true" value="#{Details.companyAddresses.addressFirstLineTxt}" size="50" />
+
+            <h:outputText/>
+            <h:outputText/>
+
+            <h:outputText value="#{msg['details.companyDetailsSection.companyCity']}" />
+            <p:inputText disabled="true" value="#{Details.companyAddresses.cityNm}" />
+
+            <h:outputText value="#{msg['details.companyDetailsSection.companyProvince']}" />
+            <p:inputText disabled="true" value="#{Details.companyAddresses.fmdbRegions.regionDsc}" />
+
+            <h:outputText value="#{msg['details.companyDetailsSection.companyCountry']}" />
+            <p:inputText disabled="true" value="#{Details.companyAddresses.fmdbRegions.fmdbCountries.countryDsc}" />
+
+            <h:outputText value="#{msg['details.companyDetailsSection.companyPostalCode']}" />
+            <p:inputText disabled="true" value="#{Details.companyAddresses.postalCodeTxt}" />
+
+            <h:outputText value="#{msg['details.companyDetailsSection.companyPhone']}" />
+            <p:inputText disabled="true" value="#{Details.companyDetails.workPhoneNo}" />
+
+            <h:outputText value="#{msg['details.companyDetailsSection.companyPhoneExtension']}" />
+            <p:inputText disabled="true" value="#{Details.companyDetails.workPhExtNo}" />
+
+            <h:outputText value="#{msg['details.companyDetailsSection.companyFax']}" />
+            <p:inputText disabled="true" value="#{Details.companyDetails.faxNo}" />
+
+        </p:panelGrid>
+
+
+
+        <h1 class="panel-header">#{msg['details.companyDetailsSection.contactInfoHeading']}</h1>
+
+        <p:panelGrid columns="4" styleClass="borderless ui-grid-blank" layout="grid" id="contactDetails"
+            columnClasses="ui-grid-col-2 label-col, ui-grid-col-2, ui-grid-col-2 label-col, ui-grid-col-4" >
+
+                <h:outputText value="#{msg['details.companyDetailsSection.contactName']}" />                                               
+                <h:panelGroup>
+                    <h:selectOneMenu value="#{Details.contactId}" rendered="#{Details.contactNames != null}" style="width: 108%"
+                                     valueChangeListener="#{Details.selectContact}" >
+                        <f:selectItem itemLabel="" itemValue="" />
+                        <f:selectItems value="#{Details.contactNames}" />
+                        <p:ajax event="change" update="form1:tabView:contactDetails" process="@this" />
+                    </h:selectOneMenu>                                                   
+                    <h:outputText value="No Contacts Available" rendered="#{Details.contactNames == null}" />
+                </h:panelGroup>
+
+                <h:outputText value="#{msg['details.companyDetailsSection.contactTitle']}" />
+                <p:inputText disabled="true" value="#{Details.contact.jobTitleNm}" />
+
+                <h:outputText value="#{msg['details.companyDetailsSection.contactAddress']}" />
+                <p:inputText disabled="true" value="#{Details.contact.address.addressFirstLineTxt}" />
+
+                <h:outputText />
+                <h:outputText />
+
+                <h:outputText value="#{msg['details.companyDetailsSection.contactCity']}" />
+                <p:inputText disabled="true" value="#{Details.contact.address.cityNm}" />
+
+                <h:outputText value="#{msg['details.companyDetailsSection.contactProvince']}" />
+                <p:inputText disabled="true" value="#{Details.contact.address.fmdbRegions.regionDsc}" />
+
+                <h:outputText value="#{msg['details.companyDetailsSection.contactCountry']}" />
+                <p:inputText disabled="true" value="#{Details.contact.address.fmdbRegions.fmdbCountries.countryDsc}" />
+
+                <h:outputText value="#{msg['details.companyDetailsSection.contactPostalCode']}" />
+                <p:inputText disabled="true" value="#{Details.contact.address.postalCodeTxt}" />    
+
+                <h:outputText value="#{msg['details.companyDetailsSection.contactPhone']}" />
+                <p:inputText disabled="true" value="#{Details.contact.contactDetail.workPhoneNo}" />
+
+                <h:outputText value="#{msg['details.companyDetailsSection.contactPhoneExtension']}" />
+                <p:inputText disabled="true" value="#{Details.contact.contactDetail.workPhExtNo}" />
+
+                <h:outputText value="#{msg['details.companyDetailsSection.contactFax']}" />
+                <p:inputText disabled="true" value="#{Details.contact.contactDetail.faxNo}" />
+
+                <h:outputText value="#{msg['details.companyDetailsSection.contactEmail']}" />
+                <p:inputText disabled="true" value="#{Details.contact.contactDetail.emailAddress}" />
+
+                <h:outputText value="#{msg['details.companyDetailsSection.contactCell']}" />
+                <p:inputText disabled="true" value="#{Details.contact.contactDetail.cellNo}" />
+        </p:panelGrid>
+
+         <p:panelGrid columns="2" styleClass="borderless ui-grid-blank" layout="grid" id="companyComments"
+             columnClasses="ui-grid-col-2 label-col, ui-grid-col-6" >
+                <h:outputText value="#{msg['details.companyDetailsSection.companyComments']}" />
+                <p:inputTextarea disabled="true" value="#{Details.company.commentTxt}" cols="65" />
+         </p:panelGrid>        
+    </h:panelGroup>
+     
+
+                         
+</ui:composition>

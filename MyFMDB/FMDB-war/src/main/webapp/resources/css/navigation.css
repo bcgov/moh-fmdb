@@ -1,0 +1,132 @@
+.region-site-links ul {
+  margin-right: 10px;
+  margin-top: 6px;
+}
+.region-site-links li > a {
+  font-size: 13px;
+}
+.region-site-links li:first-child > a:before {
+  font-family: FontAwesome;
+  content: '\f095';
+  margin-right: 8px;
+}
+.region-footer li.last > a:before {
+  font-family: FontAwesome;
+  content: '\f095';
+  margin-right: 8px;
+}
+.nav-bullet {
+  color: #999999;
+  font-size: 11px;
+  padding-right: 2px;
+}
+ul.nav li.dropdown:hover ul.dropdown-menu {
+  display: block;
+}
+ul.nav li.dropdown ul.dropdown-menu {
+  margin-top: 0;
+}
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus {
+  color: #ffffff;
+  background-color: #6583b0;
+}
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus {
+  text-decoration: underline;
+}
+.dropdown-menu > .active > a {
+  background-color: #5475a7;
+  text-decoration: underline;
+}
+
+.navbar-links .nav > li {
+  float: left;
+  list-style-image: none;
+}
+
+.navbar-links .nav > li > a {
+  color: #ffffff;
+  display: block;
+  margin: 10px 0;
+  line-height: 1em;
+}
+
+.navbar-links .nav > li > a:hover,
+.navbar-links .nav > li > a:active,
+.navbar-links .nav > li > a:focus {
+  background: transparent;
+}
+.navbar-links-container a,
+.navbar-links-container a:hover {
+    color: #ffffff
+}
+@media (min-width: 960px) and (max-width: 1199px) {
+  .navbar-links .nav > li > a {
+    padding: 0 10px;
+  }
+}
+.navbar-links .nav {
+  margin-top: 9px;
+}
+.navbar-header {
+  color: white;
+}
+.navbar-header .search-toggle {
+  margin-top: 3px;
+}
+/*Left Menu Navigation Dropdown*/
+#left-menu-sidebar.dropdown-menu {
+  left: auto;
+  background: #ffffff;
+  margin: 0 0 -100% 0;
+  border-top: none;
+  width: 100%;
+  position: relative;
+}
+#left-menu-sidebar.dropdown-menu .well {
+  border: none;
+}
+.mobile-section-navigation {
+  margin-bottom: 1em;
+}
+.mobile-section-navigation #left-mobile-dropdown {
+  width: 100%;
+  text-align: left;
+  line-height: 2em;
+}
+.mobile-section-navigation #left-mobile-dropdown .dropdown-toggle-icon {
+  position: absolute;
+  right: 27px;
+  top: 8px;
+}
+@media (min-width: 960px) {
+    .navbar-nav > li {
+        float: left;
+    }
+}
+
+
+.footer-region{
+    overflow: hidden;
+}
+.footer li > a,
+.footer .nav > li > a {
+    color: #ffffff;
+    padding: 0px;
+}
+.footer li.environment {
+    color: #D3D3D3;
+    display: block;
+    font-size: 16px;
+}
+.footer .nav > li > a:hover,
+.footer .nav > li > a:focus {
+  text-decoration: underline;
+  background: none;
+}
+.footer ul {
+    padding-left: 0px;
+}

@@ -1,0 +1,21 @@
+<ui:composition template="/WEB-INF/templates/fmdbTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="content">
+        
+        <h1 class="first-item">Admin Menu</h1>
+        <ul style="list-style: square;">
+            <li><h:link outcome="admin/BiaRequestedStatusCodes.xhtml">BIA Requested Status Codes</h:link></li>
+            <li><h:link outcome="admin/CompanyContacts.xhtml">Company Contacts</h:link></li>
+            <li><h:link outcome="admin/CompanyType.xhtml">Company Type</h:link></li>
+            <li><h:link outcome="admin/PharmaCareStatusCodes.xhtml">Pharmacare Status Codes</h:link></li>
+            <li><h:link outcome="admin/PLAStatusCodes.xhtml">PLA Status Codes</h:link></li>
+            <li><h:link outcome="admin/SubmissionType.xhtml">Submission Type</h:link></li>          
+            <li><h:link outcome="admin/Reviewer.xhtml">Reviewer</h:link></li>          
+        </ul>         
+   
+    </ui:define>
+</ui:composition>

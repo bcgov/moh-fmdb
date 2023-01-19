@@ -1,0 +1,102 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"       
+               xmlns:ui="http://java.sun.com/jsf/facelets"
+               xmlns:h="http://java.sun.com/jsf/html"
+               xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+    
+    <h1 class="panel-header">#{msg['details.economicSection.budgetAnalysisHeading']}</h1>
+    <p:panelGrid columns="4" styleClass="borderless ui-grid-blank" layout="grid"
+        columnClasses="ui-grid-col-2 label-col, ui-grid-col-2, ui-grid-col-2 label-col, ui-grid-col-2" >
+
+        <h:outputText value="#{msg['details.economicSection.budgetImpactRequested']}" />
+        <p:inputText disabled="true" value="#{Details.submission.fmdbSubmissionReviewDetails.biaRequstedCd.biaRequestedDsc}" />
+        
+        <h:outputText value="#{msg['details.economicSection.budgetImpactRequestedBy']}" />
+        <p:inputText disabled="true" value="#{Details.submission.fmdbSubmissionReviewDetails.biaRequestedByNm}" />
+                                                      
+        <h:outputText value="#{msg['details.economicSection.budgetImpactRequestedDate']}" />
+        <p:inputText disabled="true" value="#{Details.submission.fmdbSubmissionReviewDetails.biaRequestedDt}" size="12">
+            <f:convertDateTime pattern="yyyy-MM-dd"/>
+        </p:inputText>
+        
+        <h:outputText value="#{msg['details.economicSection.budgetImpactTargetDate']}" />
+        <p:inputText disabled="true" value="#{Details.submission.fmdbSubmissionReviewDetails.biaTargetDt}" size="12" >
+            <f:convertDateTime pattern="yyyy-MMM-dd" />
+        </p:inputText>
+        
+        <h:outputText value="#{msg['details.economicSection.budgetImpactActualCompletion']}" />
+        <p:inputText disabled="true" value="#{Details.submission.fmdbSubmissionReviewDetails.biaActualDt}" size="12">
+            <f:convertDateTime pattern="yyyy-MMM-dd" />
+        </p:inputText>
+
+        <h:outputText value="#{msg['details.economicSection.budgetImpactAssignedTo']}" />
+        <p:inputText disabled="true" value="#{Details.submission.fmdbSubmissionReviewDetails.biaAssignedToNm}" />
+    </p:panelGrid>
+    
+
+    <h1 class="panel-header">#{msg['details.economicSection.economicAnalysisHeading']}</h1>
+    
+    <p:panelGrid columns="6" styleClass="borderless ui-grid-blank" layout="grid"
+        columnClasses="ui-grid-col-2 text-right, ui-grid-col-1, ui-grid-col-1, ui-grid-col-1, ui-grid-col-1, ui-grid-col-1" >
+                   
+        <h:outputText value="Year"/>
+        <h:outputText value="-2"/>
+        <h:outputText value="-1"/>
+        <h:outputText value="1"/>
+        <h:outputText value="2"/>
+        <h:outputText value="3"/>
+
+        Company Predicted ($M)
+        <p:inputText size="6" maxlength="7" value="#{Details.economicStatusMinusTwo.companyPredictionAmt}" />
+        <p:inputText size="6" maxlength="7" value="#{Details.economicStatusMinusOne.companyPredictionAmt}" />
+        <p:inputText size="6" maxlength="7" value="#{Details.economicStatusOne.companyPredictionAmt}" />
+        <p:inputText size="6" maxlength="7" value="#{Details.economicStatusTwo.companyPredictionAmt}" />
+        <p:inputText size="6" maxlength="7" value="#{Details.economicStatusThree.companyPredictionAmt}" />
+
+        PSD Predicted ($M)
+        <p:inputText size="6" maxlength="7" value="#{Details.economicStatusMinusTwo.psdPredictionAmt}" />
+        <p:inputText size="6" maxlength="7" value="#{Details.economicStatusMinusOne.psdPredictionAmt}" />
+        <p:inputText size="6" maxlength="7" value="#{Details.economicStatusOne.psdPredictionAmt}" />
+        <p:inputText size="6" maxlength="7" value="#{Details.economicStatusTwo.psdPredictionAmt}" />
+        <p:inputText size="6" maxlength="7" value="#{Details.economicStatusThree.psdPredictionAmt}" />
+
+        PSD Expenditure ($M)
+        <p:inputText size="6" maxlength="7" value="#{Details.economicStatusMinusTwo.psdExpenditureAmt}" />
+        <p:inputText size="6" maxlength="7" value="#{Details.economicStatusMinusOne.psdExpenditureAmt}" />
+        <p:inputText size="6" maxlength="7" value="#{Details.economicStatusOne.psdExpenditureAmt}" />
+        <p:inputText size="6" maxlength="7" value="#{Details.economicStatusTwo.psdExpenditureAmt}" />
+        <p:inputText size="6" maxlength="7" value="#{Details.economicStatusThree.psdExpenditureAmt}" />
+
+        BC Expenditure Actual ($M)
+        <p:inputText size="6" maxlength="7" value="#{Details.economicStatusMinusTwo.bcActualAmt}" />
+        <p:inputText size="6" maxlength="7" value="#{Details.economicStatusMinusOne.bcActualAmt}" />
+        <p:inputText size="6" maxlength="7" value="#{Details.economicStatusOne.bcActualAmt}" />
+        <p:inputText size="6" maxlength="7" value="#{Details.economicStatusTwo.bcActualAmt}" />
+        <p:inputText size="6" maxlength="7" value="#{Details.economicStatusThree.bcActualAmt}" />
+
+        PSD Patients Actual
+        <p:inputText size="6" maxlength="7" value="#{Details.economicStatusMinusTwo.psdActualAmt}" />
+        <p:inputText size="6" maxlength="7" value="#{Details.economicStatusMinusOne.psdActualAmt}" />
+        <p:inputText size="6" maxlength="7" value="#{Details.economicStatusOne.psdActualAmt}" />
+        <p:inputText size="6" maxlength="7" value="#{Details.economicStatusTwo.psdActualAmt}" />
+        <p:inputText size="6" maxlength="7" value="#{Details.economicStatusThree.psdActualAmt}" />
+
+        BC Patients Actual 
+        <p:inputText size="6" maxlength="7" value="#{Details.economicStatusMinusTwo.bcNumPatientActualsQty}" />
+        <p:inputText size="6" maxlength="7" value="#{Details.economicStatusMinusOne.bcNumPatientActualsQty}" />
+        <p:inputText size="6" maxlength="7" value="#{Details.economicStatusOne.bcNumPatientActualsQty}" />
+        <p:inputText size="6" maxlength="7" value="#{Details.economicStatusTwo.bcNumPatientActualsQty}" />
+        <p:inputText size="6" maxlength="7" value="#{Details.economicStatusThree.bcNumPatientActualsQty}" />    
+    </p:panelGrid>
+    
+    <p:panelGrid columns="2" styleClass="borderless ui-grid-blank" layout="grid"
+         columnClasses="ui-grid-col-2 label-col, ui-grid-col-6" >
+            <h:outputText value="#{msg['details.economicSection.economicComments']}" />
+            <p:inputTextarea id="economicComments"
+                         maxlength="4000"
+                         cols="65" value="#{Details.economicStatus.analysisNotes}" />
+     </p:panelGrid>
+                                               
+    
+                   
+</ui:composition>             

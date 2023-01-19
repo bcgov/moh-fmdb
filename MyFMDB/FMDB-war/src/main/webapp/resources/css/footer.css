@@ -1,0 +1,11 @@
+
+.footer {
+  border: none;
+  background: #003366;
+  color: #ffffff;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.footer-region{
+    overflow: hidden;
+}

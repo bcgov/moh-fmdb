@@ -1,0 +1,23 @@
+.search-panel {
+    margin-bottom: 20px
+}
+.serviceLink,
+.serviceLink:hover{
+    color: #ffffff;
+    text-decoration: none; 
+}
+.page-title {
+    display: inline-block;
+    font-size: 35px;
+    padding-left: 20px;
+    position: absolute;
+}
+.input-row td {
+    padding: 8px
+}
+.borderless.ui-panelgrid .ui-panelgrid-cell {
+    border: none;
+}
+.results-table {
+    margin-bottom: 20px;
+}

@@ -1,0 +1,90 @@
+<ui:composition template="/WEB-INF/templates/fmdbTemplate.xhtml" 
+                xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+    
+    <ui:define name="content">
+        <h:form id="form1">
+            <p:messages />            
+            <h1 style="margin-top: 0px">Search Criteria</h1>
+
+            <div class="ui-g">
+                <div class="ui-g-3">
+                    <label>Submission Number</label>
+                    <p:inputText value="#{Search.submissionNumber}"  />
+                </div>
+                <div class="ui-g-3">
+                    <label>Chemical Name</label><br/>
+                    <p:inputText value="#{Search.chemicalName}" />
+                </div>
+                <div class="ui-g-6"/>
+                
+                <div class="ui-g-3">
+                    <label>Submission Type</label>
+                    <h:selectOneMenu value="#{Search.submissionType}" >
+                        <f:selectItem itemLabel="" itemValue="" />
+                        <f:selectItems value="#{DropDownListBean.submissionTypes}" />
+                    </h:selectOneMenu>
+                </div>
+                <div class="ui-g-3">
+                    <label>Trade Name</label> <br/>
+                    <p:inputText value="#{Search.tradeName}" />
+                </div>
+                <div class="ui-g-6"/>
+                
+                <div class="ui-g-3">
+                    <label>Company Name</label>
+                    <p:inputText value="#{Search.companyName}" />
+                </div>     
+                
+                <div class="ui-g-6 form-submit-buttons" style="width: 175%">      
+                    <p:commandButton action="#{Search.search}" value="Search" update="form1" styleClass="submit-button" />
+                    <p:commandButton process="@this" action="#{Search.clear}" value="Clear Criteria" update="form1" styleClass="secondary-button"/>
+                    <p:commandButton process="@this" action="#{Search.clearResults}" value="Clear Results" update="form1" styleClass="secondary-button"/>
+                </div>                    
+            </div>
+
+            <h:panelGroup rendered="#{Search.searchResultCollection!=null}">             
+          
+                <p:dataTable id="searchResults" value="#{Search.searchResultCollection}" var="record" rows="20" 
+                             paginator="true" paginatorPosition="top" style="margin-top: 20px"
+                            paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                            rowsPerPageTemplate="15,20, #{Search.totalNumberOfRows >= 25 ? Search.totalNumberOfRows : 25}">
+                    
+                    <p:column sortBy="#{record.submissionNumber}" headerText="Sub #">
+                        <h:link id='selectLink' outcome="Details" value="#{record.submissionNumber}">
+                            <f:param name="submissionNumber" value="#{record.submissionNumber}" />
+                        </h:link>
+                    </p:column>
+                    
+                    <p:column sortBy="#{record.submissionType}" headerText="Sub. Type">
+                        <h:outputText value="#{record.submissionType}" />
+                    </p:column>
+                    
+                    <p:column sortBy="#{record.companyName}" headerText="Company">
+                        <h:outputText value="#{record.companyName}" />
+                    </p:column>
+                    
+                    <p:column sortBy="#{record.chemicalName}" headerText="Chemical Name">
+                        <h:outputText value="#{record.chemicalName}" />
+                    </p:column>
+                    
+                    <p:column sortBy="#{record.tradeName}" headerText="Trade Name">
+                        <h:outputText value="#{record.tradeName}" />
+                    </p:column>
+                    
+                    <p:column sortBy="#{record.receivedDate}" headerText="Drug Review Start Date" class="no-padding">
+                        <h:outputText value="#{record.receivedDate}">
+                            <f:convertDateTime pattern="yyyy-MMM-dd" />
+                        </h:outputText>
+                    </p:column>
+                    
+                </p:dataTable>
+            </h:panelGroup>
+            
+        </h:form>
+    </ui:define>
+</ui:composition>
+

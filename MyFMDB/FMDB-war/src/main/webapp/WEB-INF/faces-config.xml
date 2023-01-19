@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!-- =========== FULL CONFIGURATION FILE ================================== -->
+
+<faces-config version="2.0"
+              xmlns="http://java.sun.com/xml/ns/javaee" 
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+                  
+    <application>
+        <resource-bundle>
+            <base-name>Bundle</base-name>
+            <var>msg</var>
+        </resource-bundle> 
+        <resource-bundle>
+            <base-name>version</base-name>
+            <var>msg2</var>
+        </resource-bundle> 
+    </application>     
+                 
+
+<!--    <lifecycle>
+        <phase-listener>fmdbwar.interceptor.LoggerPhaseListener</phase-listener>
+    </lifecycle>-->
+    
+<!-- =========== Report Pages ================================== -->    
+
+
+    <managed-bean>
+        <managed-bean-name>SingleDrugSubStatusReport</managed-bean-name>
+        <managed-bean-class>fmdbwar.pages.reports.SingleDrugSubStatusReport</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope> 
+    </managed-bean>
+    
+
+</faces-config>

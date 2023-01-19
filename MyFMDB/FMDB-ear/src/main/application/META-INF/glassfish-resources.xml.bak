@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resources PUBLIC "-//GlassFish.org//DTD GlassFish Application Server 3.1 Resource Definitions//EN" "http://glassfish.org/dtds/glassfish-resources_1_5.dtd">
+<resources>
+
+    <jdbc-connection-pool is-isolation-level-guaranteed="false" datasource-classname="org.postgresql.ds.PGConnectionPoolDataSource" name="FMDB-DB-Internal_Proxy_user" sql-trace-listeners="" res-type="javax.sql.ConnectionPoolDataSource">
+        <property name="URL" value="jdbc:postgresql://172.17.0.2:5432/FMDB"></property>
+        <property name="Password" value="admin"></property>
+		<property name="driverClass" value="org.postgresql.Driver"/>
+        <property name="User" value="postgres"></property>
+    </jdbc-connection-pool>
+    <jdbc-connection-pool is-isolation-level-guaranteed="false" datasource-classname="org.postgresql.ds.PGConnectionPoolDataSource" name="FMDB-DB-External_Proxy_user" sql-trace-listeners="" res-type="javax.sql.ConnectionPoolDataSource">
+        <property name="URL" value="jdbc:postgresql://172.17.0.2:5432/FMDB"></property>
+        <property name="Password" value="admin"></property>
+        <property name="driverClass" value="org.postgresql.Driver"/>
+        <property name="User" value="postgres"></property>
+    </jdbc-connection-pool>
+    
+    <jdbc-resource pool-name="FMDB-DB-External_Proxy_user" jndi-name="jdbc/fmdb_pub"></jdbc-resource>
+    <jdbc-resource pool-name="FMDB-DB-Internal_Proxy_user" jndi-name="jdbc/fmdb"></jdbc-resource>
+    
+    <custom-resource factory-class="org.glassfish.resources.custom.factory.PropertiesFactory" res-type="java.util.Properties" jndi-name="fmdb/oidc_properties">
+        <property name="providerUri" value="https://common-logon-dev.hlth.gov.bc.ca/auth/realms/moh_applications/"></property>
+        <!--<property name="providerUri" value="https://localhost:8543/auth/realms/moh-users-realm/"></property>-->
+        <property name="clientId" value="FMDB"></property>
+        <property name="clientSecret" value="${ALIAS=fmdb-keycloak-client-secret}"></property>
+<!--        <property name="redirectUri" value="https://fmdbd.hlth.gov.bc.ca/FMDB/callback"></property>-->
+        <property name="redirectUri" value="http://localhost:8080/FMDB/callback"></property>
+        <property name="siteminderLogoutUri" value="https://logontest7.gov.bc.ca/clp-cgi/logoff.cgi"></property>
+        <property name="scope" value="openid"></property>
+        <property name="callerGroupsClaim" value="fmdb_role"></property>
+        <property name="callerNameClaim" value="preferred_username"></property>
+    </custom-resource>
+
+</resources>
