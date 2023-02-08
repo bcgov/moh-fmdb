@@ -1,12 +1,12 @@
 FROM maven:3.8.6-openjdk-11-slim as build-stage
 RUN mkdir -p /home/fmdb
-COPY errorhandler-1.0.jar /home/fmdb
+COPY MyFMDB/errorhandler-1.0.jar /home/fmdb
 RUN mvn install:install-file -Dfile=/home/fmdb/errorhandler-1.0.jar -DgroupId=com.cgi.fmdb -DartifactId=errorhandler -Dversion=1.0 -Dpackaging=jar -DgeneratePom=true
-COPY FMDB-ear /home/fmdb/FMDB-ear
-COPY FMDB-ejb /home/fmdb/FMDB-ejb
-COPY FMDB-war /home/fmdb/FMDB-war
-COPY FMDB-war-pub /home/fmdb/FMDB-war-pub
-COPY pom.xml /home/fmdb
+COPY MyFMDB/FMDB-ear /home/fmdb/FMDB-ear
+COPY MyFMDB/FMDB-ejb /home/fmdb/FMDB-ejb
+COPY MyFMDB/FMDB-war /home/fmdb/FMDB-war
+COPY MyFMDB/FMDB-war-pub /home/fmdb/FMDB-war-pub
+COPY MyFMDB/pom.xml /home/fmdb
 
 RUN mvn -f /home/fmdb/pom.xml clean package -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.http.ssl.insecure=true
 
