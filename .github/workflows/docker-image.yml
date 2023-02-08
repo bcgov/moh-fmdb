@@ -42,7 +42,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v3
         with:
-          context: MyFMDB
+          context: .
           push: true
           tags: ${{ env.GITHUB_REGISTRY }}/${{env.IMAGE_NAME}}
           file: MyFMDB/Dockerfile
