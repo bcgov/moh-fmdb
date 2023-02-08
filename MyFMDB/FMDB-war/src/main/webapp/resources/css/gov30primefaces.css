@@ -510,3 +510,19 @@ select[multiple], select[size] {
     border: 2px solid #494949;
     background: none;
 }
+/* Growl */
+.ui-growl-item-container.ui-state-highlight.ui-growl-warn {
+    background: #fcba19;
+    font-family: 'myriad-pro', Calibri, Arial, sans serif;
+    text-shadow: none;
+    opacity: 1;
+    background-color: #38598A;
+    border: 5px solid #FCBA19;
+}
+.ui-growl-image {
+    display: none;
+}
+.ui-growl-message {
+    float: none;
+    width: auto;
+}

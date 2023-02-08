@@ -6,12 +6,12 @@
     <parent>
         <artifactId>FMDB</artifactId>
         <groupId>ca.bc.gov.health</groupId>
-        <version>2.0</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>${project.parent.artifactId}-war-pub</artifactId>
     <packaging>war</packaging>
-    
+        
     <build>
         <plugins>
             <plugin>
