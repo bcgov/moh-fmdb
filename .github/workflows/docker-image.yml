@@ -8,11 +8,15 @@ on:
 
 jobs:
 
-  build:
+  build-and-push-image:
 
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+    
     - uses: actions/checkout@v3
     - name: Build the Docker image
       run: docker build . --file MyFMDB/Dockerfile --tag my-image-name:$(date +%s)
