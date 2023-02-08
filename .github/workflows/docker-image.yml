@@ -6,6 +6,9 @@ on:
       - main
   pull_request:
 
+env:
+  GITHUB_REGISTRY: ghcr.io
+
 jobs:
 
   build-and-push-image:
@@ -15,8 +18,17 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        
+      - name: Log in to the GitHub Container registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.GITHUB_REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-    
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file MyFMDB/Dockerfile --tag my-image-name:$(date +%s)
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v3
+        with:
+          context: docker/keycloak
+          push: true
+          file: MyFMDB/Dockerfile
