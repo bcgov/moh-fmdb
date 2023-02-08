@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: FMDB Docker Image CI
 
 on:
   push:
