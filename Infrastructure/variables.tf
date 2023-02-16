@@ -12,10 +12,6 @@ variable "ecs_task_execution_role_name" {
   default     = "FMDB_EcsTaskExecutionRole"
 }
 
-# variable "environment" {
-#   description = "The workload account environment (e.g. dev, test, prod)"
-# }
-
 variable "fargate_cpu" {
   description = "Fargate instance CPU units to provision (1 vCPU = 1024 CPU units)"
   default     = 512
@@ -32,12 +28,32 @@ variable "fmdb_cluster_name" {
   default     = "fmdb-cluster" 
 }
 
-# variable "common_tags" {
-#   description = "Common tags for created resources"
-#   default = {
-#     Application = "FMDB"
-#   }
-# }
+variable "common_tags" {
+  description = "Common tags for created resources"
+  default = {
+    Application = "FMDB"
+  }
+}
+
+variable "health_check_path" {
+  default = "/"
+}
+
+variable "service_names" {
+  description = "List of service names to use as subdomains"
+  default     = ["startup-sample-project", "ssp"]
+  type        = list(string)
+}
+
+variable "alb_name" {
+  description = "Name of the internal alb"
+  default     = "default"
+  type        = string
+}
+
+variable "acl_value" {
+    default = "private"
+}
 
 variable "app_port" {
   description = "Port exposed by the docker image to redirect traffic to"
