@@ -3,11 +3,12 @@ terraform {
 }
  locals {
 #   tfc_hostname        = "app.terraform.io"
-#   project             = get_env("LICENSE_PLATE")
+  # project             = get_env("LICENSE_PLATE")
     environment         = reverse(split("/", get_terragrunt_dir()))[0]
 #   app_image           = get_env("app_image", "")
  }
 
+#Will need to update below once we have license_plate information
 # generate "remote_state" {
 #   path      = "backend.tf"
 #   if_exists = "overwrite"
@@ -16,11 +17,14 @@ terraform {
 #   backend "s3" {
 #     bucket         = "terraform-remote-state-${ local.project }-${ local.environment }"
 #     key            = "${ local.project }/${ local.environment }/containers-app.tfstate"
+#     region         = "ca-central-1"
+#     encrypt        = true
 #     dynamodb_table = "terraform-remote-state-lock-${ local.project }"
 #   }
 # }
 # EOF
 # }
+
 
 generate "tfvars" {
   path              = "terragrunt.auto.tfvars"
@@ -38,6 +42,9 @@ generate "provider" {
   contents  = <<EOF
 provider "aws" {
   region  = "ca-central-1"
+#   assume_role {
+#     role_arn = "arn:aws:iam::$${var.target_aws_account_id}:role/BCGOV_$${var.target_env}_Automation_Admin_Role"
+#   }
 }
 EOF
 }
