@@ -38,8 +38,9 @@ resource "aws_ecs_task_definition" "fmdb_td" {
           hostPort      = var.app_port
         }
       ]
-      environment = [
-        #place holder for any env. variables
+      secrets = [
+        {"name": "PG_USER", 
+         "valueFrom": "${aws_secretsmanager_secret_version.pg_user.arn}"}
       ]
     }
   ])
