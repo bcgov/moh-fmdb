@@ -13,7 +13,7 @@ data "aws_alb_listener" "front_end" {
 }
 
 resource "aws_alb_target_group" "app" {
-  name                 = "sample-target-group"
+  name                 = "fmdb-target-group"
   port                 = var.app_port
   protocol             = "HTTP"
   vpc_id               = data.aws_vpc.main.id
@@ -40,7 +40,7 @@ resource "aws_lb_listener_rule" "host_based_weighted_routing" {
     type             = "forward"
     target_group_arn = aws_alb_target_group.app.arn
   }
-
+  #figure out what to place here
   condition {
     host_header {
       values = [for sn in var.service_names : "${sn}.*"]

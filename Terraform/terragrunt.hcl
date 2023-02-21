@@ -3,28 +3,29 @@ terraform {
 }
  locals {
 #   tfc_hostname        = "app.terraform.io"
-  # project             = get_env("LICENSE_PLATE")
+    #project             = get_env("LICENSE_PLATE")
+    project             = "ynr9ed"
     environment         = reverse(split("/", get_terragrunt_dir()))[0]
 #   app_image           = get_env("app_image", "")
  }
 
 #Will need to update below once we have license_plate information
-# generate "remote_state" {
-#   path      = "backend.tf"
-#   if_exists = "overwrite"
-#   contents  = <<EOF
-# terraform {
-#   backend "s3" {
-#     bucket         = "terraform-remote-state-${ local.project }-${ local.environment }"
-#     key            = "${ local.project }/${ local.environment }/containers-app.tfstate"
-#     region         = "ca-central-1"
-#     encrypt        = true
-#     dynamodb_table = "terraform-remote-state-lock-${ local.project }"
-#   }
-# }
-# EOF
-# }
-
+generate "remote_state" {
+  path      = "backend.tf"
+  if_exists = "overwrite"
+  contents  = <<EOF
+terraform {
+  backend "s3" {
+    bucket         = "terraform-remote-state-${ local.project }-${ local.environment }"
+    key            = "${ local.project }/${ local.environment }/fmdb-app.tfstate"
+    region         = "ca-central-1"
+    encrypt        = true
+    
+  }
+}
+EOF
+}
+#dynamodb_table = "terraform-remote-state-lock-${ local.project }"
 
 generate "tfvars" {
   path              = "terragrunt.auto.tfvars"
