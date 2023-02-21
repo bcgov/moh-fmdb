@@ -1,5 +1,5 @@
-resource "aws_secretsmanager_secret" "jdbc_connection" {
-  name = "jdbc_connection"
+resource "aws_secretsmanager_secret" "jdbc_url" {
+  name = "jdbc_url"
 }
 
 resource "aws_secretsmanager_secret" "pg_user" {
@@ -10,8 +10,8 @@ resource "aws_secretsmanager_secret" "pg_password" {
   name = "pg_password"
 }
 
-resource "aws_secretsmanager_secret_version" "jdbc_connection" {
-  secret_id     = aws_secretsmanager_secret.jdbc_connection.id
+resource "aws_secretsmanager_secret_version" "jdbc_url" {
+  secret_id     = aws_secretsmanager_secret.jdbc_url.id
   secret_string = "changeme"
 }
 resource "aws_secretsmanager_secret_version" "pg_user" {

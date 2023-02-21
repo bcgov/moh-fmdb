@@ -40,7 +40,11 @@ resource "aws_ecs_task_definition" "fmdb_td" {
       ]
       secrets = [
         {"name": "PG_USER", 
-         "valueFrom": "${aws_secretsmanager_secret_version.pg_user.arn}"}
+         "valueFrom": "${aws_secretsmanager_secret_version.pg_user.arn}"},
+        {"name": "PG_PASSWORD", 
+         "valueFrom": "${aws_secretsmanager_secret_version.pg_password.arn}"},
+        {"name": "JDBC_URL", 
+         "valueFrom": "${aws_secretsmanager_secret_version.jdbc_url.arn}"}
       ]
     }
   ])
