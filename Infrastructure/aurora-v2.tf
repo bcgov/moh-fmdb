@@ -17,7 +17,7 @@ resource "random_password" "fmdb_master_password" {
 variable "fmdb_master_username" {
   description = "The username for the DB master user"
   type        = string
-  default     = "sysadmin"
+  default     = "postgres"
   sensitive   = true
 }
 
