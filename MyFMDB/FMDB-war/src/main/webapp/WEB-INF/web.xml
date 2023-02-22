@@ -3,6 +3,12 @@
     <description>Formulary Management Database</description>
     <display-name>Formulary Management</display-name>
     <distributable/>
+
+    <!-- Override PrimeFaces 10.0.0 Default Theme to retain CSS overrides created for PrimeFaces 8.0 Default Theme -->
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>aristo</param-value>
+    </context-param>
        
     <security-constraint>
         <display-name>AdminAccess</display-name>
@@ -126,10 +132,9 @@
         <servlet-name>SingleDrugSubmissionStatusReport</servlet-name>
         <url-pattern>/pages/reports/SingleDrugSubmissionStatusReport</url-pattern>
     </servlet-mapping>
+	<!-- Set to Keycloak's SSO Session Idle (30) + Time to account for the user login process (3) -->
     <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
+        <session-timeout>33</session-timeout>
     </session-config>
     <welcome-file-list>
         <welcome-file>pages/Search.xhtml</welcome-file>

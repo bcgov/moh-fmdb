@@ -5,13 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ca.bc.gov.health</groupId>
     <artifactId>FMDB</artifactId>
-    <version>2.0</version>
+    <version>${revision}</version>
     <packaging>pom</packaging>
     <modules>
-        <module>${project.artifactId}-ear</module>
-        <module>${project.artifactId}-war</module>
         <module>${project.artifactId}-ejb</module>
+        <module>${project.artifactId}-war</module>
         <module>${project.artifactId}-war-pub</module>
+        <module>${project.artifactId}-ear</module>
     </modules>
 	
     <repositories>
@@ -19,6 +19,11 @@
             <id>cgi-mvn-release</id>
             <name>CGI Maven Repository</name>
             <url>https://artifactory.hlth.gov.bc.ca/artifactory/cgi-mvn-release</url>
+        </repository>
+        <repository>
+            <id>primefaces-mvn</id>
+            <name>PrimeFaces Maven Repository</name>
+            <url>https://repository.primefaces.org</url>
         </repository>
     </repositories>
 
@@ -61,11 +66,26 @@
         <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
-            <version>6.2</version>
+            <version>10.0.0</version>
+        </dependency>
+        <!-- Override PrimeFaces 10.0.0 Default Theme to retain CSS overrides created for PrimeFaces 8.0 Default Theme -->
+        <dependency>
+            <groupId>org.primefaces.themes</groupId>
+            <artifactId>aristo</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+        <!-- Match this version to what is included with the Payara server to deploy to -->
+        <dependency>
+            <groupId>fish.payara.security.connectors</groupId>
+            <artifactId>security-connector-oidc-client</artifactId>
+            <version>2.3.0</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
     <properties>
+        <revision>2.3.1</revision>
+        
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>

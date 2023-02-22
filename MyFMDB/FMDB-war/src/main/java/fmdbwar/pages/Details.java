@@ -241,7 +241,7 @@ public class Details implements Serializable {
     }
 
     public void processUpload(FileUploadEvent ue) {
-        byte[] file = ue.getFile().getContents();
+        byte[] file = ue.getFile().getContent();
         String name = ue.getFile().getFileName();
         String content = ue.getFile().getContentType();
         Date saveDate = new Date();

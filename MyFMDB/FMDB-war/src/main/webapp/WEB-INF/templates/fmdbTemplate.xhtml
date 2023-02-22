@@ -47,6 +47,9 @@
                 <div class="container nav-container">
                     <ui:include src="topNav.xhtml"/>
                 </div> 
+                <p:growl id="timeoutWarningGrowl" for="timeoutMessages" widgetVar="timeoutWarning" showDetail="true" sticky="true"/>
+                <p:remoteCommand name="extendSession" global="false" actionListener="#{SessionTimeout.extendSession}"/>
+                <p:remoteCommand name="endSession" global="false" actionListener="#{SessionTimeout.endSession}"/>
             </h:form>
         </header>
 
@@ -82,7 +85,7 @@
                     <div class="ui-g-3">
                         <ul>
                             <li class="environment">User: #{request.userPrincipal.name}</li>
-                            <li class="environment">Version: #{msg['footer.version']}</li>                            
+                            <li class="environment">Version: ${project.version}</li>
                         </ul>
                     </div>
                 </div>

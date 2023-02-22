@@ -16,8 +16,8 @@
  */
 package ca.bc.gov.hlth.request;
 
-
 import ca.bc.gov.hlth.security.OidcConfig;
+import fish.payara.security.openid.api.OpenIdContext;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.URLEncoder;
@@ -30,24 +30,37 @@ import javax.servlet.ServletException;
 @RequestScoped
 @Named("Logout")
 public class LogoutBean implements Serializable {
-    
-    @Inject 
+
+    @Inject
+    private OpenIdContext context;
+
+    @Inject
     private OidcConfig oidcConfig;
-    
+
     public void logout() throws ServletException, IOException {
-        
-        /* Currently Keycloak does not support logging out of SiteMinder IDP's automatically
-        so we set the Keycloak Logout redirect_uri= paramter to be the SiteMinder logout
-        and we set the Siteminder returl= parameter to be application which chains both logouts for full Single Sign Out.
-        https://github.com/bcgov/ocp-sso/issues/4 */
-        
-        String siteMinderLogoutUrl = oidcConfig.getSiteminderLogoutUri() + "?retnow=1&returl=" + oidcConfig.getRedirectUri();
-        String keycloakLogoutUrl = oidcConfig.getProviderUri() + "protocol/openid-connect/logout?redirect_uri=" + URLEncoder.encode(siteMinderLogoutUrl, "UTF-8");
-        
-        FacesContext.getCurrentInstance()
-                .getExternalContext()
-                .redirect(keycloakLogoutUrl);
+
+        String idToken = "";
+        if (context.getIdentityToken() != null) {
+            idToken = context.getIdentityToken().getToken();
+        }
+
+        /**
+         * Currently Keycloak does not support logging out of SiteMinder IDP's automatically so we set the Keycloak
+         * Logout redirect_uri= parameter to be the SiteMinder logout and we set the SiteMinder returl= parameter to be
+         * application which chains both logouts for full Single Sign Out. https://github.com/bcgov/ocp-sso/issues/4
+         */
+        String logoutUrl
+                = oidcConfig.getSiteminderLogoutUri()
+                + "?retnow=1&returl="
+                + oidcConfig.getRedirectUri();
+        String keycloakLogoutUrl
+                = oidcConfig.getProviderUri()
+                + "protocol/openid-connect/logout?post_logout_redirect_uri="
+                + URLEncoder.encode(logoutUrl, "UTF-8")
+                + "&id_token_hint=" + idToken;
+
+        FacesContext.getCurrentInstance().getExternalContext().redirect(keycloakLogoutUrl);
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
     }
-  
+
 }

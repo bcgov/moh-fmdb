@@ -21,7 +21,7 @@
     <jdbc-resource pool-name="FMDB-DB-Internal_Proxy_user" jndi-name="jdbc/fmdb"></jdbc-resource>
     
     <custom-resource factory-class="org.glassfish.resources.custom.factory.PropertiesFactory" res-type="java.util.Properties" jndi-name="fmdb/oidc_properties">
-        <property name="providerUri" value="https://common-logon-dev.hlth.gov.bc.ca/auth/realms/moh_applications/"></property>
+        <property name="providerUri" value="https://common-logon-test.hlth.gov.bc.ca/auth/realms/moh_applications/"></property>
         <property name="clientId" value="FMDB"></property>
         <property name="clientSecret" value="${ENV=fmdb_keycloak-client-secret}"></property>
         <property name="redirectUri" value="http://localhost:8080/FMDB/callback"></property>
