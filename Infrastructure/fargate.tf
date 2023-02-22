@@ -1,5 +1,5 @@
 resource "aws_ecs_cluster" "fmdb_cluster" {
-  name = "FMDB_Cluster"
+  name = "fmdb_cluster"
 }
 
 resource "aws_ecs_cluster_capacity_providers" "fmdb_cluster" {
