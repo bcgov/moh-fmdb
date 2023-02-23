@@ -17,7 +17,7 @@ resource "random_password" "fmdb_master_password" {
 variable "fmdb_master_username" {
   description = "The username for the DB master user"
   type        = string
-  default     = "sysadmin"
+  default     = "postgres"
   sensitive   = true
 }
 
@@ -42,7 +42,7 @@ resource "aws_db_subnet_group" "fmdb_subnet_group" {
 
 data "aws_rds_engine_version" "postgresql" {
   engine  = "aurora-postgresql"
-  version = "13.6"
+  version = "13.9"
 }
 
 module "aurora_postgresql_v2" {

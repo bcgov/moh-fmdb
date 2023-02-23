@@ -39,12 +39,6 @@ variable "health_check_path" {
   default = "/"
 }
 
-variable "service_names" {
-  description = "List of service names to use as subdomains"
-  default     = ["startup-sample-project", "ssp"]
-  type        = list(string)
-}
-
 variable "alb_name" {
   description = "Name of the internal alb"
   default     = "default"
@@ -57,7 +51,7 @@ variable "acl_value" {
 
 variable "app_port" {
   description = "Port exposed by the docker image to redirect traffic to"
-  default     = 443
+  default     = 8080
 }
 
 variable "app_image" {
