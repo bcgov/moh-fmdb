@@ -49,7 +49,11 @@ resource "aws_ecs_task_definition" "fmdb_td" {
         {"name": "PG_PASSWORD", 
          "valueFrom": "${aws_secretsmanager_secret_version.pg_password.arn}"},
         {"name": "JDBC_SETTING", 
-         "valueFrom": "${aws_secretsmanager_secret_version.jdbc_url.arn}"}
+         "valueFrom": "${aws_secretsmanager_secret_version.jdbc_setting.arn}"},
+         {"name": "fmdb_keycloak-client-secret",
+         "valueFrom": "${aws_secretsmanager_secret_version.fmdb_keycloak-client-secret.arn}"},
+         {"name": "REDIRECT_URI",
+         "valueFrom": "${aws_secretsmanager_secret_version.redirect_uri.arn}"}
       ]
       #change awslog group
       logConfiguration = {
