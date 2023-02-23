@@ -24,7 +24,7 @@
         <property name="providerUri" value="https://common-logon-test.hlth.gov.bc.ca/auth/realms/moh_applications/"></property>
         <property name="clientId" value="FMDB"></property>
         <property name="clientSecret" value="${ENV=fmdb_keycloak-client-secret}"></property>
-        <property name="redirectUri" value="http://localhost:8080/FMDB/callback"></property>
+        <property name="redirectUri" value="${ENV=REDIRECT_URI}"></property>
         <property name="siteminderLogoutUri" value="https://logontest7.gov.bc.ca/clp-cgi/logoff.cgi"></property>
         <property name="scope" value="openid"></property>
         <property name="callerGroupsClaim" value="fmdb_role"></property>
