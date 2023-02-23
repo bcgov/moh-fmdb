@@ -1,3 +1,8 @@
+resource "aws_cloudwatch_log_group" "ecs_monitoring" {
+  name = "ecs-monitoring"
+  retention_in_days = "731"
+}
+
 resource "aws_ecs_cluster" "fmdb_cluster" {
   name = "fmdb_cluster"
 }
@@ -27,7 +32,7 @@ resource "aws_ecs_task_definition" "fmdb_td" {
       essential   = true
       name        = "fmdb-${var.target_env}-definition"
       #change to variable to env. for GH Actions
-      image       = "public.ecr.aws/lts/apache2:2.4-20.04_beta"
+      image       = "666395672448.dkr.ecr.ca-central-1.amazonaws.com/temp-ecr:latest"
       cpu         = var.fargate_cpu
       memory      = var.fargate_memory
       networkMode = "awsvpc"
@@ -43,9 +48,18 @@ resource "aws_ecs_task_definition" "fmdb_td" {
          "valueFrom": "${aws_secretsmanager_secret_version.pg_user.arn}"},
         {"name": "PG_PASSWORD", 
          "valueFrom": "${aws_secretsmanager_secret_version.pg_password.arn}"},
-        {"name": "JDBC_URL", 
+        {"name": "JDBC_SETTING", 
          "valueFrom": "${aws_secretsmanager_secret_version.jdbc_url.arn}"}
       ]
+      #change awslog group
+      logConfiguration = {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "${aws_cloudwatch_log_group.ecs_monitoring.name}",
+        "awslogs-region": "ca-central-1",
+        "awslogs-stream-prefix": "streaming"
+        }
+      }
     }
   ])
 }

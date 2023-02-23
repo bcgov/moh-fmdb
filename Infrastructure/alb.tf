@@ -22,12 +22,12 @@ resource "aws_alb_target_group" "app" {
 
   health_check {
     healthy_threshold   = "2"
-    interval            = "5"
+    interval            = "150"
     protocol            = "HTTP"
     matcher             = "200"
-    timeout             = "3"
+    timeout             = "120"
     path                = var.health_check_path
-    unhealthy_threshold = "2"
+    unhealthy_threshold = "10"
   }
 
     tags = local.common_tags
@@ -42,8 +42,8 @@ resource "aws_lb_listener_rule" "host_based_weighted_routing" {
   }
   #figure out what to place here
   condition {
-    host_header {
-      values = [for sn in var.service_names : "${sn}.*"]
+    path_pattern {
+      values = ["/"]
     }
   }
 }
