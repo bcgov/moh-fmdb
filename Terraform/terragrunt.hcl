@@ -18,6 +18,7 @@ terraform {
   backend "s3" {
     bucket         = "terraform-remote-state-${ local.project }-${ local.environment }"
     key            = "${ local.project }/${ local.environment }/fmdb-app.tfstate"
+    dynamodb_table = "terraform-remote-state-lock-${ local.project }"
     region         = "ca-central-1"
     encrypt        = true
     
@@ -25,7 +26,7 @@ terraform {
 }
 EOF
 }
-#dynamodb_table = "terraform-remote-state-lock-${ local.project }"
+
 
 generate "tfvars" {
   path              = "terragrunt.auto.tfvars"
