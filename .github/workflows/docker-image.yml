@@ -7,7 +7,6 @@ on:
   pull_request:
 
 env:
-  GITHUB_REGISTRY: ghcr.io
   IMAGE_NAME: bcgov/moh-fmdb
   IMAGE_ID: ${{ secrets.AWS_ECR_URI }}
 
