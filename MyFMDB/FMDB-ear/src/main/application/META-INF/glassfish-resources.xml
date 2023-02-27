@@ -23,7 +23,7 @@
     <custom-resource factory-class="org.glassfish.resources.custom.factory.PropertiesFactory" res-type="java.util.Properties" jndi-name="fmdb/oidc_properties">
         <property name="providerUri" value="https://common-logon-test.hlth.gov.bc.ca/auth/realms/moh_applications/"></property>
         <property name="clientId" value="FMDB"></property>
-        <property name="clientSecret" value="${ENV=fmdb_keycloak-client-secret}"></property>
+        <property name="clientSecret" value="${ENV=fmdb_keycloak_client_secret}"></property>
         <property name="redirectUri" value="${ENV=REDIRECT_URI}"></property>
         <property name="siteminderLogoutUri" value="https://logontest7.gov.bc.ca/clp-cgi/logoff.cgi"></property>
         <property name="scope" value="openid"></property>
