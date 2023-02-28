@@ -45,9 +45,9 @@ resource "aws_ecs_task_definition" "fmdb_td" {
       ]
       secrets = [
         {"name": "PG_USER", 
-         "valueFrom": "${aws_secretsmanager_secret_version.pg_user.arn}"},
+         "valueFrom": "${aws_secretsmanager_secret_version.rds_credentials.arn}:username::"},
         {"name": "PG_PASSWORD", 
-         "valueFrom": "${aws_secretsmanager_secret_version.pg_password.arn}"},
+         "valueFrom": "${aws_secretsmanager_secret_version.rds_credentials.arn}:password::"},
         {"name": "JDBC_SETTING", 
          "valueFrom": "${aws_secretsmanager_secret_version.jdbc_setting.arn}"},
          {"name": "fmdb_keycloak-client-secret",
