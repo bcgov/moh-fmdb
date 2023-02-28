@@ -26,13 +26,13 @@ resource "aws_ecs_task_definition" "fmdb_td" {
   requires_compatibilities = ["FARGATE"]
   cpu                      = var.fargate_cpu
   memory                   = var.fargate_memory
-  # tags                     = local.common_tags
+  tags                     = local.common_tags
   container_definitions = jsonencode([
     {
       essential   = true
       name        = "fmdb-${var.target_env}-definition"
       #change to variable to env. for GH Actions
-      image       = "666395672448.dkr.ecr.ca-central-1.amazonaws.com/temp-ecr:latest"
+      image       = var.app_image
       cpu         = var.fargate_cpu
       memory      = var.fargate_memory
       networkMode = "awsvpc"

@@ -31,7 +31,7 @@ variable "fmdb_cluster_name" {
 variable "common_tags" {
   description = "Common tags for created resources"
   default = {
-    Application = "FMDB"
+    Application = "fmdb"
   }
 }
 
@@ -63,4 +63,14 @@ variable "app_image" {
 variable "app_count" {
   description = "Number of docker containers to run"
   default     = 2
+}
+
+variable "fam_console_idp_name" {
+  description = "Identifies which version of IDIR to use (DEV, TEST, or PROD)"
+  type = string
+}
+
+variable "db_instance_identifier" {
+  description = "Identifies the cluster ID of aurora_rds_v2"
+  default     = "fmdb-cluster"
 }
