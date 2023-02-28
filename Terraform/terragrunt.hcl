@@ -3,7 +3,8 @@ terraform {
 }
  locals {
     #tfc_hostname        = "app.terraform.io"
-    project             = get_env("LICENSE_PLATE")
+    # project             = get_env("LICENSE_PLATE")
+    project             = "ynr9ed"
     environment         = reverse(split("/", get_terragrunt_dir()))[0]
     app_image           = get_env("app_image", "")
  }
