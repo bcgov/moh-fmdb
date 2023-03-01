@@ -32,7 +32,7 @@ resource "aws_ecs_task_definition" "fmdb_td" {
       essential   = true
       name        = "fmdb-${var.target_env}-definition"
       #change to variable to env. for GH Actions
-      image       = var.app_image
+      image       = "666395672448.dkr.ecr.ca-central-1.amazonaws.com/fmdb:latest"
       cpu         = var.fargate_cpu
       memory      = var.fargate_memory
       networkMode = "awsvpc"
@@ -50,7 +50,7 @@ resource "aws_ecs_task_definition" "fmdb_td" {
          "valueFrom": "${aws_secretsmanager_secret_version.rds_credentials.arn}:password::"},
         {"name": "JDBC_SETTING", 
          "valueFrom": "${aws_secretsmanager_secret_version.jdbc_setting.arn}"},
-         {"name": "fmdb_keycloak-client-secret",
+         {"name": "fmdb_keycloak_client_secret",
          "valueFrom": "${aws_secretsmanager_secret_version.fmdb_keycloak-client-secret.arn}"},
          {"name": "REDIRECT_URI",
          "valueFrom": "${aws_secretsmanager_secret_version.redirect_uri.arn}"}
