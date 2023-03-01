@@ -3,10 +3,6 @@ resource "random_pet" "fmdb_subnet_group_name" {
   length = 2
 }
 
-#  We'll need to update this to get the ARN of the KMS key alias
-# data "aws_kms_alias" "rds_key" {
-#   name = "alias/aws/rds"
-# }
 
 resource "random_password" "fmdb_master_password" {
   length           = 16

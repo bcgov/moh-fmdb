@@ -20,8 +20,8 @@ resource "aws_cloudwatch_metric_alarm" "ecs_cpu_utilization_alarm" {
 
   
   dimensions = {
-    ClusterName = "fmdb_cluster"
-    ServiceName = "fmdb-dev-service"
+    ClusterName = var.cluster_name
+    ServiceName = var.ecs_service_name
   }
 
   alarm_actions = [
@@ -43,9 +43,9 @@ resource "aws_cloudwatch_metric_alarm" "ecs_memory_utilization" {
   tags                = local.common_tags
 
   
-  dimensions = {
-    ClusterName = "fmdb_cluster"
-    ServiceName = "fmdb-dev-service"
+ dimensions = {
+    ClusterName = var.cluster_name
+    ServiceName = var.ecs_service_name
   }
 
   alarm_actions = [
@@ -66,9 +66,9 @@ resource "aws_cloudwatch_metric_alarm" "ecs_service_status" {
   tags                = local.common_tags
 
   
-  dimensions = {
-    ClusterName = "fmdb_cluster"
-    ServiceName = "fmdb-dev-service"
+ dimensions = {
+    ClusterName = var.cluster_name
+    ServiceName = var.ecs_service_name
   }
   
   alarm_description = "Alarm for Amazon ECS service status"
@@ -91,9 +91,9 @@ resource "aws_cloudwatch_metric_alarm" "ecs_network_traffic" {
   tags                = local.common_tags
 
   
-  dimensions = {
-    ClusterName = "fmdb_cluster"
-    ServiceName = "fmdb-dev-service"
+ dimensions = {
+    ClusterName = var.cluster_name
+    ServiceName = var.ecs_service_name
   }
   
   alarm_description = "Alarm for Amazon ECS Network Traffic"
@@ -116,9 +116,9 @@ resource "aws_cloudwatch_metric_alarm" "ecs_disk_usage" {
   tags                = local.common_tags
 
   
-  dimensions = {
-    ClusterName = "fmdb_cluster"
-    ServiceName = "fmdb-dev-service"
+ dimensions = {
+    ClusterName = var.cluster_name
+    ServiceName = var.ecs_service_name
   }
   
   alarm_description = "Alarm for Amazon ECS task filesystem utilization"
@@ -141,7 +141,7 @@ resource "aws_cloudwatch_metric_alarm" "ecs_task_failures" {
 
   
   dimensions = {
-    ClusterName = "fmdb_cluster"
+    ClusterName = var.cluster_name
   }
   
   alarm_description = "Alarm for Amazon ECS task failures"
@@ -230,7 +230,7 @@ resource "aws_cloudwatch_metric_alarm" "billing_alarm" {
   evaluation_periods  = "1"
   metric_name         = "EstimatedCharges"
   namespace           = "AWS/Billing"
-  period              = "2592000" # 1 month (in seconds)
+  period              = "86400" # 1 day (in seconds)
   statistic           = "Maximum"
   threshold           = "375"   
   

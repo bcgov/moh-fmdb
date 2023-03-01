@@ -28,6 +28,18 @@ variable "fmdb_cluster_name" {
   default     = "fmdb-cluster" 
 }
 
+variable "cluster_name" { 
+  description = "Name for ECS cluster (with underscore)" 
+  type        = string 
+  default     = "fmdb_cluster"
+}
+
+variable "ecs_service_name" {
+  description = "Name for the ECS service name"
+  type        = string
+  default     = "fmdb-dev-service"
+}
+
 variable "common_tags" {
   description = "Common tags for created resources"
   default = {
