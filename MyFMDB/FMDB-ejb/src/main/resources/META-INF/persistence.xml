@@ -39,8 +39,8 @@
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="toplink.cache.shared.default" value="false" />
-            <property name="toplink.target-database" value="Oracle" />
-            <property name="eclipselink.target-database" value="Oracle"/>
+            <property name="toplink.target-database" value="PostgreSQL" />
+            <property name="eclipselink.target-database" value="PostgreSQL"/>
         </properties>
   </persistence-unit>
 </persistence>
