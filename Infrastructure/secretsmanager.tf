@@ -3,7 +3,7 @@ resource "aws_secretsmanager_secret" "jdbc_setting" {
 }
 
 resource "aws_secretsmanager_secret" "fmdb_proxy_user" {
-  name = "fmdb_proxy_user"
+  name = "fmdb_user"
 }
 
 
