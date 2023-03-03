@@ -19,6 +19,10 @@ resource "aws_alb_target_group" "app" {
   vpc_id               = data.aws_vpc.main.id
   target_type          = "ip"
   deregistration_delay = 30
+  stickiness {
+    type = "lb_cookie"
+    
+  }
 
   health_check {
     healthy_threshold   = "2"

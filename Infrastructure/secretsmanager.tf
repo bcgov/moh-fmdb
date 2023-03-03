@@ -2,13 +2,10 @@ resource "aws_secretsmanager_secret" "jdbc_setting" {
   name = "jdbc_setting"
 }
 
-resource "aws_secretsmanager_secret" "pg_user" {
-  name = "pg_user"
+resource "aws_secretsmanager_secret" "fmdb_proxy_user" {
+  name = "fmdb_user"
 }
 
-resource "aws_secretsmanager_secret" "pg_password" {
-  name = "pg_password"
-}
 
 resource "aws_secretsmanager_secret" "fmdb_keycloak-client-secret" {
   name = "fmdb_keycloak-client-secret"
@@ -23,14 +20,18 @@ resource "aws_secretsmanager_secret_version" "jdbc_setting" {
   secret_string = "changeme"
 }
 
-resource "aws_secretsmanager_secret_version" "pg_user" {
-  secret_id     = aws_secretsmanager_secret.pg_user.id
-  secret_string = "changeme"
+resource "aws_secretsmanager_secret_version" "rds_credentials" {
+  secret_id     = aws_secretsmanager_secret.fmdb_proxy_user.id
+  secret_string = <<EOF
+{
+  "username": "fmdb_proxy_user",
+  "password": "changeme",
+  "engine": "${data.aws_rds_engine_version.postgresql.version}",
+  "host": "${module.aurora_postgresql_v2.cluster_endpoint}",
+  "port": ${module.aurora_postgresql_v2.cluster_port},
+  "dbClusterIdentifier": "${module.aurora_postgresql_v2.cluster_id}"
 }
-
-resource "aws_secretsmanager_secret_version" "pg_password" {
-  secret_id     = aws_secretsmanager_secret.pg_password.id
-  secret_string = "changeme"
+EOF
 }
 
 resource "aws_secretsmanager_secret_version" "fmdb_keycloak-client-secret" {

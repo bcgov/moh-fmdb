@@ -26,13 +26,13 @@ resource "aws_ecs_task_definition" "fmdb_td" {
   requires_compatibilities = ["FARGATE"]
   cpu                      = var.fargate_cpu
   memory                   = var.fargate_memory
-  # tags                     = local.common_tags
+  tags                     = local.common_tags
   container_definitions = jsonencode([
     {
       essential   = true
       name        = "fmdb-${var.target_env}-definition"
       #change to variable to env. for GH Actions
-      image       = "666395672448.dkr.ecr.ca-central-1.amazonaws.com/temp-ecr:latest"
+      image       = "666395672448.dkr.ecr.ca-central-1.amazonaws.com/fmdb:latest"
       cpu         = var.fargate_cpu
       memory      = var.fargate_memory
       networkMode = "awsvpc"
@@ -45,12 +45,12 @@ resource "aws_ecs_task_definition" "fmdb_td" {
       ]
       secrets = [
         {"name": "PG_USER", 
-         "valueFrom": "${aws_secretsmanager_secret_version.pg_user.arn}"},
+         "valueFrom": "${aws_secretsmanager_secret_version.rds_credentials.arn}:username::"},
         {"name": "PG_PASSWORD", 
-         "valueFrom": "${aws_secretsmanager_secret_version.pg_password.arn}"},
+         "valueFrom": "${aws_secretsmanager_secret_version.rds_credentials.arn}:password::"},
         {"name": "JDBC_SETTING", 
          "valueFrom": "${aws_secretsmanager_secret_version.jdbc_setting.arn}"},
-         {"name": "fmdb_keycloak-client-secret",
+         {"name": "fmdb_keycloak_client_secret",
          "valueFrom": "${aws_secretsmanager_secret_version.fmdb_keycloak-client-secret.arn}"},
          {"name": "REDIRECT_URI",
          "valueFrom": "${aws_secretsmanager_secret_version.redirect_uri.arn}"}

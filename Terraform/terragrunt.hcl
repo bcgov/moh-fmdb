@@ -8,7 +8,6 @@ terraform {
     app_image           = get_env("app_image", "")
  }
 
-#Will need to update below once we have license_plate information
 generate "remote_state" {
   path      = "backend.tf"
   if_exists = "overwrite"
