@@ -57,7 +57,7 @@ jobs:
         with:
           builder: ${{ steps.buildx.outputs.name }}
           cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new
           context: .
           file: ./MyFMDB/Dockerfile
           target: test
@@ -68,7 +68,7 @@ jobs:
         with:
           builder: ${{ steps.buildx.outputs.name }}
           cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new
           context: .
           file: ./MyFMDB/Dockerfile
           target: runtime
