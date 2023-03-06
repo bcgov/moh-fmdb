@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
         inputs:
         env:
-          description: select the environment to push
+          description: select the environment to destroy
           type: environment
           required: true
 
@@ -59,7 +59,7 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
           context: .
-          file: ./Dockerfile
+          file: ./MyFMDB/Dockerfile
           target: test
 
       - name: Build and push
