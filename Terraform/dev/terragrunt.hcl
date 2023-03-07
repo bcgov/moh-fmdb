@@ -17,7 +17,7 @@ generate "dev_tfvars" {
   contents          = <<-EOF
   fargate_cpu = 512
   fargate_memory = 1024
-  app_port = 8080
+  app_port = 8181
   fam_console_idp_name = "DEV-IDIR"
   EOF
 }
