@@ -109,7 +109,7 @@ jobs:
           terragrunt_version: ${{ env.TG_VERSION }}
 
       - name: Terragrunt Apply
-        working-directory: ${{ env.TFC_WORKSPACE }}
+#         working-directory: ${{ env.TFC_WORKSPACE }}
         env:
           app_image: ${{ env.IMAGE_ID }}:${{ github.sha }}
           LICENSE_PLATE: ${{ secrets.MY_LICENSE_PLATE }}
