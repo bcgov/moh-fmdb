@@ -11,6 +11,7 @@ on:
 
 env:
   IMAGE_ID: ${{ secrets.AWS_ECR_URI }}
+  IMAGE_NAME: fmdbtest
 
   TF_VERSION: 1.2.2
   TG_VERSION: 0.37.1
@@ -70,16 +71,16 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
           file: MyFMDB/Dockerfile
-          target: runtime
+#           target: runtime
           push: true
-          tags: ${{ env.IMAGE_ID  }}/${{env.IMAGE_NAME}}
+          tags: ${{ env.IMAGE_ID  }}${{env.IMAGE_NAME}}
         # Temp fix
         # https://github.com/docker/build-push-action/issues/252
         # https://github.com/moby/buildkit/issues/1896
-      - name: Move cache
-        run: |
-          rm -rf /tmp/.buildx-cache
-          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+#       - name: Move cache
+#         run: |
+#           rm -rf /tmp/.buildx-cache
+#           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
   terraform_apply:
     name: terraform apply Dev
