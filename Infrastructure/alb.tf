@@ -15,10 +15,14 @@ data "aws_alb_listener" "front_end" {
 resource "aws_alb_target_group" "app" {
   name                 = "fmdb-target-group"
   port                 = var.app_port
-  protocol             = "HTTP"
+  protocol             = "HTTPS"
   vpc_id               = data.aws_vpc.main.id
   target_type          = "ip"
   deregistration_delay = 30
+  lifecycle {
+    create_before_destroy = true
+    ignore_changes = [name]
+  }
   stickiness {
     type = "lb_cookie"
     
@@ -27,7 +31,7 @@ resource "aws_alb_target_group" "app" {
   health_check {
     healthy_threshold   = "2"
     interval            = "150"
-    protocol            = "HTTP"
+    protocol            = "HTTPS"
     matcher             = "200"
     timeout             = "120"
     path                = var.health_check_path
@@ -39,7 +43,9 @@ resource "aws_alb_target_group" "app" {
 
 resource "aws_lb_listener_rule" "host_based_weighted_routing" {
   listener_arn = data.aws_alb_listener.front_end.arn
-
+  lifecycle {
+    create_before_destroy = true
+  }
   action {
     type             = "forward"
     target_group_arn = aws_alb_target_group.app.arn
