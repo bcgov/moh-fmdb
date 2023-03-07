@@ -68,8 +68,8 @@ jobs:
         with:
           builder: ${{ steps.buildx.outputs.name }}
           cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache-new
-          file: ./Dockerfile
+          cache-to: type=local,dest=/tmp/.buildx-cache
+          file: ./MyFMDB/Dockerfile
           target: runtime
           push: true
           tags: ${{ env.IMAGE_ID }}:${{ github.sha }}
