@@ -126,7 +126,10 @@ resource "aws_secretsmanager_secret_version" "fmdb_mastercreds_secret_version" {
     "username": "${var.fmdb_master_username}",
     "password": "${random_password.fmdb_master_password.result}"
    }
-EOF
+  EOF
+  lifecycle {
+  ignore_changes = [ secret_string  ]
+  }
 }
 
 resource "random_password" "fmdb_api_password" {
@@ -163,5 +166,9 @@ resource "aws_secretsmanager_secret_version" "fmdb_apicreds_secret_version" {
     "username": "${var.fmdb_api_username}",
     "password": "${random_password.fmdb_api_password.result}"
    }
-EOF
+  EOF
+  lifecycle {
+  ignore_changes = [ secret_string  ]
+  }
+
 }

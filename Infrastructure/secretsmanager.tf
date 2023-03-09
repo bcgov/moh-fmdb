@@ -32,6 +32,9 @@ resource "aws_secretsmanager_secret_version" "rds_credentials" {
   "dbClusterIdentifier": "${module.aurora_postgresql_v2.cluster_id}"
 }
 EOF
+lifecycle {
+  ignore_changes = [ secret_string  ]
+  }
 }
 
 resource "aws_secretsmanager_secret_version" "fmdb_keycloak-client-secret" {
