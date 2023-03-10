@@ -13,6 +13,8 @@ on:
         - terraform
         - github_actions
 
+#testing with comment again
+
 env:
   IMAGE_ID: ${{ secrets.AWS_ECR_URI }}
   IMAGE_NAME: fmdbtest
