@@ -8,7 +8,8 @@ on:
       type: environment
       required: true
     push: 
-      [pull_request, push]
+      branches:
+        - main
 
 #testing with comment again
 
