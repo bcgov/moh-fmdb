@@ -3,7 +3,7 @@ include {
 }
  
 inputs = {
-environment = "prod"
+environment = "dev"
 }
 
 locals {
