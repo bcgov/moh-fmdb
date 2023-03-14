@@ -21,6 +21,7 @@ env:
   TF_VERSION: 1.2.2
   TG_VERSION: 0.37.1
   TG_SRC_PATH: Terraform
+  
 
 permissions:
   id-token: write # This is required for requesting the JWT
@@ -88,7 +89,7 @@ jobs:
       - name: Set env
         run: |
             INPUTS=$(cat Terraform/dev/terragrunt.hcl | grep inputs -A 9999 | grep -v inputs)
-            ENVIRONMENT=$(echo "$INPUTS" | grep -Po '(?<=environment = ")[^"]*')
+            ENVIRONMENT=$(echo "$INPUTS" | grep -Po '(?<=environment = ")[^"]*') >> $GITHUB_ENV
       - name: Test
         run: echo $ENVIRONMENT
 
