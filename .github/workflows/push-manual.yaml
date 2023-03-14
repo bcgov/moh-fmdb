@@ -45,7 +45,7 @@ jobs:
           
       - name: Get environment variable from Terragrunt
         run: |
-          INPUTS=$(cat ../../Terraform/dev/terragrunt.hcl | grep inputs -A 9999 | grep -v inputs)
+          INPUTS=$(cat Terraform/dev/terragrunt.hcl | grep inputs -A 9999 | grep -v inputs)
           ENVIRONMENT=$(echo "$INPUTS" | grep -Po '(?<=environment = ")[^"]*')
           echo "Environment: $ENVIRONMENT"
 
