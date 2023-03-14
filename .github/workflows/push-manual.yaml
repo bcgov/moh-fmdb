@@ -96,7 +96,8 @@ jobs:
       - name: Set env
         run: |
             INPUTS=$(cat Terraform/dev/terragrunt.hcl | grep inputs -A 9999 | grep -v inputs)
-            ENVIRONMENT=$(echo "$INPUTS" | grep -Po '(?<=environment = ")[^"]*') >> $TFC_WORKSPACE
+            echo ""$INPUTS" | grep -Po '(?<=environment = ")[^"]*'" >> $TFC_WORKSPACE
+
             
       - name: Terragrunt Apply
         working-directory: ${{ env.TG_SRC_PATH }}/${{ env.TFC_WORKSPACE }}
