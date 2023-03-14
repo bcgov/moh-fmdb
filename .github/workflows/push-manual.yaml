@@ -59,8 +59,9 @@ jobs:
         uses: docker/setup-buildx-action@v1
 
       - name: Get target_env from Terragrunt
-        run: |
-          echo "::set-env name=target_env::$(terragrunt output -json target_env | jq -r .)"
+          run:|
+            TARGET_ENV=$(terragrunt output -json target_env | jq -r .)
+            echo "TARGET_ENV=$TARGET_ENV" >> $GITHUB_ENV
       
       - name: Use target_env in a command
         run: echo $target_env
