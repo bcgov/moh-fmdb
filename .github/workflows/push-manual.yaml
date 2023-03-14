@@ -43,13 +43,11 @@ jobs:
           role-to-assume: ${{ secrets.TERRAFORM_DEPLOY_ROLE_ARN }}
           aws-region: ca-central-1
           
-      - name: Get target_env from Terragrunt
+      - name: Get environment variable from Terragrunt
         run: |
-          TARGET_ENV=$(terragrunt output -json target_env | jq -r .)
-          echo "TARGET_ENV=$TARGET_ENV" >> $GITHUB_ENV
-
-      - name: Use target_env in a command
-        run: echo $target_env
+          INPUTS=$(cat ../../Terraform/dev/terragrunt.hcl | grep inputs -A 9999 | grep -v inputs)
+          ENVIRONMENT=$(echo "$INPUTS" | grep -Po '(?<=environment = ")[^"]*')
+          echo "Environment: $ENVIRONMENT"
 
       - name: Login to Amazon ECR
         id: login-ecr
