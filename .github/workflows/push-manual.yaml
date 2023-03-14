@@ -60,7 +60,7 @@ jobs:
 
       - name: Get target_env from Terragrunt
         run: |
-        echo "::set-env name=target_env::$(terragrunt output -json target_env | jq -r .)"
+          echo "::set-env name=target_env::$(terragrunt output -json target_env | jq -r .)"
       
       - name: Use target_env in a command
         run: echo $target_env
