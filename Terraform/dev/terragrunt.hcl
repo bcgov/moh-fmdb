@@ -1,6 +1,10 @@
 include {
   path = find_in_parent_folders()
 }
+ 
+inputs = {
+environment = "prod"
+}
 
 locals {
   project = get_env("LICENSE_PLATE")
