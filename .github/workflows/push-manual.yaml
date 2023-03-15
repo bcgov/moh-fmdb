@@ -11,9 +11,6 @@ on:
       - main
   pull_request:
 
-
-#Adding a different comment and merging to see if it triggers the pipeline. 
-
 env:
   IMAGE_ID: ${{ secrets.AWS_ECR_URI }}
   IMAGE_NAME: fmdbtest
