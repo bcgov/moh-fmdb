@@ -113,4 +113,10 @@ jobs:
         env:
           app_image: ${{ env.IMAGE_ID }}:${{ github.sha }}
           LICENSE_PLATE: ${{ secrets.MY_LICENSE_PLATE }}
-        run: terragrunt run-all apply --terragrunt-non-interactive
+          run: terragrunt run-all apply --terragrunt-non-interactive
+
+        - name: ZAP Scan
+          uses: zaproxy/action-baseline@v0.7.0
+          with:
+            target: ${{ env.TARGET_URL }}
+
