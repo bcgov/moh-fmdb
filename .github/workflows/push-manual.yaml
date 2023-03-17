@@ -12,6 +12,7 @@ on:
   pull_request:
 
 env:
+  APP_IMAGE: ${{ secrets.APP_IMAGE }} 
   IMAGE_ID: ${{ secrets.AWS_ECR_URI }}
   IMAGE_NAME: fmdbtest
   TF_VERSION: 1.2.2
@@ -95,7 +96,7 @@ jobs:
             INPUTS=$(cat Terraform/dev/terragrunt.hcl | grep inputs -A 9999 | grep -v inputs)
             ENVIRONMENT=$(echo "$INPUTS" | grep -Po '(?<=environment = ")[^"]*') >> $TFC_WORKSPACE
       - name: Test
-        run: echo $TFC_WORKSPACE
+        run: echo $APP_IMAGE
             
       - name: Terragrunt Apply
         working-directory: ${{ env.TG_SRC_PATH }}/${{ env.TFC_WORKSPACE }}
