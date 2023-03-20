@@ -27,7 +27,7 @@ permissions:
 jobs:
   docker_push:
     name: docker push
-    environment:   ${{ secrets.ENVIRONMENT }}
+    environment:  ${{env.TFC_WORKSPACE}}
     runs-on: ubuntu-22.04
     steps:
       - name: Check out the repo
