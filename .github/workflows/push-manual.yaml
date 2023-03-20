@@ -67,7 +67,7 @@ jobs:
           
   terraform_apply:
     name: terraform apply Dev
-    environment: ${{ secrets.ENVIRONMENT }}
+    environment: ${{ env.TFC_WORKSPACE }}
     runs-on: ubuntu-22.04
     needs: docker_push
     steps:
