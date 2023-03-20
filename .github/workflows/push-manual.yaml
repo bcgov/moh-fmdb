@@ -97,6 +97,6 @@ jobs:
           app_image: ${{ env.IMAGE_ID }}:${{ github.sha }}
           LICENSE_PLATE: ${{ secrets.MY_LICENSE_PLATE }}
         run: |
-            echo "repository variable : ${{ secret.ENVIRONMENT }} " 
+            echo "repository variable : ${{ vars.ENVIRONMENT }} " 
             echo "Environment variable: ${{ secrets.ENVIRONMENT }} " 
             terragrunt run-all apply --terragrunt-non-interactive
