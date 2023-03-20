@@ -76,6 +76,8 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: ${{ github.event.workflow_run.head_branch }}
+          run: |
+            echo "repository variable : ${{ vars.ENVIRONMENT }} " 
           
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -96,6 +98,4 @@ jobs:
         env:
           app_image: ${{ env.IMAGE_ID }}:${{ github.sha }}
           LICENSE_PLATE: ${{ secrets.MY_LICENSE_PLATE }}
-        run: |
-           echo "repository variable : ${{ vars.ENVIRONMENT }}" 
-           terragrunt run-all apply --terragrunt-non-interactive
+        run: terragrunt run-all apply --terragrunt-non-interactive
