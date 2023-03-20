@@ -27,7 +27,7 @@ permissions:
 jobs:
   docker_push:
     name: docker push
-    environment: tools
+    environment:  ${{ secrets.ENVIRONMENT }}
     runs-on: ubuntu-22.04
     steps:
       - name: Check out the repo
@@ -67,7 +67,7 @@ jobs:
           
   terraform_apply:
     name: terraform apply Dev
-    environment: ${{ env.TFC_WORKSPACE }}
+    environment:  ${{ secrets.ENVIRONMENT }}
     runs-on: ubuntu-22.04
     needs: docker_push
     steps:
