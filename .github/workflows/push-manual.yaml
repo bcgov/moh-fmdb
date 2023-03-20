@@ -109,4 +109,4 @@ jobs:
       - name: ZAP Scan
         uses: zaproxy/action-baseline@v0.7.0
         with:
-          target: ${{ env.URL }} 
+          target: 'https://fmdb.ynr9ed-dev.nimbus.cloud.gov.bc.ca/'
