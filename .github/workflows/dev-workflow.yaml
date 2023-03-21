@@ -30,6 +30,9 @@ jobs:
     environment:  dev
     runs-on: ubuntu-22.04
     steps:
+      - name: GitTools
+        uses: GitTools/actions@v0.10.2
+
       - name: Check out the repo
         uses: actions/checkout@v2
         
