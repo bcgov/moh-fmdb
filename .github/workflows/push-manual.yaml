@@ -27,7 +27,7 @@ permissions:
 jobs:
   docker_push:
     name: docker push
-    environment:  ${{env.TFC_WORKSPACE}}
+    environment:  ${{ secrets.ENVIRONMENT }}
     runs-on: ubuntu-22.04
     steps:
       - name: Check out the repo
@@ -63,7 +63,7 @@ jobs:
           cache-to: type=local,dest=/tmp/.buildx-cache
           file: MyFMDB/Dockerfile
           push: true
-          tags: ${{ env.IMAGE_ID  }}${{env.IMAGE_NAME}}
+          tags: ${{ env.IMAGE_ID  }}${{ env.IMAGE_NAME }}
           
   terraform_apply:
     name: terraform apply Dev
