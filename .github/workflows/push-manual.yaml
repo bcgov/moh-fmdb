@@ -90,13 +90,12 @@ jobs:
       - uses: peter-murray/terragrunt-github-action@v1.0.0
         with:
           terragrunt_version: ${{ env.TG_VERSION }}
-            
       - name: Terragrunt Apply
         working-directory: ${{ env.TG_SRC_PATH }}/${{ env.TFC_WORKSPACE }}
         env:
           app_image: ${{ env.IMAGE_ID }}:${{ github.sha }}
           LICENSE_PLATE: ${{ secrets.MY_LICENSE_PLATE }}
-        run: |
+          run: |
             echo "repository variable : '${{ vars.ENVIRONMENT }}' " 
             echo "Environment variable: '${{ secrets.ENVIRONMENT }}' " 
             terragrunt run-all apply --terragrunt-non-interactive
@@ -110,3 +109,10 @@ jobs:
         uses: zaproxy/action-baseline@v0.7.0
         with:
           target: 'https://fmdb.ynr9ed-dev.nimbus.cloud.gov.bc.ca/'
+          
+
+      - name: ZAP Scan
+        uses: zaproxy/action-baseline@v0.7.0
+        with:
+        target: ${{ env.TARGET_URL }}
+
