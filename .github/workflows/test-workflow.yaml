@@ -6,6 +6,9 @@ on:
         description: 'Environment to run tests against' 
         type: environment 
         required: true
+  push: 
+    branches:
+      - main
   pull_request:
 
 env:
@@ -15,7 +18,7 @@ env:
   TF_VERSION: 1.2.2
   TG_VERSION: 0.37.1
   TG_SRC_PATH: Terraform
-  TFC_WORKSPACE:  tools
+  TFC_WORKSPACE:  test
   
 permissions:
   id-token: write # This is required for requesting the JWT
@@ -24,7 +27,7 @@ permissions:
 jobs:
   docker_push:
     name: docker push
-    environment:  tools
+    environment:  test
     runs-on: ubuntu-22.04
     steps:
       - name: Check out the repo
@@ -63,8 +66,8 @@ jobs:
           tags: ${{ env.IMAGE_ID  }}${{env.IMAGE_NAME}}
           
   terraform_apply:
-    name: terraform apply tools
-    environment:  tools
+    name: terraform apply test
+    environment:  test
     runs-on: ubuntu-22.04
     needs: docker_push
     steps:
@@ -106,4 +109,4 @@ jobs:
       - name: ZAP Scan
         uses: zaproxy/action-baseline@v0.7.0
         with:
-          target: 'https://fmdb.ynr9ed-tools.nimbus.cloud.gov.bc.ca/'
+          target: 'https://fmdb.ynr9ed-test.nimbus.cloud.gov.bc.ca/'
