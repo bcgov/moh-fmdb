@@ -110,3 +110,12 @@ jobs:
         uses: zaproxy/action-baseline@v0.7.0
         with:
           target: 'https://fmdb.ynr9ed-dev.nimbus.cloud.gov.bc.ca/'
+          
+  versioning:  
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: Gr1N/github-semver-action@v1
+        with:
+          bump: major
+          push: true
