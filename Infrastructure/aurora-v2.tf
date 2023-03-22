@@ -170,5 +170,4 @@ resource "aws_secretsmanager_secret_version" "fmdb_apicreds_secret_version" {
   lifecycle {
   ignore_changes = [ secret_string  ]
   }
-
 }
