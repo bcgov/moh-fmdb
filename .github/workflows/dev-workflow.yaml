@@ -117,6 +117,6 @@ jobs:
       - uses: paulhatch/semantic-version@v5.0.2
         with:
           tag_prefix: "v"
-          major_pattern: "(MAJOR-FMDB)"
-          bump_each_commit: true
+          major_pattern: "(MAJOR)"
+          bump_each_commit: false
           push: true
