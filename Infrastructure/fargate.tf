@@ -17,7 +17,9 @@ resource "aws_ecs_cluster_capacity_providers" "fmdb_cluster" {
 
   }
 }
+
 #difference between task and execution roles
+
 resource "aws_ecs_task_definition" "fmdb_td" {
   family                   = "fmdb-${var.target_env}-task"
   execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
