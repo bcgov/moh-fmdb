@@ -71,7 +71,6 @@ resource "aws_ecs_task_definition" "fmdb_td" {
 resource "aws_ecs_service" "main" {
   name                              = "fmdb-${var.target_env}-service"
   cluster                           = aws_ecs_cluster.fmdb_cluster.arn
-  # Cant do count.index (research)
   task_definition                   = aws_ecs_task_definition.fmdb_td.arn
   desired_count                     = 2
   #Health Check need to go up?
@@ -80,7 +79,6 @@ resource "aws_ecs_service" "main" {
 
   network_configuration {
     security_groups  = [data.aws_security_group.app.id]
-#NEED TO FIGURE OUT aws_subnets
     subnets          = data.aws_subnets.app.ids
     assign_public_ip = false
   }
