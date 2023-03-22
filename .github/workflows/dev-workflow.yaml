@@ -114,8 +114,9 @@ jobs:
   versioning:  
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: Gr1N/github-semver-action@v1
+      - uses: paulhatch/semantic-version@v5.0.2
         with:
-          bump: major
+          tag_prefix: "v"
+          major_pattern: "(MAJOR-FMDB)"
+          bump_each_commit: true
           push: true
