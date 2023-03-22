@@ -111,13 +111,11 @@ jobs:
         with:
           target: 'https://fmdb.ynr9ed-dev.nimbus.cloud.gov.bc.ca/'
           
-  versioning:  
+  bump_version:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
     - name: Bump version and push tag
-      uses: kimgault/github-tag-action@v1.0
+      uses: wiktorj/github-tag-action@master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        BRANCH: main
-        BUMP: major
