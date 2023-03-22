@@ -99,5 +99,4 @@ resource "aws_ecs_service" "main" {
   ignore_changes = [ capacity_provider_strategy ]
   }
 
-#   tags = local.common_tags
 }
