@@ -1,20 +1,24 @@
-name: Publish
+name: Rollback
 
 on:
   workflow_dispatch:
     inputs:
-       environment:
-        description: 'Environment to run tests against' 
-        type: environment 
+      environment:
+        description: 'Environment to run tests against'
+        type: environment
         required: true
-       version:
+      version:
         description: 'Version Number'
         required: false
-  uses: author/action-rollback@stable
-  with:
-    # Using a tag name
-    tag: "${{ github.event.inputs.version }}"
-    #  If the release does not exist but the tag does, setting this to true will remove the tag.
-    delete_orphan_tag: true
-  env:
-    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  rollback:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Rollback Release
+        uses: author/action-rollback@stable
+        with:
+          # Using a tag name
+          tag: "${{ github.event.inputs.version }}"   
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
