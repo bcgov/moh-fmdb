@@ -10,6 +10,8 @@ on:
     branches:
       - main
   pull_request:
+  
+concurrency: dev
 
 env:
   APP_IMAGE: ${{ secrets.APP_IMAGE }} 
