@@ -123,4 +123,5 @@ jobs:
       env:
         DEFAULT_BUMP: major 
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        RELEASE_BRANCHES : main
         WITH_V: true
