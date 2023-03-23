@@ -112,10 +112,15 @@ jobs:
           target: 'https://fmdb.ynr9ed-dev.nimbus.cloud.gov.bc.ca/'
           
   bump_version:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: '0'
+
     - name: Bump version and push tag
-      uses: wiktorj/github-tag-action@master
+      uses: anothrNick/github-tag-action@1.55.0 # Don't use @master unless you're happy to test the latest version
       env:
+        DEFAULT_BUMP: major 
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        WITH_V: true
