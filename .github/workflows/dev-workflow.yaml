@@ -97,13 +97,13 @@ jobs:
           terragrunt_version: ${{ env.TG_VERSION }}
             
       - name: Terragrunt Apply
-        working-directory: ${{ env.TG_SRC_PATH }}/${{ env.TFC_WORKSPACE }}
+        working-directory: ${{ env.TG_SRC_PATH }}/${{ github.event.inputs.environment }}
         env:
           app_image: ${{ env.IMAGE_ID }}:${{ github.sha }}
           LICENSE_PLATE: ${{ secrets.MY_LICENSE_PLATE }}
         run: |
             echo "repository variable : '${{ vars.ENVIRONMENT }}' " 
-            echo "Environment variable: '${{ secrets.ENVIRONMENT }}' " 
+            echo "Environment variable: '${{ github.event.inputs.environment }}' " 
             terragrunt run-all apply --terragrunt-non-interactive
   zap_scan:
     runs-on: ubuntu-latest
