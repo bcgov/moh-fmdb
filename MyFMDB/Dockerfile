@@ -11,5 +11,6 @@ COPY MyFMDB/pom.xml /home/fmdb
 RUN mvn -f /home/fmdb/pom.xml clean package -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.http.ssl.insecure=true
 
 FROM payara/server-full:5.2022.4-jdk11
+COPY MyFMDB/pre-boot-commands.asadmin $PREBOOT_COMMANDS
 COPY --from=build-stage /home/fmdb/FMDB-ear/target/FMDB-ear.ear $DEPLOY_DIR
 COPY MyFMDB/postgresql-42.4.0.jar /opt/payara/appserver/glassfish/domains/domain1/lib
