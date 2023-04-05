@@ -1,0 +1,2 @@
+create-jvm-options ${ENV=XMX_DEV}
+create-jvm-options ${ENV=XMS_DEV}
