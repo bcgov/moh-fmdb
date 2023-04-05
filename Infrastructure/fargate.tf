@@ -55,6 +55,12 @@ resource "aws_ecs_task_definition" "fmdb_td" {
          {"name": "REDIRECT_URI",
          "valueFrom": "${aws_secretsmanager_secret_version.redirect_uri.arn}"}
       ]
+      environment = [
+        {"name": "XMX_DEV",
+         "value": "\\-Xmx1024m"},
+        {"name": "XMS_DEV",
+         "value": "\\-Xms512m"}
+      ]
       #change awslog group
       logConfiguration = {
       "logDriver": "awslogs",
