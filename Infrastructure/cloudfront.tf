@@ -3,6 +3,19 @@ locals {
 }
 
 
+provider "aws" {
+  alias = "us-east-1"
+  region = "us-east-1"
+}
+
+data "aws_acm_certificate" "fmdb_certificate" {
+  provider = aws.us-east-1
+  domain = "fmdbd.hlth.gov.bc.ca"
+  statuses = ["ISSUED"]
+  most_recent = true
+}
+
+
 data "aws_cloudfront_cache_policy" "CachingDisabled" {
   name = "Managed-CachingDisabled"
 }
@@ -15,7 +28,18 @@ resource "aws_cloudfront_distribution" "fmdb_distribution" {
   origin {
     domain_name = local.alb_origin_id
     origin_id   = local.alb_origin_id
+    custom_origin_config {
+    http_port = 80
+    https_port = 443
+    origin_ssl_protocols = ["TLSv1.2"]
+    origin_protocol_policy = "https-only"
+    }
+    origin_shield {
+      enabled = true
+      origin_shield_region = "us-east-1"
+    }
   }
+  
   enabled             = true
   is_ipv6_enabled     = true
   aliases = ["fmdbd.hlth.gov.bc.ca"]
@@ -59,7 +83,9 @@ resource "aws_cloudfront_distribution" "fmdb_distribution" {
 #   }
 
   viewer_certificate {
-    cloudfront_default_certificate = true
+    acm_certificate_arn = data.aws_acm_certificate.fmdb_certificate.arn
+    minimum_protocol_version = "TLSv1.2_2021"
+    ssl_support_method = "sni-only"
   }
 }
 
