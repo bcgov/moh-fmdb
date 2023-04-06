@@ -6,6 +6,7 @@
 package ca.bc.gov.hlth.security;
 
 import java.io.IOException;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,8 +20,11 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/callback")
 public class CallbackServlet extends HttpServlet {
 
+    @Inject
+    private OidcConfig oidcConfig;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect(request.getContextPath() + "/pages/Search.xhtml");
+        response.sendRedirect(oidcConfig.getRedirectUri().replace("/callback", "/pages/Search.xhtml"));
     }
 }
