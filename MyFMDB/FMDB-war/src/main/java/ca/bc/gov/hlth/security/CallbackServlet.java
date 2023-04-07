@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author trevor.schiavone
  */
-@WebServlet("/callback")
+@WebServlet("/Callback")
 public class CallbackServlet extends HttpServlet {
 
     @Override
