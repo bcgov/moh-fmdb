@@ -16,7 +16,7 @@ import fish.payara.security.annotations.OpenIdAuthenticationDefinition;
     providerURI = "#{oidcConfig.providerUri}",
     clientId = "#{oidcConfig.clientId}",
     clientSecret = "#{oidcConfig.clientSecret}",
-    redirectURI = "#{oidcConfig.redirectUri}",
+//    redirectURI = "#{oidcConfig.redirectUri}",
     scope = "#{oidcConfig.scope}",
     claimsDefinition = @ClaimsDefinition(callerNameClaim = "#{oidcConfig.callerNameClaim}", callerGroupsClaim = "#{oidcConfig.callerGroupsClaim}"),
     /* Default jwksConnectTimeout values can trigger com.nimbusds.jose.RemoteKeySourceException: Couldn't retrieve remote JWK set: connect timed out */
