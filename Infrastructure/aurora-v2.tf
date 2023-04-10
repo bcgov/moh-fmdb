@@ -14,7 +14,7 @@ variable "fmdb_master_username" {
   description = "The username for the DB master user"
   type        = string
   default     = "postgres"
-  # sensitive   = true
+  sensitive   = true
 }
 
 variable "fmdb_database_name" {
