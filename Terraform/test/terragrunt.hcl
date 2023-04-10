@@ -3,9 +3,7 @@ include {
 }
 
 locals {
-  #project = get_env("LICENSE_PLATE")
-  project             = "ynr9ed"
-
+  project = get_env("LICENSE_PLATE")
 #   commontags = [
 #     environment = "dev",
 #     application = "fmdb"
