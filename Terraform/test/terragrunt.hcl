@@ -4,6 +4,8 @@ include {
 
 locals {
   #project = get_env("LICENSE_PLATE")
+  project             = "ynr9ed"
+
 #   commontags = [
 #     environment = "dev",
 #     application = "fmdb"
@@ -11,13 +13,13 @@ locals {
 }
 
 generate "test_tfvars" {
-  path              = "dev.auto.tfvars"
+  path              = "test.auto.tfvars"
   if_exists         = "overwrite"
   disable_signature = true
   contents          = <<-EOF
-  environment = "dev"
   fargate_cpu = 512
   fargate_memory = 1024
   app_port = 21000
+  fam_console_idp_name = "TEST-IDIR"
   EOF
 }

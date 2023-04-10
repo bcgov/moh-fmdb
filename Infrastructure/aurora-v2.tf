@@ -43,6 +43,7 @@ data "aws_rds_engine_version" "postgresql" {
 
 module "aurora_postgresql_v2" {
   source = "terraform-aws-modules/rds-aurora/aws"
+  version = "7.7.1"
 
   name              = "${var.fmdb_cluster_name}-${var.target_env}"
   engine            = data.aws_rds_engine_version.postgresql.engine
@@ -58,11 +59,11 @@ module "aurora_postgresql_v2" {
   master_username = var.fmdb_master_username
   master_password = random_password.fmdb_master_password.result
 
-  # create_cluster         = true
+  create_cluster         = true
   create_security_group  = false
   create_db_subnet_group = false
   create_monitoring_role = false
-  # create_random_password = false
+  create_random_password = false
 
   apply_immediately   = true
   skip_final_snapshot = true
@@ -170,8 +171,4 @@ resource "aws_secretsmanager_secret_version" "fmdb_apicreds_secret_version" {
   lifecycle {
   ignore_changes = [ secret_string  ]
   }
-}
-
-output "module_master_username" {
-  value = var.fmdb_master_username
 }
