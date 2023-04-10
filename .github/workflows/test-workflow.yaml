@@ -24,7 +24,7 @@ permissions:
 jobs:
   docker_push:
     name: docker push
-    environment:  dev
+    environment:  test
     runs-on: ubuntu-22.04
     steps:
       - name: Check out the repo
