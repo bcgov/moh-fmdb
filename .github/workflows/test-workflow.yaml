@@ -6,7 +6,7 @@ on:
         description: 'Environment to run tests against' 
         type: environment 
         required: true
-  pull_request:
+#   pull_request:
 
 env:
   APP_IMAGE: ${{ secrets.APP_IMAGE }} 

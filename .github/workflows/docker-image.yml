@@ -6,7 +6,7 @@ on:
        environment:
         description: 'Environment to run tests against' 
         type: environment 
-  pull_request:
+#   pull_request:
  
 
 env:
