@@ -60,7 +60,7 @@ jobs:
           cache-to: type=local,dest=/tmp/.buildx-cache
           file: MyFMDB/Dockerfile
           push: true
-          tags: "${{ env.IMAGE_ID  }}:latest${{env.IMAGE_NAME}}"
+          tags: "${{ env.IMAGE_ID  }}:latest"
           
   terraform_apply:
     name: terraform apply test
