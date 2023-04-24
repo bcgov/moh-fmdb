@@ -32,7 +32,7 @@ resource "aws_ecs_task_definition" "fmdb_td" {
       essential   = true
       name        = "fmdb-${var.target_env}-definition"
       #change to variable to env. for GH Actions
-      image       = "666395672448.dkr.ecr.ca-central-1.amazonaws.com/fmdb:latest"
+      image       = "${data.aws_caller_identity.current.account_id}.dkr.ecr.ca-central-1.amazonaws.com/fmdb:latest"
       cpu         = var.fargate_cpu
       memory      = var.fargate_memory
       networkMode = "awsvpc"

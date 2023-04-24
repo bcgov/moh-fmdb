@@ -2,6 +2,10 @@ variable "target_env" {
   description = "AWS workload account env (e.g. dev, test, prod, sandbox, unclass)"
 }
 
+variable "alb_origin_id" {
+  description = "AWS workload account env (e.g. dev, test, prod, sandbox, unclass)"
+}
+
 variable "aws_region" {
   description = "The AWS region things are created in"
   default     = "ca-central-1"
@@ -63,7 +67,7 @@ variable "acl_value" {
 
 variable "app_port" {
   description = "Port exposed by the docker image to redirect traffic to"
-  default     = 8080
+  default     = 8181
 }
 
 variable "app_image" {
