@@ -55,8 +55,4 @@ resource "aws_lb_listener_rule" "host_based_weighted_routing" {
       values = ["/*"]
     }
   }
-  host_header {
-    values = ["fmdbd.hlth.gov.bc.ca"]
-    forward = "replace"
-  }
 }

@@ -53,7 +53,7 @@ resource "aws_cloudfront_distribution" "fmdb_distribution" {
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD","OPTIONS","PUT","POST","PATCH","DELETE"]
     cached_methods   = ["GET", "HEAD"]
-    target_origin_id = local.alb_origin_id
+    target_origin_id = var.alb_origin_id
     cache_policy_id = data.aws_cloudfront_cache_policy.CachingDisabled.id
     origin_request_policy_id = data.aws_cloudfront_origin_request_policy.AllViewerExceptHostHeader.id
     compress = true
