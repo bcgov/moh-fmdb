@@ -84,11 +84,9 @@ jobs:
         with:
           terraform_version: ${{ env.TF_VERSION }}
           
-      - uses: autero1/action-terragrunt@v1.1.0
+      - uses: autero1/action-terragrunt@v1.3.1
         with:
           terragrunt_version: ${{ env.TG_VERSION }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-
             
       - name: Terragrunt Apply
         working-directory: ${{ env.TG_SRC_PATH }}/${{ env.TFC_WORKSPACE }}
