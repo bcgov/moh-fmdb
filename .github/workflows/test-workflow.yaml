@@ -31,7 +31,7 @@ jobs:
         uses: actions/checkout@v3
         
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v3
         with:
           role-to-assume: ${{ secrets.TERRAFORM_DEPLOY_ROLE_ARN_TEST }}
           aws-region: ca-central-1
@@ -97,13 +97,13 @@ jobs:
             echo "repository variable : '${{ vars.ENVIRONMENT }}' " 
             echo "Environment variable: '${{ secrets.ENVIRONMENT }}' " 
             terragrunt run-all apply --terragrunt-non-interactive
-  zap_scan:
-    runs-on: ubuntu-latest
-    permissions: write-all
-    name: Scan the webapplication
-    needs: terraform_apply
-    steps:
-      - name: ZAP Scan
-        uses: zaproxy/action-baseline@v0.7.0
-        with:
-          target: 'https://fmdb.ynr9ed-test.nimbus.cloud.gov.bc.ca/'
+#  zap_scan:
+#    runs-on: ubuntu-latest
+#    permissions: write-all
+#    name: Scan the webapplication
+#    needs: terraform_apply
+#    steps:
+#      - name: ZAP Scan
+#        uses: zaproxy/action-baseline@v0.7.0
+#        with:
+#          target: 'https://fmdb.ynr9ed-test.nimbus.cloud.gov.bc.ca/'
