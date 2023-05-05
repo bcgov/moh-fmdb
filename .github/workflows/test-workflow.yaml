@@ -106,4 +106,4 @@ jobs:
       - name: ZAP Scan
         uses: zaproxy/action-baseline@v0.7.0
         with:
-          target: 'https://fmdb.hlth.gov.bc.ca/'
+          target: 'https://fmdb.ynr9ed-test.nimbus.cloud.gov.bc.ca/'
