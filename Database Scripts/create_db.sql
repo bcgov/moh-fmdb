@@ -1,7 +1,7 @@
 -- Database: FMDB_DB
 
-CREATE ROLE fmdb_owner LOGIN PASSWORD 'admin';
-CREATE ROLE fmdb_proxy_user LOGIN PASSWORD 'admin';
+CREATE ROLE fmdb_owner LOGIN PASSWORD @password;
+CREATE ROLE fmdb_proxy_user LOGIN PASSWORD @password;
 GRANT fmdb_owner TO postgres;
 
 
