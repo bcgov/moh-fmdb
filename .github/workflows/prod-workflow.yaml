@@ -58,7 +58,7 @@ jobs:
           builder: ${{ steps.buildx.outputs.name }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
-          file: MyFMDB/Dockerfile
+          file: fmdb/Dockerfile
           push: true
           tags: ${{ env.IMAGE_ID  }}${{env.IMAGE_NAME}}
           
