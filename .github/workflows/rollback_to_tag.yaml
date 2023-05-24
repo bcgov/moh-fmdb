@@ -18,7 +18,7 @@ jobs:
     permissions: write-all
     steps:
       - name: Rollback Release
-        uses: author/action-rollback@stable
+        uses: author/action-rollback@main
         with:
           # Using a tag name
           tag: '${{ github.event.inputs.version }}'
