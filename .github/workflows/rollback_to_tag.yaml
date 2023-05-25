@@ -15,12 +15,25 @@ on:
 jobs:
   rollback:
     runs-on: ubuntu-latest
-    permissions: write-all
+    permissions:
+      contents: read
+      pull-requests: write
+      repository: write
+
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
       - name: Rollback Release
-        uses: author/action-rollback@main
-        with:
-          # Using a tag name
-          tag: '${{ github.event.inputs.version }}'
-        env: 
+        run: |
+          git checkout ${{ github.event.inputs.version }}
+          # Perform rollback steps specific to your repository
+
+      - name: Push Rollback Changes
+        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -am "Rollback changes"
+          git push
