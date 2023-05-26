@@ -18,9 +18,9 @@ jobs:
     permissions: write-all
     steps:
       - name: Rollback Release
-        uses: author/action-rollback@stable
+        uses: bcgov/action-rollback@stable
         with:
           # Using a tag name
-          tag: '${{ github.event.inputs.tag }}'
+          tag: '${{ github.event.inputs.version }}'
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
