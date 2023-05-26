@@ -21,6 +21,6 @@ jobs:
         uses: author/action-rollback@stable
         with:
           # Using a tag name
-          tag: ${{ github.event.inputs.tag }}
+          tag: ${{ steps.get_tag_name.outputs.tag_name }}
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
