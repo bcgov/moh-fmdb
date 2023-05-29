@@ -29,5 +29,5 @@ jobs:
           git push origin :refs/tags/${{ github.event.inputs.tag }}
           git revert -n ${{ github.event.inputs.release_id }}
           git commit -m "Rollback release ${{ github.event.inputs.release_id }}"
-          git push origin HEAD:main
+          git push origin HEAD:Ravi-Rollbackchanges
         
