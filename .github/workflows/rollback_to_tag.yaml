@@ -33,5 +33,6 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git checkout -B Ravi-Rollbackchanges
-          git merge --ff-only $GITHUB_SHA
+          git revert -n $GITHUB_SHA
+          git commit -am "Revert changes"
+          git push origin Ravi-rollbackchanges
