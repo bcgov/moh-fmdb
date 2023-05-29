@@ -1,0 +1,9 @@
+name: 'Rollback Action'
+description: 'Commit data on master branch from latest tag'
+inputs:
+  tag:
+    description: 'Name of the latest tag'
+    required: true
+runs:
+  using: 'node12'
+  main: 'index.js'
