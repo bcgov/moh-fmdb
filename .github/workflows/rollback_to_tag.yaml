@@ -26,7 +26,7 @@ jobs:
       - name: Revert to Tag
         run: |
           git fetch --tags
-          git checkout main
+          git checkout -b Ravi-Rollbackchanges
           git revert -n $(git rev-list -n 1 tags/${{ github.event.inputs.tag }})
 
       - name: Commit Revert
@@ -35,4 +35,4 @@ jobs:
 
       - name: Push Revert
         run: |
-          git push origin main
+          git push origin Ravi-Rollbackchanges
