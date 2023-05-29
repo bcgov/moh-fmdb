@@ -25,8 +25,7 @@ jobs:
 
       - name: Rollback Release
         run: |
-          git fetch --tags
-          git checkout tags/${{ github.event.inputs.version }}
+          git checkout ${{ github.event.inputs.tag }}
           # Perform rollback steps specific to your repository
       - name: Push Rollback Changes
         env:
@@ -34,8 +33,5 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git diff Ravi-Rollbackchanges > ~/diff.patch
-          git checkout Ravi-Rollbackchanges
-          git apply ~/diff.patch
-          git commit -am 'Rolled back to version ${{ github.event.inputs.version }}'
-          git push origin Ravi-Rollbackchanges
+          git checkout -B Ravi-Rollbackchanges
+          git merge --ff-only $GITHUB_SHA
