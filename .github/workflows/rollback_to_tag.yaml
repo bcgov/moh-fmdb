@@ -23,16 +23,15 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Revert to Tag
+      - name: Rollback Release
         run: |
-          git fetch --tags
-          git checkout -b Ravi-Rollbackchanges
-          git revert -n $(git rev-list -n 1 tags/${{ github.event.inputs.tag }})
-
-      - name: Commit Revert
+          git checkout ${{ github.event.inputs.tag }}
+          # Perform rollback steps specific to your repository
+      - name: Push Rollback Changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git commit -am "Revert to tag ${{ github.event.inputs.tag }}"
-
-      - name: Push Revert
-        run: |
-          git push origin Ravi-Rollbackchanges
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git checkout -B Ravi-Rollbackchanges
+          git merge --ff-only $GITHUB_SHA
