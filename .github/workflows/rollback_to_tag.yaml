@@ -17,8 +17,11 @@ jobs:
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
       - name: Rollback Release
-        uses: bcgov/moh-fmdb@main
+        uses: bcgov/moh-fmdb@Ravi-Rollbackchanges
         with:
           # Using a tag name
           tag: '${{ github.event.inputs.version }}'
