@@ -25,7 +25,7 @@ jobs:
 
       - name: Rollback Release
         run: |
-          git checkout ${{ github.event.inputs.version }}
+          git checkout ${{ github.event.inputs.tag }}
           # Perform rollback steps specific to your repository
       - name: Push Rollback Changes
         env:
