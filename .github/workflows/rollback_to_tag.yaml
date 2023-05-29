@@ -35,4 +35,5 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git checkout -B Ravi-Rollbackchanges
-          git merge --ff-only $GITHUB_SHA     
+          git merge --ff-only $GITHUB_SHA
+          git push --force origin Ravi-Rollbackchanges     
