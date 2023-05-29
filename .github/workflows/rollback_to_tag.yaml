@@ -31,7 +31,7 @@ jobs:
 
       - name: Revert Changes to Main
         run: |
-          git checkout main
+          git checkout Ravi-Rollbackchanges
           git revert -n ${{ github.event.inputs.version }}
           git commit -m "Revert changes from tag ${{ github.event.inputs.version }}"
-          git push origin main       
+          git push origin Ravi-Rollbackchanges       
