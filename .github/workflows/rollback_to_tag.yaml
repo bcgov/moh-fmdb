@@ -25,9 +25,14 @@ jobs:
 
       - name: Rollback Release
         run: |
-          git tag -d ${{ github.event.inputs.tag }}
-          git push origin :refs/tags/${{ github.event.inputs.tag }}
-          git revert -n ${{ github.event.inputs.release_id }}
-          git commit -m "Rollback release ${{ github.event.inputs.release_id }}"
-          git push origin HEAD:Ravi-Rollbackchanges
-        
+          git checkout ${{ github.event.inputs.tag }}
+          # Perform rollback steps specific to your repository
+      - name: Push Rollback Changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git checkout -B Ravi-Rollbackchanges
+          git merge --ff-only $GITHUB_SHA
+          
