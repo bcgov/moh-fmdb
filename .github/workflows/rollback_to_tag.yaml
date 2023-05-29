@@ -18,7 +18,7 @@ jobs:
     permissions: write-all
     steps:
       - name: Rollback Release
-        uses: bcgov/action-rollback@stable
+        uses: moh-fmdb/action-rollback@stable
         with:
           # Using a tag name
           tag: '${{ github.event.inputs.version }}'
