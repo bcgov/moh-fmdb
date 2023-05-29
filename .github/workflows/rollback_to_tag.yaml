@@ -36,5 +36,5 @@ jobs:
           git config --local user.name "GitHub Action"
           git checkout -B Ravi-Rollbackchanges
           git merge --ff-only $GITHUB_SHA
-          git push --force origin Ravi-Rollbackchanges git pull origin Ravi-Rollbackchanges --allow-unrelated-histories
+          git push --force origin Ravi-Rollbackchanges --allow-unrelated-histories
                
