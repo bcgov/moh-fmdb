@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Rollback Release
-        uses: bcgov/moh-fmdb/action-rollback@stable
+        uses: bcgov/rollback-action/rollback-action@main
         with:
           # Using a tag name
           tag: '${{ github.event.inputs.version }}'
