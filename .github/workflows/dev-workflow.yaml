@@ -113,16 +113,18 @@ jobs:
 
       - name: Rollback Release
         run: |
-            git checkout tags/${{ github.event.inputs.version }} -b rollback
-            # Additional rollback steps or commands if needed
-
+          git fetch --tags
+          git checkout tags/${{ github.event.inputs.version }}
+          # Perform rollback steps specific to your repository
+            
       - name: Push Rollback Changes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git push origin rollback            
+          git commit -am "Rollback changes"
+          git push            
   zap_scan:
     runs-on: ubuntu-latest
     permissions: write-all
