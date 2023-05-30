@@ -107,6 +107,22 @@ jobs:
             echo "repository variable : '${{ vars.ENVIRONMENT }}' " 
             echo "Environment variable: '${{ github.event.inputs.environment }}' " 
             terragrunt run-all apply --terragrunt-non-interactive
+      - name: Rollback on Failure
+        if: ${{ failure() && needs.docker_push.result == 'success' && needs.terraform_apply.result == 'failure' }}
+        uses: actions/checkout@v3
+
+      - name: Rollback Release
+        run: |
+            git checkout tags/${{ github.event.inputs.version }} -b rollback
+            # Additional rollback steps or commands if needed
+
+      - name: Push Rollback Changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git push origin rollback            
   zap_scan:
     runs-on: ubuntu-latest
     permissions: write-all
