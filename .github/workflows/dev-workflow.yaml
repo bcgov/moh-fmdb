@@ -107,8 +107,15 @@ jobs:
             echo "repository variable : '${{ vars.ENVIRONMENT }}' " 
             echo "Environment variable: '${{ github.event.inputs.environment }}' " 
             terragrunt run-all apply --terragrunt-non-interactive
-      - name: Rollback on Failure
-        if: ${{ failure() && needs.docker_push.result == 'success' && needs.terraform_apply.result == 'failure' }}
+  rollback:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    needs: terraform_apply
+    if: failure()
+    steps:
+      - name: Checkout Repository
         uses: actions/checkout@v3
 
       - name: Rollback Release
