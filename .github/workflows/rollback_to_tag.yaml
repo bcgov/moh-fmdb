@@ -35,4 +35,4 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git reset --hard ${{ github.event.inputs.version }}
-          git push --force Ravi-Rollbackchanges
+          git push -f origin Ravi-Rollbackchanges
