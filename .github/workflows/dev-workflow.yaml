@@ -130,8 +130,8 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git commit -am "Rollback changes"
-          git push            
+          git reset --hard ${{ github.event.inputs.version }}
+          git push -f origin Ravi-Rollbackchanges
   zap_scan:
     runs-on: ubuntu-latest
     permissions: write-all
