@@ -110,7 +110,7 @@ jobs:
   rollback:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       pull-requests: write
     needs: terraform_apply
     if: failure()
