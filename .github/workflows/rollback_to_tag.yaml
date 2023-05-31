@@ -35,6 +35,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
+          git checkout Ravi-Rollbackchanges
           git reset --hard ${{ github.event.inputs.version }}
           git commit -m "Rollback changes"
           git push -f origin Ravi-Rollbackchanges
