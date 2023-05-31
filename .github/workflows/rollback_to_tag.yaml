@@ -28,16 +28,16 @@ jobs:
           git fetch --tags
           git checkout tags/${{ github.event.inputs.version }}
           # Perform rollback steps specific to your repository
+
+      - name: Reset Branch to Tag
+        run: |
+          git branch -f Ravi-rollbackchanges ${{ github.event.inputs.version }}
+          git checkout ${{ github.event.inputs.version }}
+
       - name: Push Rollback Changes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git reset --hard ${{ github.event.inputs.version }}
-          git push -f origin Ravi-Rollbackchanges
-
-      - name: Update Branch Reference
-        run: |
-          git symbolic-ref HEAD refs/heads/Ravi-Rollbackchanges
-          git push -f origin HEAD:Ravi-Rollbackchanges
+          git push -f origin Ravi-rollbackchanges
