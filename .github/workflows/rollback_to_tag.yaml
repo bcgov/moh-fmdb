@@ -21,7 +21,7 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Rollback Release
         run: |
@@ -36,3 +36,8 @@ jobs:
           git config --local user.name "GitHub Action"
           git reset --hard ${{ github.event.inputs.version }}
           git push -f origin Ravi-Rollbackchanges
+
+      - name: Update Branch Reference
+        run: |
+          git symbolic-ref HEAD refs/heads/Ravi-Rollbackchanges
+          git push -f origin HEAD:Ravi-Rollbackchanges
