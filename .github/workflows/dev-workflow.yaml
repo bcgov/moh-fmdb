@@ -107,6 +107,30 @@ jobs:
             echo "repository variable : '${{ vars.ENVIRONMENT }}' " 
             echo "Environment variable: '${{ github.event.inputs.environment }}' " 
             terragrunt run-all apply --terragrunt-non-interactive
+  rollback:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    needs: terraform_apply
+    if: failure()
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Rollback Changes
+        run: |
+          git fetch --tags
+          git reset --hard tags/${{ github.event.inputs.version }}
+          # Perform rollback steps specific to your repository
+
+      - name: Push Rollback Changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git push -f origin HEAD
   zap_scan:
     runs-on: ubuntu-latest
     permissions: write-all
