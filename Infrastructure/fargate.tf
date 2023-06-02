@@ -53,7 +53,11 @@ resource "aws_ecs_task_definition" "fmdb_td" {
          {"name": "fmdb_keycloak_client_secret",
          "valueFrom": "${aws_secretsmanager_secret_version.fmdb_keycloak-client-secret.arn}"},
          {"name": "REDIRECT_URI",
-         "valueFrom": "${aws_secretsmanager_secret_version.redirect_uri.arn}"}
+         "valueFrom": "${aws_secretsmanager_secret_version.redirect_uri.arn}"},
+         {"name": "SITEMINDER_URI",
+         "valueFrom": "${aws_secretsmanager_secret_version.fmdb_siteminder_uri.arn}"},
+         {"name": "PROVIDER_URI",
+         "valueFrom": "${aws_secretsmanager_secret_version.fmdb_provider_uri.arn}"}
       ]
       environment = [
         {"name": "XMX_DEV",
