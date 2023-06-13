@@ -3,7 +3,7 @@ include {
 }
 
 locals {
-  #project = get_env("LICENSE_PLATE")
+  project = get_env("LICENSE_PLATE")
 #   commontags = [
 #     environment = "dev",
 #     application = "fmdb"
@@ -11,7 +11,7 @@ locals {
 }
 
 generate "test_tfvars" {
-  path              = "dev.auto.tfvars"
+  path              = "test.auto.tfvars"
   if_exists         = "overwrite"
   disable_signature = true
   contents          = <<-EOF

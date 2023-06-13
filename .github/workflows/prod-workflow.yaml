@@ -11,7 +11,7 @@ on:
 env:
   APP_IMAGE: ${{ secrets.APP_IMAGE }} 
   IMAGE_ID: ${{ secrets.AWS_ECR_URI_PROD }}
-  IMAGE_NAME: fmdbprod
+  IMAGE_NAME: fmdbtest
   TF_VERSION: 1.2.2
   TG_VERSION: 0.37.1
   TG_SRC_PATH: Terraform
@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Check out the repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -40,7 +40,7 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
         
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: /tmp/.buildx-cache
           key: ${{ runner.os }}-buildx-${{ github.sha }}
@@ -49,18 +49,18 @@ jobs:
             
       - name: Set up Docker Buildx
         id: buildx
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v2
         
       - name: Build and push
         id: docker_build
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v4
         with:
           builder: ${{ steps.buildx.outputs.name }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
           file: fmdb/Dockerfile
           push: true
-          tags: ${{ env.IMAGE_ID  }}${{env.IMAGE_NAME}}
+          tags: ${{ env.IMAGE_ID  }}:latest
           
   terraform_apply:
     name: terraform apply prod
@@ -70,7 +70,7 @@ jobs:
     steps:
     
       - name: Check out the repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: ${{ github.event.workflow_run.head_branch }}
           
@@ -80,7 +80,7 @@ jobs:
           role-to-assume: ${{ secrets.TERRAFORM_DEPLOY_ROLE_ARN }}
           aws-region: ca-central-1
           
-      - uses: hashicorp/setup-terraform@v1
+      - uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: ${{ env.TF_VERSION }}
           
