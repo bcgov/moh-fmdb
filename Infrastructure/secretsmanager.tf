@@ -20,6 +20,14 @@ resource "aws_secretsmanager_secret_version" "jdbc_setting" {
   secret_string = "changeme"
 }
 
+resource "aws_secretsmanager_secret" "fmdb_provider_uri"{ 
+  name = "${var.application}_provider_uri"
+}
+
+resource "aws_secretsmanager_secret" "fmdb_siteminder_uri"{ 
+  name = "${var.application}_siteminder_uri"
+}
+
 resource "aws_secretsmanager_secret_version" "rds_credentials" {
   secret_id     = aws_secretsmanager_secret.fmdb_proxy_user.id
   secret_string = <<EOF
@@ -44,5 +52,15 @@ resource "aws_secretsmanager_secret_version" "fmdb_keycloak-client-secret" {
 
 resource "aws_secretsmanager_secret_version" "redirect_uri" {
   secret_id     = aws_secretsmanager_secret.redirect_uri.id
+  secret_string = "changeme"
+}
+
+resource "aws_secretsmanager_secret_version" "fmdb_provider_uri" {
+  secret_id     = aws_secretsmanager_secret.fmdb_provider_uri.id
+  secret_string = "changeme"
+}
+
+resource "aws_secretsmanager_secret_version" "fmdb_siteminder_uri" {
+  secret_id     = aws_secretsmanager_secret.fmdb_siteminder_uri.id
   secret_string = "changeme"
 }
