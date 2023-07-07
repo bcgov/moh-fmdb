@@ -91,7 +91,7 @@ resource "aws_ecs_service" "main" {
 
   load_balancer {
     target_group_arn = aws_alb_target_group.app.id
-    container_name   = "fmdb-${var.target_env}-definition"
+    container_name   = "${var.application}-${var.target_env}-definition"
     container_port   = var.app_port
   }
 
