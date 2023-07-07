@@ -53,7 +53,7 @@ resource "aws_lb_listener_rule" "host_based_weighted_routing" {
   #figure out what to place here to replace the environment
   condition {
     host_header {
-      values = ["fmdb.ynr9ed-dev.nimbus.cloud.gov.bc.ca"]
+      values = ["${var.alb_origin_id}"]
     }
   }
 }
