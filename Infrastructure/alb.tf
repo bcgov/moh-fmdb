@@ -13,7 +13,7 @@ data "aws_alb_listener" "front_end" {
 }
 
 resource "aws_alb_target_group" "app" {
-  name                 = "fmdb-target-group"
+  name                 = "fmdb-test-target-group"
   port                 = var.app_port
   protocol             = "HTTPS"
   vpc_id               = data.aws_vpc.main.id
@@ -50,10 +50,10 @@ resource "aws_lb_listener_rule" "host_based_weighted_routing" {
     type             = "forward"
     target_group_arn = aws_alb_target_group.app.arn
   }
-  #figure out what to place here
+  #figure out what to place here to replace the environment
   condition {
-    path_pattern {
-      values = ["/*"]
+    host_header {
+      values = ["fmdb.ynr9ed-dev.nimbus.cloud.gov.bc.ca"]
     }
   }
 }
