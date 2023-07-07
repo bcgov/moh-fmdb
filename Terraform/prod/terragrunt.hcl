@@ -19,5 +19,7 @@ generate "prod_tfvars" {
   fargate_memory = 1024
   app_port = 8181
   fam_console_idp_name = "DEV-IDIR"
+  domain = "fmdb.hlth.gov.bc.ca"
+  alb_origin_id = "fmdb.ynr9ed-prod.nimbus.cloud.gov.bc.ca"
   EOF
 }
