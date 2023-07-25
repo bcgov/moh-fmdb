@@ -7,14 +7,14 @@
         <property name="Password" value="${ENV=PG_PASSWORD}"></property>
 		<property name="driverClass" value="org.postgresql.Driver"/>
         <property name="User" value="${ENV=PG_USER}"></property>
-		<property name="CurrentSchema" value="fmdb"></property>
+		<property name="CurrentSchema" value="fmd"></property>
     </jdbc-connection-pool>
     <jdbc-connection-pool is-isolation-level-guaranteed="false" datasource-classname="org.postgresql.ds.PGSimpleDataSource" name="FMDB-DB-External_Proxy_user" sql-trace-listeners="" res-type="javax.sql.DataSource">
          <property name="URL" value="${ENV=JDBC_SETTING}"></property>
         <property name="Password" value="${ENV=PG_PASSWORD}"></property>
 		<property name="driverClass" value="org.postgresql.Driver"/>
         <property name="User" value="${ENV=PG_USER}"></property>
-		<property name="CurrentSchema" value="fmdb"></property>
+		<property name="CurrentSchema" value="fmd"></property>
     </jdbc-connection-pool>
     
     <jdbc-resource pool-name="FMDB-DB-External_Proxy_user" jndi-name="jdbc/fmdb_pub"></jdbc-resource>
