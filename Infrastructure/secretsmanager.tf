@@ -34,7 +34,6 @@ resource "aws_secretsmanager_secret_version" "rds_credentials" {
 {
   "username": "fmdb_proxy_user",
   "password": "changeme",
-  "engine": "${data.aws_rds_engine_version.postgresql.version}",
   "host": "${module.aurora_postgresql_v2.cluster_endpoint}",
   "port": ${module.aurora_postgresql_v2.cluster_port},
   "dbClusterIdentifier": "${module.aurora_postgresql_v2.cluster_id}"
