@@ -15,6 +15,11 @@
     </modules>
 	
     <repositories>
+         <repository>
+            <id>mvnrepository</id>
+            <name>MVN Repository</name>
+            <url>https://repo1.maven.org/maven2/</url>
+        </repository>
         <repository>
             <id>cgi-mvn-release</id>
             <name>CGI Maven Repository</name>
@@ -76,7 +81,7 @@
         <!-- Override PrimeFaces 10.0.0 Default Theme to retain CSS overrides created for PrimeFaces 8.0 Default Theme -->
         <dependency>
             <groupId>org.primefaces.themes</groupId>
-            <artifactId>aristo</artifactId>
+                <artifactId>aristo</artifactId>
             <version>1.0.1</version>
         </dependency>
         <!-- Match this version to what is included with the Payara server to deploy to -->
