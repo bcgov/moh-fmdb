@@ -73,7 +73,7 @@ public class PublicAccessVw implements Serializable {
             if (cdrReviewYn.equals("N")) {
                 cdrReviewYn = "No";
             } else if (cdrReviewYn.equals("Y")) {
-                cdrReviewYn = "<a href='https://www.cadth.ca/about-cadth/what-we-do/products-services/cdr/reports' target='new_window'>Yes</a>";
+                cdrReviewYn = "<a href='https://www.cda-amc.ca/reports' target='new_window'>Yes</a>";
             }
 
         }
@@ -169,7 +169,7 @@ public class PublicAccessVw implements Serializable {
         if (reviewStatusDsc != null 
                 && !reviewStatusDsc.isEmpty() 
                 && reviewStatusDsc.equals("Limited Coverage-Special Authority required")) {
-            reviewStatusDsc = "<a href='http://www.health.gov.bc.ca/pharmacare/sa/criteria/restricted/restrictedtable.html' target='new_window'>Limited Coverage</a>. Special Authority required</a>";
+            reviewStatusDsc = "<a href='https://www2.gov.bc.ca/gov/content/health/practitioner-professional-resources/pharmacare/programs/special-authority/sa-drug-list' target='new_window'>Limited Coverage</a>. Special Authority required</a>";
         }
 
         return reviewStatusDsc;
