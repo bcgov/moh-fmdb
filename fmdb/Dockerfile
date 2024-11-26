@@ -21,7 +21,7 @@ COPY fmdb/FMDB-war-pub /home/fmdb/FMDB-war-pub
 COPY fmdb/pom.xml /home/fmdb
 
 # Artifactory repo for errorhandler-1.0.jar uses a self-signed certificate which requires SSL overrides for Maven
-RUN mvn -f /home/fmdb/pom.xml clean package -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.http.ssl.insecure=true
+RUN mvn -U -f /home/fmdb/pom.xml clean package -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.http.ssl.ignore.validity.dates=true
 
 FROM payara/server-full:5.2022.4-jdk11
 COPY fmdb/pre-boot-commands.asadmin $PREBOOT_COMMANDS

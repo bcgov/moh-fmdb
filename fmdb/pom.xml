@@ -15,18 +15,13 @@
     </modules>
 	
     <repositories>
- 
-         <repository>
-            <id>MVMRepository</id>
-            <name>MVMRepository</name>
-            <url>https://mvnrepository.com/</url>
-        </repository>
-        
+
         
         <repository>
             <id>primefaces-mvn</id>
             <name>PrimeFaces Maven Repository</name>
             <url>https://repository.primefaces.org</url>
+            <layout>default</layout>
         </repository>
         
      
