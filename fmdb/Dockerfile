@@ -1,5 +1,6 @@
 FROM maven:3.8.6-openjdk-11-slim as build-stage
 
+RUN mvn de.qaware.maven:go-offline-maven-plugin:resolve-dependencies
 
 RUN mkdir -p /home/fmdb
 
