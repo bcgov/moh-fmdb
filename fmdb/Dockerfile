@@ -1,7 +1,11 @@
 FROM maven:3.8.6-openjdk-11-slim as build-stage
+
+WORKDIR /build
+COPY pom.xml .
+RUN mvn dependency:go-offline
+
 RUN mkdir -p /home/fmdb
 
-RUN mvn dependency:go-offline
 
 COPY fmdb/aristo-1.0.1.jar /home/fmdb
 RUN mvn install:install-file -Dfile=/home/fmdb/aristo-1.0.1.jar -DgroupId=com.cgi.fmdb -DartifactId=errorhandler -Dversion=1.0 -Dpackaging=jar -DgeneratePom=true
