@@ -1,6 +1,6 @@
 FROM maven:3.8.6-openjdk-11-slim as build-stage
 
-RUN mvn de.qaware.maven:go-offline-maven-plugin:resolve-dependencies
+COPY fmdb/aristo-1.0.1.jar /opt/payara/appserver/glassfish/domains/domain1/lib
 
 RUN mkdir -p /home/fmdb
 
