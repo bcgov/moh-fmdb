@@ -6,7 +6,7 @@ RUN mkdir -p /home/fmdb
 
 
 COPY fmdb/aristo-1.0.1.jar /home/fmdb
-RUN mvn install:install-file -Dfile=/home/fmdb/aristo-1.0.1.jar -DgroupId=org.primefaces.themes -DartifactId=aristo-1.0.1 -Dversion=1.0.1 -Dpackaging=jar -DgeneratePom=true
+RUN mvn install:install-file -Dfile=/home/fmdb/aristo-1.0.1.jar -DgroupId=org.primefaces.themes -DartifactId=aristo -Dversion=1.0.1 -Dpackaging=jar -DgeneratePom=true
 
 COPY fmdb/errorhandler-1.0.jar /home/fmdb
 RUN mvn install:install-file -Dfile=/home/fmdb/errorhandler-1.0.jar -DgroupId=com.cgi.fmdb -DartifactId=errorhandler -Dversion=1.0 -Dpackaging=jar -DgeneratePom=true
