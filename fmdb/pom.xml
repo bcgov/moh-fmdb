@@ -25,6 +25,11 @@
         </repository>
         
      
+           <repository>
+            <id>cgi-mvn-release</id>
+            <name>CGI Maven Repository</name>
+            <url>https://artifactory.hlth.gov.bc.ca/artifactory/cgi-mvn-release</url>
+        </repository>
                 
         
     </repositories>
