@@ -13,21 +13,6 @@
         <module>${project.artifactId}-war-pub</module>
         <module>${project.artifactId}-ear</module>
     </modules>
-	
-    <repositories>
-
-        
-        <repository>
-            <id>primefaces-mvn</id>
-            <name>PrimeFaces Maven Repository</name>
-            <url>https://repository.primefaces.org</url>
-            <layout>default</layout>
-        </repository>
-        
-     
-          
-        
-    </repositories>
 
     <build>
         <plugins>
