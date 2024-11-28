@@ -42,7 +42,7 @@ module "aurora_postgresql_v2" {
 
   name              = "${var.fmdb_cluster_name}-${var.target_env}"
   engine            = "aurora-postgresql"
-  engine_mode       = "serverless"
+  engine_mode       = "provisioned"
   engine_version    = 13.12
   storage_encrypted = true
   database_name     = var.fmdb_database_name
