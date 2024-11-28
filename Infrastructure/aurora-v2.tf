@@ -36,23 +36,14 @@ resource "aws_db_subnet_group" "fmdb_subnet_group" {
   }
 }
 
-data "aws_rds_engine_version" "postgresql" {
-  engine  = "aurora-postgresql"
-  version = "13.9"
-  filter {
-    name = "engine-mode"
-    values = [ "serverless" ]
-  }
-}
-
 module "aurora_postgresql_v2" {
   source = "terraform-aws-modules/rds-aurora/aws"
   version = "7.7.1"
 
   name              = "${var.fmdb_cluster_name}-${var.target_env}"
-  engine            = data.aws_rds_engine_version.postgresql.engine
-  engine_mode       = "provisioned"
-  engine_version    = data.aws_rds_engine_version.postgresql.version
+  engine            = "aurora-postgresql"
+  engine_mode       = "serverless"
+  engine_version    = 13.9
   storage_encrypted = true
   database_name     = var.fmdb_database_name
 
