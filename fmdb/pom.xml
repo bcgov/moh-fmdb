@@ -13,6 +13,14 @@
         <module>${project.artifactId}-war-pub</module>
         <module>${project.artifactId}-ear</module>
     </modules>
+	
+    <repositories>
+        <repository>
+            <id>cgi-mvn-release</id>
+            <name>CGI Maven Repository</name>
+            <url>https://artifactory.hlth.gov.bc.ca/artifactory/cgi-mvn-release</url>
+        </repository>
+    </repositories>
 
     <build>
         <plugins>
@@ -24,6 +32,27 @@
                     <source>11</source>
                     <target>11</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <version>1.5.0</version>
+                <executions>
+                    <execution>
+                        <id>flatten</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>flatten.clean</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
