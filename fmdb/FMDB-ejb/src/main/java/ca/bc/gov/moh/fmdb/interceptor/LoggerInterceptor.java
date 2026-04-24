@@ -12,8 +12,8 @@
 
 package ca.bc.gov.moh.fmdb.interceptor;
 
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.InvocationContext;
+import jakarta.interceptor.AroundInvoke;
+import jakarta.interceptor.InvocationContext;
 
 import ca.bc.gov.moh.fmdb.logging.Logger;
 import ca.bc.gov.moh.fmdb.logging.LoggerFactory;

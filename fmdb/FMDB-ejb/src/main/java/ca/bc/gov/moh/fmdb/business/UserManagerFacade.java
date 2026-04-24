@@ -13,9 +13,9 @@
 package ca.bc.gov.moh.fmdb.business;
 
 import java.security.Principal;
-import javax.annotation.Resource;
-import javax.ejb.SessionContext;
-import javax.ejb.Stateless;
+import jakarta.annotation.Resource;
+import jakarta.ejb.SessionContext;
+import jakarta.ejb.Stateless;
 
 /**
  *

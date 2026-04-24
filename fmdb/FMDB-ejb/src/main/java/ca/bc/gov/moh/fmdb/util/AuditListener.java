@@ -19,9 +19,9 @@ package ca.bc.gov.moh.fmdb.util;
 
 import java.security.Principal;
 import java.util.Date;
-import javax.faces.context.FacesContext;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
+import jakarta.faces.context.FacesContext;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import org.apache.commons.beanutils.PropertyUtils;
 
 /**

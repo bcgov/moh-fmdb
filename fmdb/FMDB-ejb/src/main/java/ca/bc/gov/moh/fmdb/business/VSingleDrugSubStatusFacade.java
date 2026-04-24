@@ -22,10 +22,10 @@ import ca.bc.gov.moh.fmdb.entity.VReviewQuestions;
 import ca.bc.gov.moh.fmdb.entity.VSingleDrugSubStatus;
 //import java.util.Date;
 import java.util.List;
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import jakarta.ejb.Stateless;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 
 /**
  *

@@ -20,7 +20,7 @@ package ca.bc.gov.moh.fmdb.business;
 import ca.bc.gov.moh.fmdb.business.exception.SaveFMDBException;
 import ca.bc.gov.moh.fmdb.entity.ReviewerNameTypes;
 import java.util.List;
-import javax.ejb.Local;
+import jakarta.ejb.Local;
 
 /**
  *

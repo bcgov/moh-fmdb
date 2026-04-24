@@ -19,8 +19,8 @@ package ca.bc.gov.moh.fmdb.util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.WriteListener;
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.WriteListener;
 
 /**
  * Simple extension of a ServletOutputStream that writes to

@@ -12,7 +12,7 @@
 
 package ca.bc.gov.moh.fmdb.business;
 
-import javax.ejb.Local;
+import jakarta.ejb.Local;
 
 /**
  *  

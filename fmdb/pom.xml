@@ -38,9 +38,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <version>8.0</version>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-api</artifactId>
+            <version>10.0.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -68,15 +68,14 @@
         <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
-            <version>10.0.0</version>
+            <version>12.0.0</version>
+            <classifier>jakarta</classifier>
         </dependency>
-        <!-- Override PrimeFaces 10.0.0 Default Theme to retain CSS overrides created for PrimeFaces 8.0 Default Theme -->
+        <!-- Override PrimeFaces 12.0.0 Default Theme to retain CSS overrides created for PrimeFaces 8.0 Default Theme -->
         <dependency>
             <groupId>org.primefaces.themes</groupId>
             <artifactId>aristo</artifactId>
             <version>1.0.1</version>
-            <scope>system</scope>
-			<systemPath>${project.basedir}/../lib/aristo-1.0.1.jar</systemPath>
         </dependency>
         <!-- Match this version to what is included with the Payara server to deploy to -->
         <dependency>

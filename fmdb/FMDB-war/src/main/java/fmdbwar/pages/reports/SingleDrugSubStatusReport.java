@@ -16,9 +16,9 @@ package fmdbwar.pages.reports;
 
 import java.io.IOException;
 import java.io.Serializable;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * Backing bean for the Single Drug Sub Status Report
