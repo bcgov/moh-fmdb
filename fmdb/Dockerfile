@@ -8,7 +8,6 @@ COPY fmdb/FMDB-ear /home/fmdb/FMDB-ear
 COPY fmdb/FMDB-ejb /home/fmdb/FMDB-ejb
 COPY fmdb/FMDB-war /home/fmdb/FMDB-war
 COPY fmdb/FMDB-war-pub /home/fmdb/FMDB-war-pub
-COPY fmdb/lib /home/fmdb/lib
 COPY fmdb/pom.xml /home/fmdb
 
 # Artifactory repo for errorhandler-1.0.jar uses a self-signed certificate which requires SSL overrides for Maven
