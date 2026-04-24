@@ -21,7 +21,7 @@ import ca.bc.gov.moh.adti.business.custom.Attachment;
 import ca.bc.gov.moh.fmdb.web.model.SearchDTO;
 import ca.bc.gov.moh.fmdb.web.pub.entity.PublicAccessVw;
 import java.util.List;
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 /**
  * @author chris.prince
