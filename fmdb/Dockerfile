@@ -2,7 +2,7 @@ FROM maven:3.8.6-openjdk-11-slim as build-stage
 RUN mkdir -p /home/fmdb
 COPY fmdb/errorhandler-1.0.jar /home/fmdb
 RUN mvn install:install-file -Dfile=/home/fmdb/errorhandler-1.0.jar -DgroupId=com.cgi.fmdb -DartifactId=errorhandler -Dversion=1.0 -Dpackaging=jar -DgeneratePom=true
-COPY lib /home/fmdb/lib
+COPY fmdb/lib /home/fmdb/lib
 RUN mvn install:install-file -Dfile=/home/fmdb/lib/aristo-1.0.1.jar -DgroupId=org.primefaces.themes -DartifactId=aristo -Dversion=1.0.1 -Dpackaging=jar -DgeneratePom=true
 COPY fmdb/FMDB-ear /home/fmdb/FMDB-ear
 COPY fmdb/FMDB-ejb /home/fmdb/FMDB-ejb
