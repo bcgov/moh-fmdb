@@ -6,7 +6,11 @@ on:
         description: 'Environment to run tests against' 
         type: environment 
         required: true
-#   pull_request:
+       version:
+        description: 'Version Number'
+        required: false
+
+concurrency: test
 
 env:
   APP_IMAGE: ${{ secrets.APP_IMAGE }} 
@@ -16,6 +20,7 @@ env:
   TG_VERSION: 0.37.1
   TG_SRC_PATH: Terraform
   TFC_WORKSPACE:  test
+  DESIGNATED_BRANCH: terraform
   
 permissions:
   id-token: write # This is required for requesting the JWT
@@ -29,6 +34,8 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
+        with: 
+          ref: ${{ env.DESIGNATED_BRANCH }}
         
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
@@ -38,7 +45,7 @@ jobs:
           
       - name: Login to Amazon ECR
         id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
+        uses: aws-actions/amazon-ecr-login@v2
         
       - uses: actions/cache@v3
         with:
@@ -72,7 +79,7 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.workflow_run.head_branch }}
+          ref: ${{ env.DESIGNATED_BRANCH }}
           
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
@@ -94,6 +101,8 @@ jobs:
           app_image: ${{ env.IMAGE_ID }}:${{ github.sha }}
           LICENSE_PLATE: ${{ secrets.MY_LICENSE_PLATE }}
         run: |
+            echo "Repository variable : '${{ inputs.ENVIRONMENT }}' " 
+            echo "Environment variable: '${{ github.event.inputs.environment }}' " 
             terragrunt run-all apply --terragrunt-non-interactive
 #  zap_scan:
 #    runs-on: ubuntu-latest
