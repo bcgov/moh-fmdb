@@ -19,6 +19,7 @@ resource "aws_lb" "front_end" {
   subnets            = [for subnet in data.aws_subnet.web : subnet.id]
 
   enable_deletion_protection = true
+  tags = merge(local.common_tags, { public = "true" })
 
 }
 
