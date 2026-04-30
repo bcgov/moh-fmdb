@@ -9,10 +9,6 @@ on:
         version:
          description: 'Version Number'
          required: false
-#   push: 
-#     branches:
-#       - main
-#   pull_request:
   
 concurrency: dev
 
@@ -24,6 +20,7 @@ env:
   TG_VERSION: 0.37.1
   TG_SRC_PATH: Terraform
   TFC_WORKSPACE: dev
+  DESIGNATED_BRANCH: terraform
   
 permissions:
   id-token: write # This is required for requesting the JWT
@@ -38,7 +35,7 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v3
         with: 
-          ref: terraform
+          ref: ${{ env.DESIGNATED_BRANCH }}
         
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
@@ -82,7 +79,7 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.workflow_run.head_branch }}
+          ref: ${{ env.DESIGNATED_BRANCH }}
           
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
@@ -99,12 +96,12 @@ jobs:
           terragrunt_version: ${{ env.TG_VERSION }}
             
       - name: Terragrunt Apply
-        working-directory: ${{ env.TG_SRC_PATH }}/${{env.TFC_WORKSPACE }}
+        working-directory: ${{ env.TG_SRC_PATH }}/${{ env.TFC_WORKSPACE }}
         env:
           app_image: ${{ env.IMAGE_ID }}:${{ github.sha }}
           LICENSE_PLATE: ${{ secrets.MY_LICENSE_PLATE }}
         run: |
-            echo "repository variable : '${{ vars.ENVIRONMENT }}' " 
+            echo "Repository variable : '${{ inputs.ENVIRONMENT }}' " 
             echo "Environment variable: '${{ github.event.inputs.environment }}' " 
             terragrunt run-all apply --terragrunt-non-interactive
 #  zap_scan:
