@@ -20,7 +20,7 @@ env:
   TG_VERSION: 0.37.1
   TG_SRC_PATH: Terraform
   TFC_WORKSPACE:  test
-  DESIGNATED_BRANCH: terraform
+  DESIGNATED_BRANCH: ${{ github.ref_name }}
   
 permissions:
   id-token: write # This is required for requesting the JWT
