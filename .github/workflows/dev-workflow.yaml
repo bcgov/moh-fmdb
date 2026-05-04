@@ -3,7 +3,7 @@ on:
    workflow_dispatch:
      inputs:
         environment:
-         description: 'Environment to run tests against' 
+         description: 'Environment for testing features in development' 
          type: environment 
          required: true
         version:
