@@ -45,7 +45,7 @@ jobs:
           
       - name: Login to Amazon ECR
         id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v2
+        uses: aws-actions/amazon-ecr-login@v1
         
       - uses: actions/cache@v3
         with:
@@ -57,13 +57,6 @@ jobs:
       - name: Set up Docker Buildx
         id: buildx
         uses: docker/setup-buildx-action@v2
-
-      - name: Debug tag
-        run: |
-          echo "Tag: '${{ env.IMAGE_ID }}:latest'"
-          echo "IMAGE_ID length: ${#IMAGE_ID}"
-          docker login -u AWS -p $(aws ecr get-login-password) ${IMAGE_ID%%/*}
-        
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v4
