@@ -3,14 +3,11 @@ provider "aws" {
   region = "us-east-1"
 }
 
-resource "aws_acm_certificate" "fmdb_certificate" {
-  provider = aws.us-east-1
-  domain_name = var.domain
-  validation_method = "DNS"
-
-  lifecycle {
-    create_before_destroy = true
-  }
+data "aws_acm_certificate" "fmdb_certificate" {
+  provider    = aws.us-east-1
+  domain      = var.domain
+  statuses    = ["ISSUED"]
+  most_recent = true
 }
 
 data "aws_cloudfront_cache_policy" "CachingDisabled" {
@@ -76,7 +73,7 @@ resource "aws_cloudfront_distribution" "fmdb_distribution" {
 # #   }
 
    viewer_certificate {
-     acm_certificate_arn = aws_acm_certificate.fmdb_certificate.arn
+     acm_certificate_arn = data.aws_acm_certificate.fmdb_certificate.arn
      minimum_protocol_version = "TLSv1.2_2021"
      ssl_support_method = "sni-only"
    }
