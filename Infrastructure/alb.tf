@@ -82,7 +82,7 @@ resource "aws_lb_listener_rule" "host_based_weighted_routing" {
   #figure out what to place here to replace the environment
   condition {
     host_header {
-      values = ["${var.alb_origin_id}"]
+      values = ["${var.application}.${var.license_plate}-${var.target_env}.stratus.cloud.gov.bc.ca"]
     }
   }
 }
