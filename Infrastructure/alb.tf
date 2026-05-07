@@ -41,6 +41,17 @@ resource "aws_alb_listener" "front_end" {
   }
 }
 
+resource "aws_alb_listener" "http" {
+  load_balancer_arn = aws_lb.front_end.arn
+  port              = "80"
+  protocol          = "HTTP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_alb_target_group.app.arn
+  }
+}
+
 resource "aws_alb_target_group" "app" {
   name                 = "fmdb-test-target-group"
   port                 = var.app_port
