@@ -93,13 +93,21 @@ For more information regarding cusotm Docker Payara images see the [docs](https:
 
 ## Running
 
-### Introduction
+The project can either be run as a collection of docker containers or as seperate services. Docker is recommended as it makes reproducing the runtime environment easier but choose whichever options suites your use case best.
+
+### Bare-metal
+
+*Under maintenance*
 
 1. First you will need to setup a PostgreSQL database. There are two simple options:
     - Setup PostgreSQL as a service on your machine: [Windows](https://www.postgresql.org/download/windows/) or [macOS](https://www.postgresql.org/download/macosx/)
     - Setup PostgreSQL as a docker container: [Docker PostgreSQL specific guide](https://docs.docker.com/guides/postgresql/)
 2. 
 
-### Bare-metal
-
 ### Docker
+
+*Under maintenance*
+
+Using docker compose all of the necessary services can be spun up automatically.
+
+1. 
