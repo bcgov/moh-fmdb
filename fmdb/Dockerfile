@@ -1,6 +1,17 @@
 FROM maven:3.9-eclipse-temurin-25-noble AS build-stage
 RUN mkdir -p /home/fmdb
 
+# Trust the enterprise certificate authority (CA).
+ARG CA_ROOT=${CA_ROOT}
+COPY ${CA_ROOT}* /usr/local/share/ca-certificates/${CA_ROOT}
+RUN if [ -f /usr/local/share/ca-certificates/${CA_ROOT} ]; then \
+    keytool -import -trustcacerts \
+    -alias zscaler-root-ca \
+    -file /usr/local/share/ca-certificates/${CA_ROOT} \
+    -keystore $JAVA_HOME/lib/security/cacerts \
+    -storepass changeit; \
+    fi
+
 # Add custom error handling library.
 COPY fmdb/errorhandler-1.0.jar /home/fmdb
 RUN mvn install:install-file \
