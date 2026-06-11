@@ -17,7 +17,7 @@
                     </h:selectOneMenu>
                 </div>
                 <div class="ui-g-12">
-                    <p:commandButton action="#{BudgetImpactAnalysisReport.runReportAction}" value="Run Report"/>
+                    <p:commandButton action="#{BudgetImpactAnalysisReport.runReportAction}" value="Run Report"  oncomplete="location.reload();"/>
                 </div>
             </div>
         </h:form>

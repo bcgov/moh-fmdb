@@ -15,7 +15,7 @@
                     <p:inputText id="chemicalName" value="#{SingleDrugSubStatusReport.chemicalName}"/>
                 </div>
                 <div class="ui-g-12">
-                    <p:commandButton action="#{SingleDrugSubStatusReport.runReportAction}" value="Run Report"/>
+                    <p:commandButton action="#{SingleDrugSubStatusReport.runReportAction}" value="Run Report"  oncomplete="location.reload();"/>
                 </div>
             </div>
         </h:form>

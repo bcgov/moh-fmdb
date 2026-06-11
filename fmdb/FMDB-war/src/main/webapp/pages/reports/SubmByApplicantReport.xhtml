@@ -22,7 +22,7 @@
                     <p:inputText id="companyName" value="#{SubmByApplicantReport.company}" required="true"/>
                 </div>
                 <div class="ui-g-12">
-                    <p:commandButton action="#{SubmByApplicantReport.runReportAction}" value="Run Report"/>
+                    <p:commandButton action="#{SubmByApplicantReport.runReportAction}" value="Run Report" oncomplete="location.reload();"/>
                 </div>
             </div>
 
