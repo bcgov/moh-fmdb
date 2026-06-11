@@ -16,13 +16,17 @@ package fmdbwar.pages.reports;
 
 import java.io.IOException;
 import java.io.Serializable;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
+import jakarta.inject.Named;
 import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * Backing bean for the Single Drug Sub Status Report
  */
+@Named("SingleDrugSubStatusReport")
+@RequestScoped
 public class SingleDrugSubStatusReport implements Serializable {
 
 
