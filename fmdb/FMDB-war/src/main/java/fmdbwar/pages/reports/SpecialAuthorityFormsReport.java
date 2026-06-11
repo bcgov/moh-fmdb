@@ -59,14 +59,13 @@ public class SpecialAuthorityFormsReport implements Serializable {
      */
     protected void navigateToReportViewerPage() throws IOException {
        
-        try {
+
             //Pass the report parameters on to the servlet
             HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
             request.getSession().setAttribute("reportView", getReportViewValue());
-            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/pages/reports/SpecialAuthorityFormsReport");
-        } catch (IOException ex) {
-            throw ex;
-        }
+            String url = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/pages/reports/SpecialAuthorityFormsReport";
+            org.primefaces.PrimeFaces.current().executeScript("window.location.href='" + url + "'");
+
     }
 
     /**
