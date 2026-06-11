@@ -57,15 +57,11 @@ public class SingleDrugSubStatusReport implements Serializable {
     protected void navigateToReportViewerPage()
        throws IOException {
         
-        try {
             //Pass the report parameters on to the servlet
             HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
             request.getSession().setAttribute("chemicalName", chemicalName);
             String url = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/pages/reports/SingleDrugSubmissionStatusReport";
             org.primefaces.PrimeFaces.current().executeScript("window.location.href='" + url + "'");
-        } catch (IOException ex) {
-            throw ex;
-        }
     }
 
     /**
