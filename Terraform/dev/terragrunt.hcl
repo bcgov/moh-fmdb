@@ -14,21 +14,6 @@ locals {
 #   ]
 }
 
-generate "required_providers" {
-  path      = "versions.tf"
-  if_exists = "overwrite"
-  contents  = <<EOF
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = ">= 5.87.0"
-    }
-  }
-}
-EOF
-}
-
 generate "dev_tfvars" {
   path              = "dev.auto.tfvars"
   if_exists         = "overwrite"
