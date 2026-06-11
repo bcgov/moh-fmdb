@@ -16,8 +16,8 @@ env:
   APP_IMAGE: ${{ secrets.APP_IMAGE }} 
   IMAGE_ID: ${{ secrets.AWS_ECR_URI_DEV }}
   IMAGE_NAME: fmdbtest
-  TF_VERSION: 1.2.2
-  TG_VERSION: 0.37.1
+  TF_VERSION: 1.9.8
+  TG_VERSION: 0.68.7
   TG_SRC_PATH: Terraform
   TFC_WORKSPACE: dev
   DESIGNATED_BRANCH: ${{ github.ref_name }}
@@ -90,6 +90,7 @@ jobs:
       - uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: ${{ env.TF_VERSION }}
+          terraform_wrapper: false
           
       - uses: autero1/action-terragrunt@v1.3.1
         with:
@@ -103,6 +104,7 @@ jobs:
         run: |
             echo "Repository variable : '${{ inputs.ENVIRONMENT }}' " 
             echo "Environment variable: '${{ github.event.inputs.environment }}' " 
+            terragrunt run-all init -upgrade --terragrunt-non-interactive
             terragrunt run-all apply --terragrunt-non-interactive
 #  zap_scan:
 #    runs-on: ubuntu-latest
