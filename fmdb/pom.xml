@@ -68,7 +68,7 @@
         <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
-            <version>15.0.0</version>
+            <version>15.0.4</version>
             <classifier>jakarta</classifier>
         </dependency>
         <!-- Override PrimeFaces 12.0.0 Default Theme to retain CSS overrides created for PrimeFaces 8.0 Default Theme -->
