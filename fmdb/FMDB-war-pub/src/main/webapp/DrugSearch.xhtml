@@ -64,8 +64,9 @@
                 <ui:repeat value="#{DrugSearch.alphabets}" var="letter">
                     <p:commandButton value="#{letter}" 
                                     action="#{DrugSearch.bookMarkAction}" 
-                                    update="@form"
+                                    update="resultsPanel"
                                     ajax="true"
+                                    partialSubmit="true"
                                     style="padding-left: 22px; font-size: 1.3em"
                                     styleClass="ui-button-link">
                         <f:setPropertyActionListener value="#{letter}" target="#{DrugSearch.bookMark}"/>
