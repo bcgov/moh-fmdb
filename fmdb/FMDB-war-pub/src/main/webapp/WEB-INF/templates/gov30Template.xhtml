@@ -56,7 +56,7 @@
 
         <div class="container" style="min-height: calc(100vh - 295px);">
             <ui:insert name="content">Content</ui:insert>
-            <p:ajaxStatus/>
+            <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
             <p:dialog styleClass="spinner-box" widgetVar="statusDialog" modal="false" 
                     draggable="false" closable="false" resizable="false" showHeader="false" >
               <h:graphicImage name="template-images/loader.png" styleClass="spinning-loader"/>
