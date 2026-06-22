@@ -64,7 +64,7 @@
                 <ui:repeat value="#{DrugSearch.alphabets}" var="letter">
                     <p:commandButton value="#{letter}" 
                                     action="#{DrugSearch.bookMarkAction}" 
-                                    update="@form"
+                                    update="resultsPanelWrapper"
                                     ajax="true"
                                     partialSubmit="true"
                                     style="padding-left: 22px; font-size: 1.3em"
@@ -76,7 +76,7 @@
                 <br/>
 
 
-
+            <h:panelGroup id="resultsPanelWrapper">
             <p:panel id="resultsPanel" rendered="#{DrugSearch.searchResults != null and not empty DrugSearch.searchResults}">
                 <f:facet name="header"><h:outputText value="#{DrugSearch.resultsTitle}"/></f:facet>
                 
@@ -148,6 +148,7 @@
                     </p:panelGrid>
                 </ui:repeat>
             </p:panel>
+            </h:panelGroup>
 
             <h:panelGrid styleClass="infoMessage" rendered="#{DrugSearch.searchResults == null or empty DrugSearch.searchResults}">
                 <h:outputText value="No Results Found"/>
