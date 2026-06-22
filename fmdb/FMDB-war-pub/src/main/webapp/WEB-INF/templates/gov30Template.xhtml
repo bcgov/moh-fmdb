@@ -34,9 +34,9 @@
                 </div>
                 <div id="navbar-toolbar">
                     <div class="container">
-                        <div class="col-sm-12 navbar-logo" style="width: 1000px; padding: 20px 0px;">
+                        <div class="col-sm-12 navbar-logo app-navbar-logo">
                             <h:commandLink action="DrugSearch" class="bcgov logo" title="Government of British Columbia Home">
-                                <h:graphicImage name="template-images/gov-logo.svg" alt="BC Government Logo" style="width: 10%;"/>
+                                <h:graphicImage name="template-images/gov-logo.svg" alt="BC Government Logo" styleClass="bcgov-logo-image"/>
                             </h:commandLink>
 
                             <h:commandLink id="home" styleClass="serviceLink" action="DrugSearch" >
@@ -54,7 +54,7 @@
         </header>
 
 
-        <div class="container" style="min-height: calc(100vh - 295px);">
+        <div class="container main-content-container">
             <ui:insert name="content">Content</ui:insert>
             <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
             <p:dialog styleClass="spinner-box" widgetVar="statusDialog" modal="false" 

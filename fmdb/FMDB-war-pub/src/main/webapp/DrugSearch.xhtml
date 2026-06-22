@@ -12,13 +12,13 @@
     <ui:define name="content">
         <h:form id="drugSearchForm">
 
-                <h1 style="margin: 0px 0px 20px 0px">PharmaCare Drug Review Results</h1>
+                <h1 class="drug-search-title">PharmaCare Drug Review Results</h1>
 
                 <table>
                     <tr>
                         <td colspan="4">
                             <h4>To search for a specific drug:</h4>
-                            <ul style="list-style: square">
+                            <ul class="square-list">
                                 <li>Type into the search field either a Brand Name, Generic Name, Company Name, or Indication, and click the Search button.</li>
                             </ul>
                         </td>
@@ -26,7 +26,7 @@
                     <tr>
                         <td colspan="4">
                             <h4>To search by alphabet:</h4>
-                            <ul style="list-style: square">
+                            <ul class="square-list">
                                 <li>From the pull-down Sort menu, select how you would like the list to be sorted: Brand Name, Company Name, Generic Name, or Indication.</li>
                                 <li>Select the appropriate letter (A-Z).</li>
                                 <li>Drugs will be shown in alphabetic order, sorted by the criteria you selected.</li>
@@ -36,7 +36,7 @@
                     <tr>
                         <td colspan="4">
                             <h4>Results:</h4>
-                            <ul style="list-style: square">
+                            <ul class="square-list">
                                 <li>For drugs reviewed by the CDR, click on the Yes link in the CDR Review field to switch to the CDR website.</li>
                                 <li>For Limited Coverage drugs, click on the Limited Coverage link to go to PharmaCare's Limited Coverage Drug Criteria web page.</li>
                             </ul>
@@ -67,8 +67,7 @@
                                     update="drugSearchForm:resultsPanelWrapper drugSearchForm:noResultsPanel"
                                     ajax="true"
                                     partialSubmit="true"
-                                    style="padding-left: 22px; font-size: 1.3em"
-                                    styleClass="ui-button-link">
+                                    styleClass="alphabet-link">
                         <f:setPropertyActionListener value="#{letter}" target="#{DrugSearch.bookMark}"/>
                     </p:commandButton>
                 </ui:repeat>
@@ -81,12 +80,10 @@
                 <f:facet name="header"><h:outputText value="#{DrugSearch.resultsTitle}"/></f:facet>
                 
                 <ui:repeat value="#{DrugSearch.searchResults}" var="drug" varStatus="varStatus">
-                    <p:panelGrid columns="2" styleClass="borderless ui-grid-blank results-table" 
-                                 style="padding-bottom: #{varStatus.index eq DrugSearch.searchResults.size() - 1 ? '0px' : '20px'};
-                                 border-bottom: #{varStatus.index eq DrugSearch.searchResults.size() - 1 ? 'none' : '1px solid #dddddd;'}"
+                    <p:panelGrid columns="2" styleClass="borderless ui-grid-blank results-table drug-result #{varStatus.index eq DrugSearch.searchResults.size() - 1 ? 'last-drug-result' : ''}" 
                                  columnClasses="ui-grid-col-3 text-right, ui-grid-col-9" layout="grid">
-                        <h:outputText value="Brand Name" style="font-weight: 600"/>
-                        <h:outputText value="#{drug.tradeNm}" style="font-weight: 600"/>
+                        <h:outputText value="Brand Name" styleClass="strong-text"/>
+                        <h:outputText value="#{drug.tradeNm}" styleClass="strong-text"/>
                         
                         <h:outputText value="Generic Name"/>
                         <h:outputText value="#{drug.chemicalNm}"/>
