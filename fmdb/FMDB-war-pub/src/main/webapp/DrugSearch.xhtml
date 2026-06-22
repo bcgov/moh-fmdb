@@ -64,7 +64,7 @@
                 <ui:repeat value="#{DrugSearch.alphabets}" var="letter">
                     <p:commandButton value="#{letter}" 
                                     action="#{DrugSearch.bookMarkAction}" 
-                                    update=":resultsPanelWrapper :noResultsPanel"
+                                    update="resultsPanelWrapper noResultsPanel"
                                     ajax="true"
                                     partialSubmit="true"
                                     style="padding-left: 22px; font-size: 1.3em"
