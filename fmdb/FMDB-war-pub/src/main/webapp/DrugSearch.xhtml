@@ -134,7 +134,7 @@
                         <h:outputText value="#{drug.psdWebComments}"/>
                         
                         <h:outputText value="Attachment"/>
-                        <h:outputLink rendered="#{drug.letterBin != null}" target="_blank" onclick="openAttachmentWindow(#{drug.submissionId});return false;" value="">
+                        <h:outputLink rendered="#{drug.letterBin != null}" target="_blank" styleClass="attachment-link" value="/AttachmentRetrievalServlet?sub=#{drug.submissionId}">
                             Reason for this drug coverage decision
                         </h:outputLink>
                         <h:outputText rendered="#{drug.letterBin == null}" value=""/>
