@@ -33,9 +33,9 @@
                 </div>
                 <div id="navbar-toolbar">
                     <div class="container">
-                        <div class="col-sm-12 navbar-logo app-navbar-logo">
+                        <div class="col-sm-12 navbar-logo">
                             <h:commandLink action="DrugSearch" class="bcgov logo" title="Government of British Columbia Home">
-                                <h:graphicImage name="template-images/gov-logo.svg" alt="BC Government Logo" styleClass="bcgov-logo-image"/>
+                                <h:graphicImage name="template-images/gov-logo.svg" alt="BC Government Logo" styleClass="gov-logo"/>
                             </h:commandLink>
 
                             <h:commandLink id="home" styleClass="serviceLink" action="DrugSearch" >
@@ -53,7 +53,7 @@
         </header>
 
 
-        <div class="container main-content-container">
+        <div class="container content-container">
             <ui:insert name="content">Content</ui:insert>
             <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
             <p:dialog styleClass="spinner-box" widgetVar="statusDialog" modal="false" 

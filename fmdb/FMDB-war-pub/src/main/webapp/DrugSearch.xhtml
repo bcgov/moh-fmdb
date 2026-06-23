@@ -12,7 +12,7 @@
     <ui:define name="content">
         <h:form id="drugSearchForm">
 
-                <h1 class="drug-search-title">PharmaCare Drug Review Results</h1>
+                <h1 class="drug-search-heading">PharmaCare Drug Review Results</h1>
 
                 <table>
                     <tr>
@@ -62,28 +62,25 @@
 
                 <br/>
                 <ui:repeat value="#{DrugSearch.alphabets}" var="letter">
-                    <p:commandButton value="#{letter}" 
-                                    action="#{DrugSearch.bookMarkAction}" 
-                                    update="drugSearchForm:resultsPanelWrapper drugSearchForm:noResultsPanel"
-                                    ajax="true"
-                                    partialSubmit="true"
-                                    styleClass="alphabet-link">
+                    <p:commandLink value="#{letter}" styleClass="alphabet-link"
+                                   action="#{DrugSearch.bookMarkAction}" update="@form"  >
+
                         <f:setPropertyActionListener value="#{letter}" target="#{DrugSearch.bookMark}"/>
-                    </p:commandButton>
+                    </p:commandLink>
                 </ui:repeat>
                 <br/>
                 <br/>
 
 
-            <h:panelGroup id="resultsPanelWrapper">
+
             <p:panel id="resultsPanel" rendered="#{DrugSearch.searchResults != null and not empty DrugSearch.searchResults}">
                 <f:facet name="header"><h:outputText value="#{DrugSearch.resultsTitle}"/></f:facet>
                 
                 <ui:repeat value="#{DrugSearch.searchResults}" var="drug" varStatus="varStatus">
-                    <p:panelGrid columns="2" styleClass="borderless ui-grid-blank results-table drug-result #{varStatus.index eq DrugSearch.searchResults.size() - 1 ? 'last-drug-result' : ''}" 
+                    <p:panelGrid columns="2" styleClass="borderless ui-grid-blank results-table #{varStatus.index eq DrugSearch.searchResults.size() - 1 ? 'results-table-last' : ''}" 
                                  columnClasses="ui-grid-col-3 text-right, ui-grid-col-9" layout="grid">
-                        <h:outputText value="Brand Name" styleClass="strong-text"/>
-                        <h:outputText value="#{drug.tradeNm}" styleClass="strong-text"/>
+                        <h:outputText value="Brand Name" styleClass="drug-brand-name"/>
+                        <h:outputText value="#{drug.tradeNm}" styleClass="drug-brand-name"/>
                         
                         <h:outputText value="Generic Name"/>
                         <h:outputText value="#{drug.chemicalNm}"/>
@@ -137,7 +134,7 @@
                         <h:outputText value="#{drug.psdWebComments}"/>
                         
                         <h:outputText value="Attachment"/>
-                        <h:outputLink rendered="#{drug.letterBin != null}" target="_blank" styleClass="attachment-link" value="/AttachmentRetrievalServlet?sub=#{drug.submissionId}">
+                        <h:outputLink rendered="#{drug.letterBin != null}" target="_blank" onclick="openAttachmentWindow(#{drug.submissionId});return false;" value="">
                             Reason for this drug coverage decision
                         </h:outputLink>
                         <h:outputText rendered="#{drug.letterBin == null}" value=""/>
@@ -145,13 +142,11 @@
                     </p:panelGrid>
                 </ui:repeat>
             </p:panel>
-            </h:panelGroup>
 
-            <h:panelGrid id="noResultsPanel" styleClass="infoMessage" rendered="#{DrugSearch.searchResults == null or empty DrugSearch.searchResults}">
+            <h:panelGrid styleClass="infoMessage" rendered="#{DrugSearch.searchResults == null or empty DrugSearch.searchResults}">
                 <h:outputText value="No Results Found"/>
             </h:panelGrid>
 
         </h:form>
     </ui:define>
 </ui:composition>
-
