@@ -14,17 +14,17 @@ package fmdbwar.pages.reports;
 
 
 import fmdbwar.Constants;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-import javax.faces.model.SelectItem;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.model.SelectItem;
 import java.io.IOException;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import javax.faces.event.ValueChangeEvent;
-import javax.faces.view.ViewScoped;
-import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.faces.event.ValueChangeEvent;
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Named;
+import jakarta.servlet.http.HttpServletRequest;
 
 
 /**
@@ -75,17 +75,15 @@ public class SubmissionReport implements Serializable {
     protected void navigateToReportViewerPage()
        throws IOException {
         
-        try {
+
             //Pass the report parameters on to the servlet
             HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
             request.getSession().setAttribute("reportView", getReportViewValue());
             request.getSession().setAttribute("sortByValue", getSortByValue());
             request.getSession().setAttribute("fromDate", getFromDate());
             request.getSession().setAttribute("toDate", getToDate());
-            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/pages/reports/SubmissionReport");
-        } catch (IOException ex) {
-            throw ex;
-        }
+            String url = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/pages/reports/SubmissionReport";
+            org.primefaces.PrimeFaces.current().executeScript("window.location.href='" + url + "'");
     }
 
     /**

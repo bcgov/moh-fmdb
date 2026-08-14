@@ -20,7 +20,7 @@ package ca.bc.gov.moh.fmdb.business;
 import ca.bc.gov.moh.fmdb.entity.VSubmissions;
 import java.util.Date;
 import java.util.List;
-import javax.ejb.Local;
+import jakarta.ejb.Local;
 
 /**
  *

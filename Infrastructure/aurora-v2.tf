@@ -38,11 +38,7 @@ resource "aws_db_subnet_group" "fmdb_subnet_group" {
 
 data "aws_rds_engine_version" "postgresql" {
   engine  = "aurora-postgresql"
-  version = "13.9"
-  filter {
-    name = "engine-mode"
-    values = [ "serverless" ]
-  }
+  version = "13.23"
 }
 
 module "aurora_postgresql_v2" {
@@ -100,10 +96,6 @@ resource "aws_db_parameter_group" "fmdb_postgresql13" {
   tags = {
     managed-by = "terraform"
   }
-  parameter {
-    name  = "timezone"
-    value = "America/Vancouver"
-  }
 }
 
 resource "aws_rds_cluster_parameter_group" "fmdb_postgresql13" {
@@ -112,6 +104,10 @@ resource "aws_rds_cluster_parameter_group" "fmdb_postgresql13" {
   description = "${var.fmdb_cluster_name}-cluster-parameter-group"
   tags = {
     managed-by = "terraform"
+  }
+  parameter {
+    name  = "timezone"
+    value = "America/Vancouver"
   }
 }
 

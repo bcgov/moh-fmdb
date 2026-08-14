@@ -20,7 +20,7 @@ import ca.bc.gov.moh.fmdb.business.exception.ItemNotFoundFMDBException;
 import ca.bc.gov.moh.fmdb.business.exception.SaveFMDBException;
 import ca.bc.gov.moh.fmdb.entity.Submission;
 import java.util.List;
-import javax.ejb.Local;
+import jakarta.ejb.Local;
 import ca.bc.gov.moh.fmdb.model.SearchDTO;
 import ca.bc.gov.moh.fmdb.model.SearchResultDTO;
 import java.util.Date;

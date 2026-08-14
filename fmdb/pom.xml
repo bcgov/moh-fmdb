@@ -16,11 +16,6 @@
 	
     <repositories>
         <repository>
-            <id>cgi-mvn-release</id>
-            <name>CGI Maven Repository</name>
-            <url>https://artifactory.hlth.gov.bc.ca/artifactory/cgi-mvn-release</url>
-        </repository>
-        <repository>
             <id>primefaces-mvn</id>
             <name>PrimeFaces Maven Repository</name>
             <url>https://repository.primefaces.org</url>
@@ -43,9 +38,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <version>8.0</version>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-api</artifactId>
+            <version>10.0.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -67,13 +62,16 @@
             <groupId>com.cgi.fmdb</groupId>
             <artifactId>errorhandler</artifactId>
             <version>1.0</version>
+            <scope>system</scope>
+			<systemPath>${project.basedir}/../errorhandler-1.0.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
-            <version>10.0.0</version>
+            <version>15.0.0</version>
+            <classifier>jakarta</classifier>
         </dependency>
-        <!-- Override PrimeFaces 10.0.0 Default Theme to retain CSS overrides created for PrimeFaces 8.0 Default Theme -->
+        <!-- Override PrimeFaces 12.0.0 Default Theme to retain CSS overrides created for PrimeFaces 8.0 Default Theme -->
         <dependency>
             <groupId>org.primefaces.themes</groupId>
             <artifactId>aristo</artifactId>

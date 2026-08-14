@@ -16,12 +16,12 @@ import java.io.Serializable;
 
 import java.sql.Timestamp;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Table;
-import javax.persistence.Id;
+import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Table;
+import jakarta.persistence.Id;
 
 @Entity(name = "PublicAccess")
 @Table(name = "FMDB_PUBLIC_ACCESS_VW")

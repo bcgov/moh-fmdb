@@ -35,9 +35,9 @@ public abstract class AbstractFMDBTestCase extends WebTestCase {
     // Set the properties for the Keystore and Truststore to use with HTTPS
     static {
        // the certificate was added to the application server keystore and marked as trusted
-        System.setProperty("javax.net.ssl.trustStore",
+        System.setProperty("jakarta.net.ssl.trustStore",
             "C:\\Apps\\Tools\\Sun\\Appserver\\domains\\domain1\\config\\keystore.jks");
-        System.setProperty("javax.net.ssl.trustStorePassword", "adminadmin");        
+        System.setProperty("jakarta.net.ssl.trustStorePassword", "adminadmin");        
     }
     
     /** Creates a new instance of AbstractFMDBTestCase */

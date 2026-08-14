@@ -141,7 +141,7 @@
                      columnClasses="ui-grid-col-2 label-col, ui-grid-col-6"  style="padding-top: 0px" rendered="#{Details.fileName eq null}">
             <h:outputText value="Add Attachment: " />
             <p:fileUpload id="fileUpload" fileLimit="1" listener="#{Details.processUpload}" mode="advanced"
-                          update="@form:tabView:dbcAttachmentPanel" sizeLimit="5242880"/> 
+                          update="@form:tabView:dbcAttachmentPanel" maxFileSize="5242880"/> 
         </p:panelGrid>
     </h:panelGroup>
 

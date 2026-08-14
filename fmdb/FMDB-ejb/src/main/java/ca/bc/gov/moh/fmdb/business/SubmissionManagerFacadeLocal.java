@@ -26,7 +26,7 @@ import ca.bc.gov.moh.fmdb.model.SearchResultDTO;
 import ca.bc.gov.moh.fmdb.model.submission.*;
 import ca.bc.gov.moh.fmdb.entity.Submission;
 import java.util.List;
-import javax.ejb.Local;
+import jakarta.ejb.Local;
 
 /**
  *  

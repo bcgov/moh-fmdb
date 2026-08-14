@@ -23,13 +23,13 @@ import ca.bc.gov.moh.fmdb.entity.ReviewerNameTypes;
 import ca.bc.gov.moh.fmdb.logging.LogManager;
 import ca.bc.gov.moh.fmdb.logging.Logger;
 import java.util.List;
-import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
-import javax.persistence.Query;
+import jakarta.ejb.Stateless;
+import jakarta.ejb.TransactionAttribute;
+import jakarta.ejb.TransactionAttributeType;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.PersistenceContextType;
+import jakarta.persistence.Query;
 
 /**
  *

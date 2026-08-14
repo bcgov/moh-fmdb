@@ -9,21 +9,18 @@ on:
         version:
          description: 'Version Number'
          required: false
-#   push: 
-#     branches:
-#       - main
-#   pull_request:
   
 concurrency: dev
 
 env:
   APP_IMAGE: ${{ secrets.APP_IMAGE }} 
-  IMAGE_ID: ${{ secrets.AWS_ECR_URI }}
+  IMAGE_ID: ${{ secrets.AWS_ECR_URI_DEV }}
   IMAGE_NAME: fmdbtest
-  TF_VERSION: 1.2.2
-  TG_VERSION: 0.37.1
+  TF_VERSION: 1.9.8
+  TG_VERSION: 0.68.7
   TG_SRC_PATH: Terraform
   TFC_WORKSPACE: dev
+  DESIGNATED_BRANCH: ${{ github.ref_name }}
   
 permissions:
   id-token: write # This is required for requesting the JWT
@@ -38,17 +35,17 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v3
         with: 
-          ref: terraform
+          ref: ${{ env.DESIGNATED_BRANCH }}
         
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          role-to-assume: ${{ secrets.TERRAFORM_DEPLOY_ROLE_ARN }}
+          role-to-assume: ${{ secrets.TERRAFORM_DEPLOY_ROLE_ARN_DEV }}
           aws-region: ca-central-1
           
       - name: Login to Amazon ECR
         id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
+        uses: aws-actions/amazon-ecr-login@v2
         
       - uses: actions/cache@v3
         with:
@@ -70,7 +67,7 @@ jobs:
           cache-to: type=local,dest=/tmp/.buildx-cache
           file: fmdb/Dockerfile
           push: true
-          tags: ${{ env.IMAGE_ID  }}${{env.IMAGE_NAME}}
+          tags: ${{ env.IMAGE_ID }}:latest
           
   terraform_apply:
     name: terraform apply 
@@ -82,30 +79,32 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.workflow_run.head_branch }}
+          ref: ${{ env.DESIGNATED_BRANCH }}
           
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          role-to-assume: ${{ secrets.TERRAFORM_DEPLOY_ROLE_ARN }}
+          role-to-assume: ${{ secrets.TERRAFORM_DEPLOY_ROLE_ARN_DEV }}
           aws-region: ca-central-1
           
       - uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: ${{ env.TF_VERSION }}
+          terraform_wrapper: false
           
       - uses: autero1/action-terragrunt@v1.3.1
         with:
           terragrunt_version: ${{ env.TG_VERSION }}
             
       - name: Terragrunt Apply
-        working-directory: ${{ env.TG_SRC_PATH }}/${{env.TFC_WORKSPACE }}
+        working-directory: ${{ env.TG_SRC_PATH }}/${{ env.TFC_WORKSPACE }}
         env:
           app_image: ${{ env.IMAGE_ID }}:${{ github.sha }}
           LICENSE_PLATE: ${{ secrets.MY_LICENSE_PLATE }}
         run: |
-            echo "repository variable : '${{ vars.ENVIRONMENT }}' " 
+            echo "Repository variable : '${{ inputs.ENVIRONMENT }}' " 
             echo "Environment variable: '${{ github.event.inputs.environment }}' " 
+            terragrunt run-all init -upgrade --terragrunt-non-interactive
             terragrunt run-all apply --terragrunt-non-interactive
 #  zap_scan:
 #    runs-on: ubuntu-latest

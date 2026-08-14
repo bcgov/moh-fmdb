@@ -26,11 +26,11 @@ import ca.bc.gov.moh.fmdb.entity.ContactNames;
 import ca.bc.gov.moh.fmdb.entity.Regions;
 import java.util.Collection;
 import java.util.List;
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
-import javax.persistence.Query;
+import jakarta.ejb.Stateless;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.PersistenceContextType;
+import jakarta.persistence.Query;
 
 /**
  *

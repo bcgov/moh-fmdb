@@ -26,7 +26,7 @@ import ca.bc.gov.moh.fmdb.entity.CompanyTypes;
 import ca.bc.gov.moh.fmdb.entity.PlaStatusTypes;
 import java.util.List;
 
-import javax.ejb.Local;
+import jakarta.ejb.Local;
 
 /**
  *  

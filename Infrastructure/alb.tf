@@ -1,15 +1,55 @@
 # alb.tf
 
-# Use the default ALB that is pre-provisioned as part of the account creation
-# This ALB has all traffic on *.LICENSE-PLATE-ENV.nimbus.cloud.gob.bc.ca routed to it
-data "aws_alb" "main" {
-  name = var.alb_name
+provider "aws" {
+  alias  = "ca-central-1"
+  region = "ca-central-1"
+}
+data "aws_acm_certificate" "certificate" {
+  provider    = aws.ca-central-1
+  domain      = var.domain
+  statuses    = ["ISSUED"]
+  most_recent = true
 }
 
-# Redirect all traffic from the ALB to the target group
-data "aws_alb_listener" "front_end" {
-  load_balancer_arn = data.aws_alb.main.id
-  port              = 443
+resource "aws_lb" "front_end" {
+  name               = "default"
+  internal           = true
+  load_balancer_type = "application"
+  security_groups    = [data.aws_security_group.web.id]
+  subnets            = [for subnet in data.aws_subnet.web : subnet.id]
+
+  enable_deletion_protection = true
+  tags = merge(local.common_tags, { public = "true" })
+
+}
+
+resource "aws_alb_listener" "front_end" {
+  load_balancer_arn = aws_lb.front_end.arn
+  port              = "443"
+  protocol          = "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-TLS13-1-2-Res-PQ-2025-09"
+  certificate_arn   = data.aws_acm_certificate.certificate.arn
+
+  default_action {
+    type = "fixed-response"
+
+    fixed_response {
+      content_type = "text/plain"
+      message_body = "Fixed response content"
+      status_code  = "200"
+    }
+  }
+}
+
+resource "aws_alb_listener" "http" {
+  load_balancer_arn = aws_lb.front_end.arn
+  port              = "80"
+  protocol          = "HTTP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_alb_target_group.app.arn
+  }
 }
 
 resource "aws_alb_target_group" "app" {
@@ -42,7 +82,7 @@ resource "aws_alb_target_group" "app" {
 }
 
 resource "aws_lb_listener_rule" "host_based_weighted_routing" {
-  listener_arn = data.aws_alb_listener.front_end.arn
+  listener_arn = aws_alb_listener.front_end.arn
   lifecycle {
     create_before_destroy = true
   }
@@ -53,7 +93,7 @@ resource "aws_lb_listener_rule" "host_based_weighted_routing" {
   #figure out what to place here to replace the environment
   condition {
     host_header {
-      values = ["${var.alb_origin_id}"]
+      values = ["${var.application}.${var.license_plate}-${var.target_env}.stratus.cloud.gov.bc.ca"]
     }
   }
 }
