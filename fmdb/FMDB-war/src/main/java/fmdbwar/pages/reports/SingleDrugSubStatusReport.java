@@ -16,13 +16,17 @@ package fmdbwar.pages.reports;
 
 import java.io.IOException;
 import java.io.Serializable;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Named;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * Backing bean for the Single Drug Sub Status Report
  */
+@Named("SingleDrugSubStatusReport")
+@RequestScoped
 public class SingleDrugSubStatusReport implements Serializable {
 
 
@@ -53,14 +57,11 @@ public class SingleDrugSubStatusReport implements Serializable {
     protected void navigateToReportViewerPage()
        throws IOException {
         
-        try {
             //Pass the report parameters on to the servlet
             HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
             request.getSession().setAttribute("chemicalName", chemicalName);
-            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/pages/reports/SingleDrugSubmissionStatusReport");
-        } catch (IOException ex) {
-            throw ex;
-        }
+            String url = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/pages/reports/SingleDrugSubmissionStatusReport";
+            org.primefaces.PrimeFaces.current().executeScript("window.location.href='" + url + "'");
     }
 
     /**

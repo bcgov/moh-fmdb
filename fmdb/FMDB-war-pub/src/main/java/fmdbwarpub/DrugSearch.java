@@ -20,10 +20,10 @@ import ca.bc.gov.moh.fmdb.web.util.FMDBUtil;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
-import javax.faces.context.FacesContext;
-import javax.faces.model.SelectItem;
-import javax.faces.view.ViewScoped;
-import javax.inject.Named;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.model.SelectItem;
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Named;
 
 /**
  * @author john.au

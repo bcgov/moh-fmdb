@@ -20,8 +20,8 @@ package fmdbwar.validator;
  *
  * @author Johnson.Ding
  */
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.AddressException;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.AddressException;
 import java.util.StringTokenizer;
 
 /**

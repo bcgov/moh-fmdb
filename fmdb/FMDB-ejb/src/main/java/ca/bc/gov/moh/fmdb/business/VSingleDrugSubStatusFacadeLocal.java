@@ -22,7 +22,7 @@ import ca.bc.gov.moh.fmdb.entity.VReviewQuestions;
 import ca.bc.gov.moh.fmdb.entity.VSingleDrugSubStatus;
 //import java.util.Date;
 import java.util.List;
-import javax.ejb.Local;
+import jakarta.ejb.Local;
 
 /**
  *

@@ -215,7 +215,8 @@
   z-index: 10;
 }
 #navbar-toolbar .navbar-logo {
-  width: 278px;
+  width: 1000px;
+  padding: 20px 0px;
 }
 @media (max-width: 767px) {
   #navbar-toolbar .navbar-logo img {

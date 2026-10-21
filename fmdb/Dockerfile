@@ -1,17 +1,51 @@
-FROM maven:3.8.6-openjdk-11-slim as build-stage
+FROM maven:3.9-eclipse-temurin-25-noble AS build-stage
 RUN mkdir -p /home/fmdb
+
+# Trust the enterprise certificate authority (CA).
+ARG CA_ROOT=${CA_ROOT}
+COPY ${CA_ROOT}* /usr/local/share/ca-certificates/${CA_ROOT}
+RUN if [ -f /usr/local/share/ca-certificates/${CA_ROOT} ]; then \
+    keytool -import -trustcacerts \
+    -alias zscaler-root-ca \
+    -file /usr/local/share/ca-certificates/${CA_ROOT} \
+    -keystore $JAVA_HOME/lib/security/cacerts \
+    -storepass changeit; \
+    fi
+
+# Add custom error handling library.
 COPY fmdb/errorhandler-1.0.jar /home/fmdb
-RUN mvn install:install-file -Dfile=/home/fmdb/errorhandler-1.0.jar -DgroupId=com.cgi.fmdb -DartifactId=errorhandler -Dversion=1.0 -Dpackaging=jar -DgeneratePom=true
+RUN mvn install:install-file \
+-Dfile=/home/fmdb/errorhandler-1.0.jar \
+-DgroupId=com.cgi.fmdb \
+-DartifactId=errorhandler \
+-Dversion=1.0 \
+-Dpackaging=jar \
+-DgeneratePom=true
+
+# Add custom styling library.
+COPY fmdb/lib /home/fmdb/lib
+RUN mvn install:install-file \
+-Dfile=/home/fmdb/lib/aristo-1.0.1.jar \
+-DgroupId=org.primefaces.themes \
+-DartifactId=aristo \
+-Dversion=1.0.1 \
+-Dpackaging=jar \
+-DgeneratePom=true
+
+# Copy in build artifacts.
 COPY fmdb/FMDB-ear /home/fmdb/FMDB-ear
 COPY fmdb/FMDB-ejb /home/fmdb/FMDB-ejb
 COPY fmdb/FMDB-war /home/fmdb/FMDB-war
 COPY fmdb/FMDB-war-pub /home/fmdb/FMDB-war-pub
 COPY fmdb/pom.xml /home/fmdb
 
-# Artifactory repo for errorhandler-1.0.jar uses a self-signed certificate which requires SSL overrides for Maven
-RUN mvn -f /home/fmdb/pom.xml clean package -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.http.ssl.insecure=true
+# Build the project.
+RUN mvn -f /home/fmdb/pom.xml clean package
 
-FROM payara/server-full:5.2022.4-jdk11
+FROM payara/server-full:7.2026.4-jdk25
+
+# For more information regarding custom Payara docker images see the docs:
+# https://docs.payara.fish/community/docs/7.2025.1.Beta1/Technical%20Documentation/Payara%20Server%20Documentation/Payara%20Server%20Docker%20Image.html
 COPY fmdb/pre-boot-commands.asadmin $PREBOOT_COMMANDS
 COPY --from=build-stage /home/fmdb/FMDB-ear/target/FMDB-ear.ear $DEPLOY_DIR
 COPY fmdb/postgresql-42.4.0.jar /opt/payara/appserver/glassfish/domains/domain1/lib

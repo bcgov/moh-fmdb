@@ -21,11 +21,11 @@ import fish.payara.security.openid.api.OpenIdContext;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.URLEncoder;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
-import javax.faces.context.FacesContext;
-import javax.inject.Inject;
-import javax.servlet.ServletException;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Named;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
+import jakarta.servlet.ServletException;
 
 @RequestScoped
 @Named("Logout")

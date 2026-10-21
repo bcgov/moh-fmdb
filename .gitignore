@@ -36,3 +36,11 @@ override.tf.json
 /fmdb/FMDB-war/target/
 /fmdb/FMDB-war-pub/target/
 /fmdb/FMDB-ear/target/
+
+# Ignore the environment file
+.env
+
+# Ignore certificate files
+*.pem
+*.crt
+*.key

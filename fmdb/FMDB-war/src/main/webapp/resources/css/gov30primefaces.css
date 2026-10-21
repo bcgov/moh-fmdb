@@ -213,7 +213,7 @@ textarea:-ms-input-placeholder {
 .ui-state-default .ui-icon.ui-icon-cancel,
 .ui-state-default .ui-icon.ui-icon-close,
 .ui-state-default .ui-icon.ui-sortable-column-icon{
-    background-image: url(/FMDB/javax.faces.resource/images/ui-icons_ffffff_256x240.png.xhtml?ln=primefaces-aristo);
+    background-image: url(/FMDB/jakarta.faces.resource/images/ui-icons_ffffff_256x240.png.xhtml?ln=primefaces-aristo);
 }
 
 .ui-state-default .ui-icon.ui-icon-calendar {

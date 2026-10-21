@@ -20,4 +20,29 @@
 }
 .results-table {
     margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #dddddd;
+}
+.results-table-last {
+    padding-bottom: 0px;
+    border-bottom: none;
+}
+.drug-search-heading {
+    margin: 0px 0px 20px 0px;
+}
+.square-list {
+    list-style: square;
+}
+.alphabet-link {
+    padding-left: 22px;
+    font-size: 1.3em;
+}
+.drug-brand-name {
+    font-weight: 600;
+}
+.gov-logo {
+    width: 10%;
+}
+.content-container {
+    min-height: calc(100vh - 295px);
 }

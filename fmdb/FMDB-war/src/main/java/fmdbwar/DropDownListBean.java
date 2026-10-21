@@ -25,11 +25,11 @@ import ca.bc.gov.moh.fmdb.entity.SubmissionTypes;
 import fmdbwar.util.SelectItemHelper;
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-import javax.enterprise.context.ApplicationScoped;
-import javax.faces.model.SelectItem;
-import javax.inject.Named;
+import jakarta.annotation.PostConstruct;
+import jakarta.ejb.EJB;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.faces.model.SelectItem;
+import jakarta.inject.Named;
 
 @Named("DropDownListBean")
 @ApplicationScoped

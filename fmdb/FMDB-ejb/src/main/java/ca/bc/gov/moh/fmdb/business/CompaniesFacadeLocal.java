@@ -20,7 +20,7 @@ package ca.bc.gov.moh.fmdb.business;
 import ca.bc.gov.moh.fmdb.business.exception.ItemNotFoundFMDBException;
 import ca.bc.gov.moh.fmdb.entity.Companies;
 import java.util.List;
-import javax.ejb.Local;
+import jakarta.ejb.Local;
 
 /**
  *

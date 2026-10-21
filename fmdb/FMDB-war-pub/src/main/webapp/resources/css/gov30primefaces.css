@@ -181,7 +181,7 @@ textarea:-ms-input-placeholder {
 }
 
 .ui-state-default .ui-icon.ui-icon-calendar {
-    background-image: url(/HCIMWeb/faces/javax.faces.resource/images/ui-icons_ffffff_256x240.png?ln=primefaces-aristo);
+    background-image: url(/HCIMWeb/faces/jakarta.faces.resource/images/ui-icons_ffffff_256x240.png?ln=primefaces-aristo);
 }
 
 .ui-datepicker table {

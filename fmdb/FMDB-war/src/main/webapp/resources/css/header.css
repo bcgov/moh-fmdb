@@ -10,6 +10,11 @@
 #government-menu h4 {
   margin-top: 12px;
   margin-bottom: 12px;
+  font-size: 16px;
+  font-weight: 500;
+}
+#government-menu li {
+  padding-bottom: 0px;
 }
 #government-menu .government-menu-close-button {
   position: absolute;
@@ -30,7 +35,13 @@
   border: none;
 }
 
-
+@media (min-width: 960px) {
+  #navbar {
+    -webkit-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.4);
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.4);
+  }
+}
 @media (min-width: 768px) and (max-width: 959px) {
   #navbar {
     background: transparent;
@@ -110,9 +121,8 @@
     display: table-cell;
     vertical-align: middle;
     text-align: center;
-    height: 40px;
+    height: 60px;
     padding: 0 12px 0;
-    font-size: 16px;
   }
   #navbar .navbar-nav > li > a:hover,
   #navbar .navbar-nav > li > a:focus,

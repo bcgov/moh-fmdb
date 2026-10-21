@@ -34,7 +34,7 @@
             <url-pattern>/AccessDenied.xhtml</url-pattern>
             <url-pattern>/Error.xhtml</url-pattern>
             <url-pattern>/pageNotFound.xhtml</url-pattern>
-            <url-pattern>/javax.faces.resource/*</url-pattern>            
+            <url-pattern>/jakarta.faces.resource/*</url-pattern>            
         </web-resource-collection>
         <auth-constraint>
             <role-name>MOHUSER</role-name>
@@ -53,7 +53,7 @@
 
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
-        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <servlet-class>jakarta.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet>
@@ -146,7 +146,7 @@
         <location>/AccessDenied.xhtml</location>
     </error-page>
     <error-page>
-        <exception-type>javax.servlet.ServletException</exception-type>
+        <exception-type>jakarta.servlet.ServletException</exception-type>
         <location>/error/ExceptionHandler</location>
     </error-page>
     <error-page>
@@ -154,7 +154,7 @@
         <location>/error/ExceptionHandler</location>
     </error-page>
     <error-page>
-        <exception-type>javax.faces.FacesException</exception-type>
+        <exception-type>jakarta.faces.FacesException</exception-type>
         <location>/error/ExceptionHandler</location>
     </error-page>    
 

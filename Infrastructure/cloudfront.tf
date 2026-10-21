@@ -4,9 +4,9 @@ provider "aws" {
 }
 
 data "aws_acm_certificate" "fmdb_certificate" {
-  provider = aws.us-east-1
-  domain = "${var.domain}"
-  statuses = ["ISSUED"]
+  provider    = aws.us-east-1
+  domain      = var.domain
+  statuses    = ["ISSUED"]
   most_recent = true
 }
 
@@ -20,8 +20,8 @@ data "aws_cloudfront_origin_request_policy" "AllViewerExceptHostHeader"{
 
 resource "aws_cloudfront_distribution" "fmdb_distribution" {
   origin {
-    domain_name = var.alb_origin_id
-    origin_id   = var.alb_origin_id
+    domain_name = "${var.application}.${var.license_plate}-${var.target_env}.stratus.cloud.gov.bc.ca"
+    origin_id   = "${var.application}.${var.license_plate}-${var.target_env}.stratus.cloud.gov.bc.ca"
     custom_origin_config {
     http_port = 80
     https_port = 443
@@ -36,7 +36,6 @@ resource "aws_cloudfront_distribution" "fmdb_distribution" {
   
   enabled             = true
   is_ipv6_enabled     = true
-  aliases = ["${var.domain}"]
   comment             = "fmdb-cloudfront"
 
 #   # Configure logging here if required 	
@@ -49,7 +48,7 @@ resource "aws_cloudfront_distribution" "fmdb_distribution" {
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD","OPTIONS","PUT","POST","PATCH","DELETE"]
     cached_methods   = ["GET", "HEAD"]
-    target_origin_id = var.alb_origin_id
+    target_origin_id = "${var.application}.${var.license_plate}-${var.target_env}.stratus.cloud.gov.bc.ca"
     cache_policy_id = data.aws_cloudfront_cache_policy.CachingDisabled.id
     origin_request_policy_id = data.aws_cloudfront_origin_request_policy.AllViewerExceptHostHeader.id
     compress = true

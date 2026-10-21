@@ -17,8 +17,8 @@ import ca.bc.gov.moh.fmdb.web.pub.PublicAcessVwControler;
 import fmdbwarpub.Constants;
 import java.io.*;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
 
 /**
  *  This servlet is used to retrieve an attachment and send it to the client.

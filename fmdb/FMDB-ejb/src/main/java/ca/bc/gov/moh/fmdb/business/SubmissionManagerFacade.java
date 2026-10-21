@@ -34,10 +34,10 @@ import ca.bc.gov.moh.fmdb.logging.Logger;
 import ca.bc.gov.moh.fmdb.logging.LogManager;
 import java.util.Iterator;
 import java.util.List;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
+import jakarta.ejb.EJB;
+import jakarta.ejb.Stateless;
+import jakarta.ejb.TransactionAttribute;
+import jakarta.ejb.TransactionAttributeType;
 
 @Stateless
 //@Interceptors(value=LoggerInterceptor.class)

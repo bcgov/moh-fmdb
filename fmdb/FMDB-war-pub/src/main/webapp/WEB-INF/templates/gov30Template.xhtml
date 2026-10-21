@@ -8,12 +8,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title><ui:insert name="title">PharmaCare Drug Review Results</ui:insert></title>
         <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/resources/template-images/favicon.ico" type="image/x-icon" />
-
-        <script type="text/javascript">
-            function openAttachmentWindow(subId){
-                return window.open('/AttachmentRetrievalServlet?sub=' + subId,'window');
-            }
-        </script>
     </h:head>
     <h:body styleClass="home">
         
@@ -22,7 +16,6 @@
         <h:outputStylesheet name="css/navigation.css" />        
         <h:outputStylesheet name="css/templatemain.css" /> 
 
-        <h:outputStylesheet name="css/primefaces.css" />
         <h:outputStylesheet name="css/gov30primefaces.css" />
         <h:outputStylesheet name="css/style.css" />
         <h:outputScript name="js/scripts.js" />
@@ -40,16 +33,16 @@
                 </div>
                 <div id="navbar-toolbar">
                     <div class="container">
-                        <div class="col-sm-12 navbar-logo" style="width: 1000px; padding: 20px 0px;">
+                        <div class="col-sm-12 navbar-logo">
                             <h:commandLink action="DrugSearch" class="bcgov logo" title="Government of British Columbia Home">
-                                <h:graphicImage name="template-images/gov-logo.svg" alt="BC Government Logo" style="width: 10%;"/>
+                                <h:graphicImage name="template-images/gov-logo.svg" alt="BC Government Logo" styleClass="gov-logo"/>
                             </h:commandLink>
 
                             <h:commandLink id="home" styleClass="serviceLink" action="DrugSearch" >
                                 <h1 class="page-title">#{msg['application.name']}</h1>
                             </h:commandLink>                          
                         </div> 
-                        <div class="navbar-government-header-button hidden-xs hidden-sm" onclick="toggleGov()">
+                        <div class="navbar-government-header-button hidden-xs hidden-sm">
                             <span class="arrow-down"/>
                             &nbsp;
                             GOV.BC.CA Menu
@@ -60,7 +53,7 @@
         </header>
 
 
-        <div class="container" style="min-height: calc(100vh - 295px);">
+        <div class="container content-container">
             <ui:insert name="content">Content</ui:insert>
             <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
             <p:dialog styleClass="spinner-box" widgetVar="statusDialog" modal="false" 
